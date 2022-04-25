@@ -18,19 +18,63 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.Cast;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
+import walkingkooka.convert.Converters;
+import walkingkooka.net.AbsoluteUrl;
+import walkingkooka.net.Url;
+import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
+import walkingkooka.spreadsheet.SpreadsheetCell;
+import walkingkooka.spreadsheet.SpreadsheetErrorKind;
+import walkingkooka.spreadsheet.SpreadsheetFormula;
+import walkingkooka.spreadsheet.SpreadsheetId;
+import walkingkooka.spreadsheet.SpreadsheetName;
+import walkingkooka.spreadsheet.engine.SpreadsheetEngine;
+import walkingkooka.spreadsheet.engine.SpreadsheetEngineContext;
+import walkingkooka.spreadsheet.engine.SpreadsheetEngineContexts;
+import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
+import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
+import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
+import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
+import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStore;
+import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStores;
+import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
+import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
+import walkingkooka.spreadsheet.reference.store.SpreadsheetCellRangeStores;
+import walkingkooka.spreadsheet.reference.store.SpreadsheetExpressionReferenceStores;
+import walkingkooka.spreadsheet.reference.store.SpreadsheetLabelStores;
+import walkingkooka.spreadsheet.security.store.SpreadsheetGroupStores;
+import walkingkooka.spreadsheet.security.store.SpreadsheetUserStores;
+import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
+import walkingkooka.spreadsheet.store.SpreadsheetColumnStores;
+import walkingkooka.spreadsheet.store.SpreadsheetRowStores;
+import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepositories;
+import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 
 import java.lang.reflect.Method;
 import java.math.MathContext;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class SpreadsheetServerExpressionFunctionsTest implements PublicStaticHelperTesting<SpreadsheetServerExpressionFunctions> {
+
+    private final static Locale LOCALE = Locale.forLanguageTag("EN-AU");
+    private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("http://server.example.com");
+
+    private final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.BIG_DECIMAL;
 
     @Test
     public void testVisit() {
@@ -47,6 +91,165 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         .size(),
                 names.size());
     }
+
+    // evaluate.........................................................................................................
+
+    @Test
+    public void testMathExpression() {
+        this.evaluateAndCheck(
+                "=1+2+3",
+                EXPRESSION_NUMBER_KIND.create(1 + 2 + 3)
+        );
+    }
+
+    @Test
+    public void testMathExpressionWithReferences() {
+        this.evaluateAndCheck(
+                "=1+A2+A3",
+                Maps.of(
+                        "A2", "=2",
+                        "A3", "=3"
+                ),
+                EXPRESSION_NUMBER_KIND.create(1 + 2 + 3)
+        );
+    }
+
+    @Test
+    public void testMathExpressionEvaluationFailureDivideByZero() {
+        this.evaluateAndCheck(
+                "=1/0",
+                SpreadsheetErrorKind.DIV0.setMessage("Division by zero")
+        );
+    }
+
+    @Test
+    public void testMathExpressionEvaluationFailureReferenceNotFound() {
+        this.evaluateAndCheck(
+                "=1+A2+A3",
+                Maps.of(
+                        "A2", "=2"
+                ),
+                SpreadsheetErrorKind.REF.setMessage("Reference not found: A3")
+        );
+    }
+
+    private void evaluateAndCheck(final String cellFormula,
+                                  final Object expectedResult) {
+        this.evaluateAndCheck(
+                cellFormula,
+                Maps.empty(),
+                expectedResult
+        );
+    }
+
+    private void evaluateAndCheck(final String cellFormula,
+                                  final Map<String, String> preload,
+                                  final Object expectedResult) {
+        this.evaluateAndCheck(
+                SpreadsheetSelection.parseCell("A1"),
+                cellFormula,
+                preload,
+                Optional.ofNullable(expectedResult)
+        );
+    }
+
+    private void evaluateAndCheck(final SpreadsheetCellReference cellReference,
+                                  final String cellFormula,
+                                  final Map<String, String> preload,
+                                  final Object expectedResult) {
+        final SpreadsheetMetadata metadata = SpreadsheetMetadata.EMPTY
+                .set(SpreadsheetMetadataPropertyName.SPREADSHEET_ID, SpreadsheetId.parse("1234"))
+                .set(SpreadsheetMetadataPropertyName.SPREADSHEET_NAME, SpreadsheetName.with("Untitled5678"))
+                .set(SpreadsheetMetadataPropertyName.LOCALE, LOCALE)
+                .loadFromLocale()
+                .set(SpreadsheetMetadataPropertyName.CREATOR, EmailAddress.parse("creator@example.com"))
+                .set(SpreadsheetMetadataPropertyName.CREATE_DATE_TIME, LocalDateTime.now())
+                .set(SpreadsheetMetadataPropertyName.MODIFIED_BY, EmailAddress.parse("modified@example.com"))
+                .set(SpreadsheetMetadataPropertyName.MODIFIED_DATE_TIME, LocalDateTime.now())
+                .set(SpreadsheetMetadataPropertyName.CELL_CHARACTER_WIDTH, 1)
+                .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
+                .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
+                .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
+                .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.UNLIMITED.getPrecision())
+                .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
+                .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@"))
+                .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
+
+        final SpreadsheetEngine engine = SpreadsheetEngines.basic(
+                metadata
+        );
+
+        final Map<FunctionExpressionName, ExpressionFunction<?, ?>> nameToFunctions = Maps.ordered();
+        SpreadsheetServerExpressionFunctions.visit(
+                (f -> nameToFunctions.put(f.name(), f))
+        );
+
+        final SpreadsheetMetadataStore metadataStore = SpreadsheetMetadataStores.treeMap();
+        metadataStore.save(metadata);
+
+        final SpreadsheetStoreRepository repo = SpreadsheetStoreRepositories.basic(
+                SpreadsheetCellStores.treeMap(),
+                SpreadsheetExpressionReferenceStores.treeMap(),
+                SpreadsheetColumnStores.treeMap(),
+                SpreadsheetGroupStores.treeMap(),
+                SpreadsheetLabelStores.treeMap(),
+                SpreadsheetExpressionReferenceStores.treeMap(),
+                metadataStore,
+                SpreadsheetCellRangeStores.treeMap(),
+                SpreadsheetCellRangeStores.treeMap(),
+                SpreadsheetRowStores.treeMap(),
+                SpreadsheetUserStores.treeMap()
+        );
+
+        final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
+                metadata,
+                (n) -> {
+                    Objects.requireNonNull(n, "name");
+                    final ExpressionFunction<?, ?> function = nameToFunctions.get(n);
+                    if (null == function) {
+                        throw new IllegalArgumentException("Unknown function " + n);
+                    }
+                    return Cast.to(function);
+                },
+                engine,
+                (b) -> {
+                    throw new UnsupportedOperationException();
+                },
+                repo,
+                SERVER_URL
+        );
+
+        // save all the preload cells, these will contain references in the test cell.
+        for (final Map.Entry<String, String> referenceToExpression : preload.entrySet()) {
+            final String reference = referenceToExpression.getKey();
+            final String formula = referenceToExpression.getValue();
+
+            engine.saveCell(
+                    SpreadsheetSelection.parseCell(reference)
+                            .setFormula(SpreadsheetFormula.EMPTY.setText(formula)),
+                    context
+            );
+        }
+
+        final SpreadsheetCell saved = engine.saveCell(
+                        cellReference.setFormula(
+                                SpreadsheetFormula.EMPTY.setText(cellFormula)
+                        ),
+                        context
+                ).cell(cellReference)
+                .orElseThrow(() -> new AssertionError("Missing " + cellReference + " after saving " + cellFormula));
+
+        this.checkEquals(
+                expectedResult,
+                saved.formula().value(),
+                cellReference + "=" + cellFormula + "\n" +
+                        preload.entrySet().stream()
+                                .map(e -> e.getKey() + "=" + e.getValue())
+                                .collect(Collectors.joining("\n"))
+        );
+    }
+
+    // PublicStaticHelperTesting........................................................................................
 
     @Test
     public void testPublicStaticMethodsWithoutMathContextParameter() {
