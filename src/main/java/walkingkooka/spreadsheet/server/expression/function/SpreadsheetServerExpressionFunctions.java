@@ -35,8 +35,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static void visit(final Consumer<ExpressionFunction<?, ?>> functions) {
         Lists.of(
+                falseFunction(),
                 trueFunction()
         ).forEach(functions::accept);
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#falseFunction}
+     */
+    public static <C extends ExpressionFunctionContext> ExpressionFunction<Boolean, C> falseFunction() {
+        return BooleanExpressionFunctions.falseFunction();
     }
 
     /**

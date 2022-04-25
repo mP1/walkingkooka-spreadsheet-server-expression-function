@@ -26,4 +26,5 @@ to emulate the semantics of Excel functions as necessary.
 
 # Functions
 
-- true
+- false()
+- true()
