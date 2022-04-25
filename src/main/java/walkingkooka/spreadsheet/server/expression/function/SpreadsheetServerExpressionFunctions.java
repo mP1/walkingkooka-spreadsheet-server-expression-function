@@ -17,8 +17,11 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
+import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.expression.function.ExpressionFunctionContext;
+import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 
 import java.util.function.Consumer;
 
@@ -30,7 +33,17 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     /**
      * Visit all {@link ExpressionFunction functions}.
      */
-    public static void visit(final Consumer<ExpressionFunction<?, ?>> consumer) {
+    public static void visit(final Consumer<ExpressionFunction<?, ?>> functions) {
+        Lists.of(
+                trueFunction()
+        ).forEach(functions::accept);
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#trueFunction}
+     */
+    public static <C extends ExpressionFunctionContext> ExpressionFunction<Boolean, C> trueFunction() {
+        return BooleanExpressionFunctions.trueFunction();
     }
 
     /**

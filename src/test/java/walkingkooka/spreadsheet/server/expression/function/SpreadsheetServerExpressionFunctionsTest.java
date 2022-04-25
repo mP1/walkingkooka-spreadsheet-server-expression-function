@@ -92,7 +92,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 names.size());
     }
 
-    // evaluate.........................................................................................................
+    // evaluateAndCheck tests...........................................................................................
 
     @Test
     public void testMathExpression() {
@@ -130,6 +130,25 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         "A2", "=2"
                 ),
                 SpreadsheetErrorKind.REF.setMessage("Reference not found: A3")
+        );
+    }
+
+    // function tests...................................................................................................
+
+    @Test
+    public void testTrue() {
+        this.evaluateAndCheck(
+                "=true()",
+                Boolean.TRUE
+        );
+    }
+
+    @Test
+    public void testTrue2() {
+        this.evaluateAndCheck(
+                "=true()",
+                Maps.of("A2", "=true()"),
+                Boolean.TRUE
         );
     }
 

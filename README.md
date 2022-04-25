@@ -21,3 +21,9 @@ to emulate the semantics of Excel functions as necessary.
 - [spreadsheet](https://github.com/mP1/walkingkooka-spreadsheet-expression-function)
 - [stat](https://github.com/mP1/walkingkooka-tree-expression-function-stat)
 - [string](https://github.com/mP1/walkingkooka-tree-expression-function-string)
+
+
+
+# Functions
+
+- true
