@@ -160,6 +160,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testNotZero() {
+        this.evaluateAndCheck(
+                "=not(0)",
+                Boolean.TRUE
+        );
+    }
+
+    @Test
     public void testTrue() {
         this.evaluateAndCheck(
                 "=true()",
