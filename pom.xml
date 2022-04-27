@@ -158,8 +158,7 @@
       <groupId>walkingkooka</groupId>
       <artifactId>walkingkooka-spreadsheet</artifactId>
       <version>1.0-SNAPSHOT</version>
-      <scope>test</scope>    
-    </dependency>  
+    </dependency>
   </dependencies>
 
   <build>
