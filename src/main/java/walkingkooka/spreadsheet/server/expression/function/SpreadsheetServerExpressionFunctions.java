@@ -39,7 +39,8 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 falseFunction(),
                 not(),
                 or(),
-                trueFunction()
+                trueFunction(),
+                xor()
         ).forEach(functions::accept);
     }
 
@@ -76,6 +77,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> trueFunction() {
         return BooleanExpressionFunctions.<SpreadsheetExpressionFunctionContext>trueFunction();
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#xor}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> xor() {
+        return BooleanExpressionFunctions.xor();
     }
 
     /**
