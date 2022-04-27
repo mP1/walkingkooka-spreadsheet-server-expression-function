@@ -36,6 +36,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
                 and(),
+                choose(),
                 falseFunction(),
                 ifFunction(),
                 ifs(),
@@ -52,6 +53,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> and() {
         return BooleanExpressionFunctions.and();
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#choose}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> choose() {
+        return BooleanExpressionFunctions.choose();
     }
 
     /**
