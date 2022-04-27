@@ -37,6 +37,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         Lists.of(
                 and(),
                 falseFunction(),
+                ifFunction(),
                 not(),
                 or(),
                 trueFunction(),
@@ -56,6 +57,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> falseFunction() {
         return BooleanExpressionFunctions.falseFunction();
+    }
+
+
+    /**
+     * {@see BooleanExpressionFunctions#ifFunction}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> ifFunction() {
+        return BooleanExpressionFunctions.ifFunction();
     }
 
     /**

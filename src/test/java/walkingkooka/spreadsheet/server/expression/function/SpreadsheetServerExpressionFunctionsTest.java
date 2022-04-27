@@ -177,6 +177,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIfTrue() {
+        this.evaluateAndCheck(
+                "=if(true(), 111, 222)",
+                EXPRESSION_NUMBER_KIND.create(111)
+        );
+    }
+
+    @Test
+    public void testIfFalse() {
+        this.evaluateAndCheck(
+                "=if(false(), 111, 222)",
+                EXPRESSION_NUMBER_KIND.create(222)
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndCheck(
                 "=not(false())",
