@@ -185,6 +185,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIfTrueCaseInsensitiveStringCompare() {
+        this.evaluateAndCheck(
+                "=if(\"abc\" = \"ABC\", 111, 222)",
+                EXPRESSION_NUMBER_KIND.create(111)
+        );
+    }
+
+    @Test
+    public void testIfTrueCaseInsensitiveStringCompareDifferent() {
+        this.evaluateAndCheck(
+                "=if(\"abc\" = \"different\", 111, 222)",
+                EXPRESSION_NUMBER_KIND.create(222)
+        );
+    }
+
+    @Test
     public void testIfFalse() {
         this.evaluateAndCheck(
                 "=if(false(), 111, 222)",
