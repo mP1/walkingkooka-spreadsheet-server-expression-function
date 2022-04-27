@@ -38,6 +38,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 and(),
                 falseFunction(),
                 ifFunction(),
+                ifs(),
                 not(),
                 or(),
                 switchFunction(),
@@ -66,6 +67,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> ifFunction() {
         return BooleanExpressionFunctions.ifFunction();
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#ifs}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> ifs() {
+        return BooleanExpressionFunctions.ifs();
     }
 
     /**

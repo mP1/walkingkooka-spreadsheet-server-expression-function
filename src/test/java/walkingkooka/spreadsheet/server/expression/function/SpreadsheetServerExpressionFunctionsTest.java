@@ -209,6 +209,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIfsFirst() {
+        this.evaluateAndCheck(
+                "=ifs(true(), 111, false(), 222)",
+                EXPRESSION_NUMBER_KIND.create(111)
+        );
+    }
+
+    @Test
+    public void testIfsSecond() {
+        this.evaluateAndCheck(
+                "=ifs(\"abc\"=\"different\", 111, true(), 222)",
+                EXPRESSION_NUMBER_KIND.create(222)
+        );
+    }
+
+    @Test
+    public void testIfsSecondStringCaseInsensitiveEquals() {
+        this.evaluateAndCheck(
+                "=ifs(\"abc\"=\"different\", 111, \"same\"=\"SAME\", 222)",
+                EXPRESSION_NUMBER_KIND.create(222)
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndCheck(
                 "=not(false())",
