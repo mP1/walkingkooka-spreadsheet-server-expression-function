@@ -27,6 +27,7 @@ to emulate the semantics of Excel functions as necessary.
 # Functions
 
 - and()
+- choose()
 - false()
 - if()
 - ifs()

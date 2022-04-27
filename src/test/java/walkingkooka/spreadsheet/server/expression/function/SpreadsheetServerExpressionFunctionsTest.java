@@ -169,6 +169,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testChooseFirst() {
+        this.evaluateAndCheck(
+                "=choose(1, 111, 222, 333)",
+                EXPRESSION_NUMBER_KIND.create(111)
+        );
+    }
+
+    @Test
+    public void testChooseSecond() {
+        this.evaluateAndCheck(
+                "=choose(2, 111, 222, 333)",
+                EXPRESSION_NUMBER_KIND.create(222)
+        );
+    }
+
+    @Test
+    public void testChooseThird() {
+        this.evaluateAndCheck(
+                "=choose(3, 111, true(), \"Third\")",
+                "Third"
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndCheck(
                 "=false()",
