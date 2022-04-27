@@ -241,6 +241,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSwitchFirst() {
+        this.evaluateAndCheck(
+                "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",
+                "One"
+        );
+    }
+
+    @Test
+    public void testSwitchSecond() {
+        this.evaluateAndCheck(
+                "=switch(\"TWO22\", 1, \"One\", \"Two22\", \"Two\", 3, 333, \"switch-default\")",
+                "Two"
+        );
+    }
+
+    @Test
+    public void testSwitchDefaults() {
+        this.evaluateAndCheck(
+                "=switch(999, 1, \"One\", 22, \"Two\", 3, 333, \"switch-default\")",
+                "switch-default"
+        );
+    }
+
+    @Test
     public void testTrue() {
         this.evaluateAndCheck(
                 "=true()",

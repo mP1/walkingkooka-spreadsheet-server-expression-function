@@ -40,6 +40,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 ifFunction(),
                 not(),
                 or(),
+                switchFunction(),
                 trueFunction(),
                 xor()
         ).forEach(functions::accept);
@@ -79,6 +80,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> or() {
         return BooleanExpressionFunctions.or();
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#switchFunction}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> switchFunction() {
+        return BooleanExpressionFunctions.switchFunction();
     }
     
     /**
