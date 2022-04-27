@@ -19,8 +19,8 @@ package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionContext;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 
 import java.util.function.Consumer;
@@ -33,7 +33,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     /**
      * Visit all {@link ExpressionFunction functions}.
      */
-    public static void visit(final Consumer<ExpressionFunction<?, ?>> functions) {
+    public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
                 falseFunction(),
                 not(),
@@ -44,22 +44,22 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     /**
      * {@see BooleanExpressionFunctions#falseFunction}
      */
-    public static <C extends ExpressionFunctionContext> ExpressionFunction<Boolean, C> falseFunction() {
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> falseFunction() {
         return BooleanExpressionFunctions.falseFunction();
     }
 
     /**
      * {@see BooleanExpressionFunctions#not}
      */
-    public static <C extends ExpressionFunctionContext> ExpressionFunction<Boolean, C> not() {
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> not() {
         return BooleanExpressionFunctions.not();
     }
 
     /**
      * {@see BooleanExpressionFunctions#trueFunction}
      */
-    public static <C extends ExpressionFunctionContext> ExpressionFunction<Boolean, C> trueFunction() {
-        return BooleanExpressionFunctions.trueFunction();
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> trueFunction() {
+        return BooleanExpressionFunctions.<SpreadsheetExpressionFunctionContext>trueFunction();
     }
 
     /**
