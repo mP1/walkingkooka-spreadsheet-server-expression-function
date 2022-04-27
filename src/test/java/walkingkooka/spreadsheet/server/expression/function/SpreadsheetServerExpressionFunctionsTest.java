@@ -241,6 +241,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         );
     }
 
+    @Test
+    public void testXorTrueTrueTrue() {
+        this.evaluateAndCheck(
+                "=xor(true(), true(), true())",
+                Boolean.TRUE
+        );
+    }
+
+    @Test
+    public void testXorFalseFalseTrue() {
+        this.evaluateAndCheck(
+                "=xor(true(), false(), true())",
+                Boolean.FALSE
+        );
+    }
+
+    @Test
+    public void testXorFalseFalseFalseFalse() {
+        this.evaluateAndCheck(
+                "=xor(false(), false(), false(), false())",
+                Boolean.FALSE
+        );
+    }
+    
     private void evaluateAndCheck(final String cellFormula,
                                   final Object expectedResult) {
         this.evaluateAndCheck(
