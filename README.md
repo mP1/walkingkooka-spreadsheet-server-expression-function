@@ -29,4 +29,5 @@ to emulate the semantics of Excel functions as necessary.
 - and()
 - false()
 - not()
+- or()
 - true()
