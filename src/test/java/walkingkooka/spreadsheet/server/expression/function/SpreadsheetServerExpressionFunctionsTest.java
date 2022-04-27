@@ -137,6 +137,38 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     // function tests...................................................................................................
 
     @Test
+    public void testAndTrueTrue() {
+        this.evaluateAndCheck(
+                "=and(true(), true())",
+                Boolean.TRUE
+        );
+    }
+
+    @Test
+    public void testAndTrue1() {
+        this.evaluateAndCheck(
+                "=and(true(), 1)",
+                Boolean.TRUE
+        );
+    }
+
+    @Test
+    public void testAndTrue0() {
+        this.evaluateAndCheck(
+                "=and(true(), 0)",
+                Boolean.FALSE
+        );
+    }
+
+    @Test
+    public void testAndTrueTrueTrue() {
+        this.evaluateAndCheck(
+                "=and(true(), true(), true())",
+                Boolean.TRUE
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndCheck(
                 "=false()",

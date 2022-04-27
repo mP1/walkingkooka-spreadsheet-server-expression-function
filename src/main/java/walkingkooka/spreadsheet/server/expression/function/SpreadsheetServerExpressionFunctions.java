@@ -35,10 +35,18 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
+                and(),
                 falseFunction(),
                 not(),
                 trueFunction()
         ).forEach(functions::accept);
+    }
+
+    /**
+     * {@see BooleanExpressionFunctions#and}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> and() {
+        return BooleanExpressionFunctions.and();
     }
 
     /**
