@@ -169,6 +169,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testChar65() {
+        this.evaluateAndCheck(
+                "=char(65)",
+                'A'
+        );
+    }
+
+    @Test
     public void testChooseFirst() {
         this.evaluateAndCheck(
                 "=choose(1, 111, 222, 333)",

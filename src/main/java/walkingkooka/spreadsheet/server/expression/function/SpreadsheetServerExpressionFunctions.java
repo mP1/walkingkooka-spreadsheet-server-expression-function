@@ -20,8 +20,10 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
+import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
+import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.util.function.Consumer;
 
@@ -36,6 +38,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
                 and(),
+                charFunction(),
                 choose(),
                 falseFunction(),
                 ifFunction(),
@@ -54,6 +57,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> and() {
         return BooleanExpressionFunctions.and();
     }
+
+    /**
+     * {@see StringExpressionFunctions#ascii}
+     */
+    public static ExpressionFunction<Character, SpreadsheetExpressionFunctionContext> charFunction() {
+        return CHAR_FUNCTION;
+    }
+
+    private final static ExpressionFunction<Character, SpreadsheetExpressionFunctionContext> CHAR_FUNCTION = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>ascii()
+            .setName(FunctionExpressionName.with("char"));
 
     /**
      * {@see BooleanExpressionFunctions#choose}
