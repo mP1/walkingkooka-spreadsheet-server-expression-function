@@ -209,6 +209,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCodeCapitalA() {
+        this.evaluateAndCheck(
+                "=code(\"A\")",
+                EXPRESSION_NUMBER_KIND.create(65)
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndCheck(
                 "=false()",
