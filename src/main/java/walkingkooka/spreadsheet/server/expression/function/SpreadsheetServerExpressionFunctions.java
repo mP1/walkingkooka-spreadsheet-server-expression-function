@@ -40,6 +40,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 and(),
                 charFunction(),
                 choose(),
+                clean(),
                 falseFunction(),
                 ifFunction(),
                 ifs(),
@@ -73,6 +74,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> choose() {
         return BooleanExpressionFunctions.choose();
+    }
+
+    /**
+     * {@see StringExpressionFunctions#clean}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> clean() {
+        return StringExpressionFunctions.clean();
     }
 
     /**

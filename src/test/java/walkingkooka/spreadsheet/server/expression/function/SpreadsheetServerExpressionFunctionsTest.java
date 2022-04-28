@@ -201,6 +201,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testClean() {
+        this.evaluateAndCheck(
+                "=clean(\"\t\nNeeds cleaning \r\")",
+                "Needs cleaning "
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndCheck(
                 "=false()",
