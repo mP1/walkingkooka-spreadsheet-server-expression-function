@@ -30,6 +30,7 @@ to emulate the semantics of Excel functions as necessary.
 - char()
 - choose()
 - clean()
+- code()
 - false()
 - if()
 - ifs()
