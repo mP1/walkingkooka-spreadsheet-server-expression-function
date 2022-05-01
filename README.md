@@ -31,6 +31,7 @@ to emulate the semantics of Excel functions as necessary.
 - choose()
 - clean()
 - code()
+- concat()
 - false()
 - if()
 - ifs()

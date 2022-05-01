@@ -217,6 +217,38 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testConcatSingleValues() {
+        this.evaluateAndCheck(
+                "=concat(A2,A3)",
+                Maps.of("A2", "'abc", "A3", "'123"),
+                "abc123"
+        );
+    }
+
+    @Test
+    public void testConcatRange() {
+        this.evaluateAndCheck(
+                "=concat(A2:A3)",
+                Maps.of("A2", "'abc", "A3", "'123"),
+                "abc123"
+        );
+    }
+
+    @Test
+    public void testConcatSingleValuesAndRange() {
+        this.evaluateAndCheck(
+                "=concat(\"First\",A2:A3,\"!!!\",B1:B2)",
+                Maps.of(
+                        "A2", "'abc",
+                        "A3", "'123",
+                        "B1", "'SecondLast",
+                        "B2", "'Last"
+                ),
+                "Firstabc123!!!SecondLastLast"
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndCheck(
                 "=false()",
