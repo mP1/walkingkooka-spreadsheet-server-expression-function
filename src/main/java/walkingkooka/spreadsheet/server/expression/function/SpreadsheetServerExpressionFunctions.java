@@ -18,11 +18,13 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
@@ -43,6 +45,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 choose(),
                 clean(),
                 code(),
+                concat(),
                 falseFunction(),
                 ifFunction(),
                 ifs(),
@@ -94,6 +97,20 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> CODE = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>unicode()
             .setName(FunctionExpressionName.with("code"));
+
+    /**
+     * {@see StringExpressionFunctions#concat}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> concat() {
+        return StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>concat()
+                .setKinds(
+                        Sets.of(
+                                ExpressionFunctionKind.FLATTEN,
+                                ExpressionFunctionKind.REQUIRES_EVALUATED_PARAMETERS,
+                                ExpressionFunctionKind.RESOLVE_REFERENCES
+                        )
+                );
+    }
 
     /**
      * {@see BooleanExpressionFunctions#falseFunction}
