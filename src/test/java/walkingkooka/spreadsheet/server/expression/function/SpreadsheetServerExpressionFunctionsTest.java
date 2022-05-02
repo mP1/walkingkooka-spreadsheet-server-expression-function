@@ -337,6 +337,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testLower() {
+        this.evaluateAndCheck(
+                "=lower(\"ABCxyz\")",
+                "abcxyz"
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndCheck(
                 "=not(false())",
