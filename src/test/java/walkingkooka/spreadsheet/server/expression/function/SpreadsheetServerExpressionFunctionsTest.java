@@ -474,6 +474,23 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testUnicodeA() {
+        this.evaluateAndCheck(
+                "=unicode(\"A\")",
+                EXPRESSION_NUMBER_KIND.create((int) 'A')
+        );
+    }
+
+    @Test
+    public void testUnicodeChar1000() {
+        final char c = 1000;
+        this.evaluateAndCheck(
+                "=unicode(\"" + c + "\")",
+                EXPRESSION_NUMBER_KIND.create((int) c)
+        );
+    }
+
+    @Test
     public void testUpper() {
         this.evaluateAndCheck(
                 "=upper(\"ABCxyz\")",
