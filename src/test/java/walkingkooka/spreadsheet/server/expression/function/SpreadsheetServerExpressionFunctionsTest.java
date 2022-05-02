@@ -249,22 +249,6 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testLeft() {
-        this.evaluateAndCheck(
-                "=left(\"abc\")",
-                "a"
-        );
-    }
-
-    @Test
-    public void testLeft2() {
-        this.evaluateAndCheck(
-                "=left(\"abc\", 2)",
-                "ab"
-        );
-    }
-
-    @Test
     public void testFalse() {
         this.evaluateAndCheck(
                 "=false()",
@@ -325,6 +309,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         this.evaluateAndCheck(
                 "=ifs(\"abc\"=\"different\", 111, \"same\"=\"SAME\", 222)",
                 EXPRESSION_NUMBER_KIND.create(222)
+        );
+    }
+
+    @Test
+    public void testLeft() {
+        this.evaluateAndCheck(
+                "=left(\"abc\")",
+                "a"
+        );
+    }
+
+    @Test
+    public void testLeft2() {
+        this.evaluateAndCheck(
+                "=left(\"abc\", 2)",
+                "ab"
         );
     }
 
