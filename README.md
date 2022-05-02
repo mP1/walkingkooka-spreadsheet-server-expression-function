@@ -37,6 +37,7 @@ to emulate the semantics of Excel functions as necessary.
 - ifs()
 - left(),
 - len(),
+- lower(),
 - not()
 - or()
 - right()
