@@ -329,6 +329,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testLen() {
+        this.evaluateAndCheck(
+                "=len(\"hello\")",
+                EXPRESSION_NUMBER_KIND.create(5)
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndCheck(
                 "=not(false())",
