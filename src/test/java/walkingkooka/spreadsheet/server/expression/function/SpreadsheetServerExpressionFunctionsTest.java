@@ -377,6 +377,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRight() {
+        this.evaluateAndCheck(
+                "=right(\"abc\")",
+                "c"
+        );
+    }
+
+    @Test
+    public void testRight2() {
+        this.evaluateAndCheck(
+                "=right(\"abc\", 2)",
+                "bc"
+        );
+    }
+    
+    @Test
     public void testSwitchFirst() {
         this.evaluateAndCheck(
                 "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",

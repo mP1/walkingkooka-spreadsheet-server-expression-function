@@ -38,6 +38,7 @@ to emulate the semantics of Excel functions as necessary.
 - left(),
 - not()
 - or()
+- right()
 - switch()
 - true()
 - xor()
