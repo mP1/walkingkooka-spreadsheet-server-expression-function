@@ -50,6 +50,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 ifFunction(),
                 ifs(),
                 left(),
+                len(),
                 not(),
                 or(),
                 right(),
@@ -144,6 +145,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> left() {
         return StringExpressionFunctions.left();
     }
+
+    /**
+     * {@see StringExpressionFunctions#stringLength}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> len() {
+        return LEN;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> LEN = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>stringLength()
+            .setName(FunctionExpressionName.with("len"));
 
     /**
      * {@see BooleanExpressionFunctions#not}
