@@ -345,6 +345,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testMid() {
+        this.evaluateAndCheck(
+                "=mid(\"apple\", 2, 3)",
+                "ppl"
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndCheck(
                 "=not(false())",
