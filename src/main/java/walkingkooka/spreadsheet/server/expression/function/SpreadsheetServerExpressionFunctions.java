@@ -57,6 +57,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 right(),
                 switchFunction(),
                 trueFunction(),
+                upper(),
                 xor()
         ).forEach(functions::accept);
     }
@@ -202,6 +203,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return BooleanExpressionFunctions.<SpreadsheetExpressionFunctionContext>trueFunction();
     }
 
+    /**
+     * {@see StringExpressionFunctions#upper}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> upper() {
+        return UPPER;
+    }
+
+    private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> UPPER = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>upperCase()
+            .setName(FunctionExpressionName.with("upper"));
+    
     /**
      * {@see BooleanExpressionFunctions#xor}
      */
