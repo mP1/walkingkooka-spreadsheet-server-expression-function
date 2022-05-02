@@ -102,15 +102,17 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      * {@see StringExpressionFunctions#concat}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> concat() {
-        return StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>concat()
-                .setKinds(
-                        Sets.of(
-                                ExpressionFunctionKind.FLATTEN,
-                                ExpressionFunctionKind.REQUIRES_EVALUATED_PARAMETERS,
-                                ExpressionFunctionKind.RESOLVE_REFERENCES
-                        )
-                );
+        return CONCAT;
     }
+
+    private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> CONCAT = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>concat()
+            .setKinds(
+                    Sets.of(
+                            ExpressionFunctionKind.FLATTEN,
+                            ExpressionFunctionKind.REQUIRES_EVALUATED_PARAMETERS,
+                            ExpressionFunctionKind.RESOLVE_REFERENCES
+                    )
+            );
 
     /**
      * {@see BooleanExpressionFunctions#falseFunction}
