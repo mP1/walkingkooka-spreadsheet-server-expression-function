@@ -44,5 +44,6 @@ to emulate the semantics of Excel functions as necessary.
 - right()
 - switch()
 - true()
+- unichar()
 - upper()
 - xor()

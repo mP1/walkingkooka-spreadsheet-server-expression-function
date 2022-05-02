@@ -58,6 +58,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 right(),
                 switchFunction(),
                 trueFunction(),
+                unichar(),
                 upper(),
                 xor()
         ).forEach(functions::accept);
@@ -210,6 +211,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> trueFunction() {
         return BooleanExpressionFunctions.<SpreadsheetExpressionFunctionContext>trueFunction();
     }
+
+    /**
+     * {@see StringExpressionFunctions#character}
+     */
+    public static ExpressionFunction<Character, SpreadsheetExpressionFunctionContext> unichar() {
+        return UNICHAR;
+    }
+
+    private final static ExpressionFunction<Character, SpreadsheetExpressionFunctionContext> UNICHAR = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>character()
+            .setName(FunctionExpressionName.with("unichar"));
 
     /**
      * {@see StringExpressionFunctions#upper}
