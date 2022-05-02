@@ -52,6 +52,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 left(),
                 len(),
                 lower(),
+                mid(),
                 not(),
                 or(),
                 right(),
@@ -167,6 +168,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> LOWER = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>lowerCase()
             .setName(FunctionExpressionName.with("lower"));
+
+    /**
+     * {@see StringExpressionFunctions#mid}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> mid() {
+        return StringExpressionFunctions.mid();
+    }
 
     /**
      * {@see BooleanExpressionFunctions#not}

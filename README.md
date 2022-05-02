@@ -38,6 +38,7 @@ to emulate the semantics of Excel functions as necessary.
 - left(),
 - len(),
 - lower(),
+- mid(),
 - not()
 - or()
 - right()
