@@ -450,6 +450,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testUpper() {
+        this.evaluateAndCheck(
+                "=upper(\"ABCxyz\")",
+                "ABCXYZ"
+        );
+    }
+
+    @Test
     public void testXorTrueTrueTrue() {
         this.evaluateAndCheck(
                 "=xor(true(), true(), true())",
