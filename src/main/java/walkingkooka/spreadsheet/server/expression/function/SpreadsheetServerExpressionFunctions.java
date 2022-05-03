@@ -52,6 +52,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 ifs(),
                 isErr(),
                 isError(),
+                isNa(),
                 left(),
                 len(),
                 lower(),
@@ -159,6 +160,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isError() {
         return SpreadsheetExpressionFunctions.isError();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#isNa}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isNa() {
+        return SpreadsheetExpressionFunctions.isNa();
     }
 
     /**

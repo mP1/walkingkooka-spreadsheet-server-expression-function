@@ -345,6 +345,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsNaWithError() {
+        this.evaluateAndCheck(
+                "=isNa(1/0)",
+                false
+        );
+    }
+
+    @Test
+    public void testIsNaWithNumber() {
+        this.evaluateAndCheck(
+                "=isNa(123)",
+                false
+        );
+    }
+    
+    @Test
     public void testLeft() {
         this.evaluateAndCheck(
                 "=left(\"abc\")",
