@@ -35,7 +35,8 @@ to emulate the semantics of Excel functions as necessary.
 - false()
 - if()
 - ifs()
-- isErr()
+- isErr(),
+- isError(),
 - left(),
 - len(),
 - lower(),
