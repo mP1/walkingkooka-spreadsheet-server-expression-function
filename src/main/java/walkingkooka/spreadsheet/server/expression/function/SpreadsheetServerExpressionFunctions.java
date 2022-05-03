@@ -51,6 +51,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 ifFunction(),
                 ifs(),
                 isErr(),
+                isError(),
                 left(),
                 len(),
                 lower(),
@@ -151,6 +152,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isErr() {
         return SpreadsheetExpressionFunctions.isErr();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#isError}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isError() {
+        return SpreadsheetExpressionFunctions.isError();
     }
 
     /**
