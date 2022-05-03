@@ -20,6 +20,7 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
 import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
@@ -49,6 +50,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 falseFunction(),
                 ifFunction(),
                 ifs(),
+                isErr(),
                 left(),
                 len(),
                 lower(),
@@ -142,6 +144,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> ifs() {
         return BooleanExpressionFunctions.ifs();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#isErr}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isErr() {
+        return SpreadsheetExpressionFunctions.isErr();
     }
 
     /**

@@ -313,6 +313,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsErrWithError() {
+        this.evaluateAndCheck(
+                "=isErr(1/0)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsErrWithNumber() {
+        this.evaluateAndCheck(
+                "=isErr(123)",
+                false
+        );
+    }
+
+    @Test
     public void testLeft() {
         this.evaluateAndCheck(
                 "=left(\"abc\")",
