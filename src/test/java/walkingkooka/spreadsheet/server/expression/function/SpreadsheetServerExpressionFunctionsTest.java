@@ -313,6 +313,23 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsBlankNoCell() {
+        this.evaluateAndCheck(
+                "=isBlank(B2)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsBlankCell() {
+        this.evaluateAndCheck(
+                "=isBlank(B2)",
+                Maps.of("B2", "'NotBlank"),
+                false
+        );
+    }
+
+    @Test
     public void testIsErrWithError() {
         this.evaluateAndCheck(
                 "=isErr(1/0)",
