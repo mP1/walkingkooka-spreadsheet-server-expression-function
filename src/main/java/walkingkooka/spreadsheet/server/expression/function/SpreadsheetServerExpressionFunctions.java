@@ -50,6 +50,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 falseFunction(),
                 ifFunction(),
                 ifs(),
+                isBlank(),
                 isErr(),
                 isError(),
                 isNa(),
@@ -147,6 +148,20 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> ifs() {
         return BooleanExpressionFunctions.ifs();
     }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#isBlank}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isBlank() {
+        return IS_BLANK;
+    }
+
+    private final static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> IS_BLANK = SpreadsheetExpressionFunctions.isBlank()
+            .setKinds(
+                    Sets.of(
+                            ExpressionFunctionKind.REQUIRES_EVALUATED_PARAMETERS
+                    )
+            );
 
     /**
      * {@see SpreadsheetExpressionFunctions#isErr}
