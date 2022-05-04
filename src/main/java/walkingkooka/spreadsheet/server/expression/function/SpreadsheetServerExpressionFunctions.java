@@ -122,7 +122,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
             .setKinds(
                     Sets.of(
                             ExpressionFunctionKind.FLATTEN,
-                            ExpressionFunctionKind.REQUIRES_EVALUATED_PARAMETERS,
+                            ExpressionFunctionKind.EVALUATE_PARAMETERS,
                             ExpressionFunctionKind.RESOLVE_REFERENCES
                     )
             );
@@ -159,7 +159,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> IS_BLANK = SpreadsheetExpressionFunctions.isBlank()
             .setKinds(
                     Sets.of(
-                            ExpressionFunctionKind.REQUIRES_EVALUATED_PARAMETERS
+                            ExpressionFunctionKind.EVALUATE_PARAMETERS
                     )
             );
 
