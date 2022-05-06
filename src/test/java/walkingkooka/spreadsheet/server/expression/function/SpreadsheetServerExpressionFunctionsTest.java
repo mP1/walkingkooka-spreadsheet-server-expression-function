@@ -134,6 +134,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         );
     }
 
+    @Test
+    public void testFunctionNameCaseInsensitive() {
+        this.evaluateAndCheck(
+                "=TRUE()",
+                true
+        );
+    }
+
     // function tests...................................................................................................
 
     @Test
@@ -642,9 +650,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 metadata
         );
 
-        final Map<FunctionExpressionName, ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> nameToFunctions = Maps.ordered();
+        final Map<String, ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
         SpreadsheetServerExpressionFunctions.visit(
-                (f -> nameToFunctions.put(f.name(), f))
+                (f -> nameToFunctions.put(f.name().value(), f))
         );
 
         final SpreadsheetMetadataStore metadataStore = SpreadsheetMetadataStores.treeMap();
@@ -668,7 +676,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 metadata,
                 (n) -> {
                     Objects.requireNonNull(n, "name");
-                    final ExpressionFunction<?, ?> function = nameToFunctions.get(n);
+                    final ExpressionFunction<?, ?> function = nameToFunctions.get(n.value());
                     if (null == function) {
                         throw new IllegalArgumentException("Unknown function " + n);
                     }
