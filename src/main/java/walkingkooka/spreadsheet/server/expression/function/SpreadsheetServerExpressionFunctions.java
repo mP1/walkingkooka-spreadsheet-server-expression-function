@@ -48,6 +48,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 code(),
                 concat(),
                 falseFunction(),
+                formulaText(),
                 ifFunction(),
                 ifs(),
                 isBlank(),
@@ -134,6 +135,12 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return BooleanExpressionFunctions.falseFunction();
     }
 
+    /**
+     * {@see SpreadsheetExpressionFunctions#formulaText}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> formulaText() {
+        return SpreadsheetExpressionFunctions.formulaText();
+    }
 
     /**
      * {@see BooleanExpressionFunctions#ifFunction}
