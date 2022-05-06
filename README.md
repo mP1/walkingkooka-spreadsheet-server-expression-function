@@ -33,6 +33,7 @@ to emulate the semantics of Excel functions as necessary.
 - code()
 - concat()
 - false()
+- formulaText(),
 - if()
 - ifs()
 - isBlank(),

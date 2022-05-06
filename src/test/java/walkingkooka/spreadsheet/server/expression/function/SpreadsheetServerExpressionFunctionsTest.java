@@ -257,6 +257,15 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testFormulaText() {
+        this.evaluateAndCheck(
+                "=formulatext(A2)",
+                Maps.of("A2", "=1+2+3"),
+                "=1+2+3"
+        );
+    }
+
+    @Test
     public void testIfTrue() {
         this.evaluateAndCheck(
                 "=if(true(), 111, 222)",
