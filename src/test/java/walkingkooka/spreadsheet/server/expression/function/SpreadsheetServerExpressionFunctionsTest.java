@@ -539,6 +539,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRowsWithCell() {
+        this.evaluateAndCheck(
+                "=rows(Z99)",
+                EXPRESSION_NUMBER_KIND.create(1)
+        );
+    }
+
+    @Test
+    public void testRowsWithRange() {
+        this.evaluateAndCheck(
+                "=rows(B1:D1)",
+                EXPRESSION_NUMBER_KIND.create(1)
+        );
+    }
+
+    @Test
+    public void testRowsWithRange2() {
+        this.evaluateAndCheck(
+                "=rows(B3:D6)",
+                EXPRESSION_NUMBER_KIND.create(4)
+        );
+    }
+
+    @Test
     public void testSwitchFirst() {
         this.evaluateAndCheck(
                 "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",
