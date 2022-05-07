@@ -250,6 +250,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testColumns() {
+        this.evaluateAndCheck(
+                "=columns(Z99)",
+                EXPRESSION_NUMBER_KIND.create(1)
+        );
+    }
+
+    @Test
+    public void testColumnsWithRange() {
+        this.evaluateAndCheck(
+                "=columns(B1:D1)",
+                EXPRESSION_NUMBER_KIND.create(3)
+        );
+    }
+
+    @Test
     public void testConcatRange() {
         this.evaluateAndCheck(
                 "=concat(A2:A3)",

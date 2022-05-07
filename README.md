@@ -33,6 +33,7 @@ to emulate the semantics of Excel functions as necessary.
 - clean()
 - code()
 - column()
+- columns()
 - concat()
 - false()
 - formulaText(),
