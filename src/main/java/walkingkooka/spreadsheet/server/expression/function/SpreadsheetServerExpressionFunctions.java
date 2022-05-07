@@ -48,6 +48,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 choose(),
                 clean(),
                 code(),
+                column(),
                 concat(),
                 falseFunction(),
                 formulaText(),
@@ -121,6 +122,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> CODE = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>unicode()
             .setName(FunctionExpressionName.with("code"));
 
+    /**
+     * {@see SpreadsheetExpressionFunctions#column}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> column() {
+        return SpreadsheetExpressionFunctions.column();
+    }
+    
     /**
      * {@see StringExpressionFunctions#concat}
      */
