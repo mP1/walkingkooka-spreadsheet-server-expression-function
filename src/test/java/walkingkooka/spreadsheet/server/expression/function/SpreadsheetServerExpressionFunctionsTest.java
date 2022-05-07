@@ -529,7 +529,15 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 "bc"
         );
     }
-    
+
+    @Test
+    public void testRow() {
+        this.evaluateAndCheck(
+                "=row(A99)",
+                EXPRESSION_NUMBER_KIND.create(99)
+        );
+    }
+
     @Test
     public void testSwitchFirst() {
         this.evaluateAndCheck(
