@@ -54,6 +54,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - lower(),
 - mid(),
 - not()
+- offset()
 - or()
 - right()
 - row()

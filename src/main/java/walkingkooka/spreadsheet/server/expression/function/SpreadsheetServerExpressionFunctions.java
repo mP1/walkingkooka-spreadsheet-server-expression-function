@@ -23,6 +23,7 @@ import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
 import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
+import walkingkooka.spreadsheet.reference.SpreadsheetExpressionReference;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -64,6 +65,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 lower(),
                 mid(),
                 not(),
+                offset(),
                 or(),
                 right(),
                 row(),
@@ -257,6 +259,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> not() {
         return BooleanExpressionFunctions.not();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#offset}
+     */
+    public static ExpressionFunction<SpreadsheetExpressionReference, SpreadsheetExpressionFunctionContext> offset() {
+        return SpreadsheetExpressionFunctions.offset();
     }
 
     /**

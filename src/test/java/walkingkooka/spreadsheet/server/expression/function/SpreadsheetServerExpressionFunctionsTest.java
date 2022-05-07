@@ -491,6 +491,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testOffset() {
+        this.evaluateAndCheck(
+                "=offset(B2,1,2,3,3)",
+                SpreadsheetSelection.parseCellRange("D3:F5" )
+        );
+    }
+
+    @Test
     public void testOrTrueTrueTrue() {
         this.evaluateAndCheck(
                 "=or(true(), true(), true())",
