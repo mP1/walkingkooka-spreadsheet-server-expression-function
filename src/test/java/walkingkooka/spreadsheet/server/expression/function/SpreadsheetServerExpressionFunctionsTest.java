@@ -145,6 +145,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     // function tests...................................................................................................
 
     @Test
+    public void testAddress() {
+        this.evaluateAndCheck(
+                "=address(1, 2)",
+                SpreadsheetSelection.parseCell("$B$1")
+        );
+    }
+
+    @Test
     public void testAndTrueTrue() {
         this.evaluateAndCheck(
                 "=and(true(), true())",

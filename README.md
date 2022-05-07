@@ -26,6 +26,7 @@ to emulate the semantics of Excel functions as necessary.
 
 # Functions
 
+- address
 - and()
 - char()
 - choose()

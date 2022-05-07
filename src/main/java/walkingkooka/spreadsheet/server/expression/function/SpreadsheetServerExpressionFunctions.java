@@ -22,6 +22,7 @@ import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
 import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
+import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -41,6 +42,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
+                address(),
                 and(),
                 charFunction(),
                 choose(),
@@ -69,6 +71,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 upper(),
                 xor()
         ).forEach(functions::accept);
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#address}
+     */
+    public static ExpressionFunction<SpreadsheetCellReference, SpreadsheetExpressionFunctionContext> address() {
+        return SpreadsheetExpressionFunctions.address();
     }
 
     /**
