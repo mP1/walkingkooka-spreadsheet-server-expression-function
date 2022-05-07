@@ -51,6 +51,7 @@ to emulate the semantics of Excel functions as necessary.
 - or()
 - right()
 - row()
+- rows()
 - switch()
 - true()
 - unichar()

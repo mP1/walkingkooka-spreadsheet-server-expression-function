@@ -67,6 +67,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 or(),
                 right(),
                 row(),
+                rows(),
                 switchFunction(),
                 trueFunction(),
                 unichar(),
@@ -277,6 +278,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> row() {
         return SpreadsheetExpressionFunctions.row();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#rows}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> rows() {
+        return SpreadsheetExpressionFunctions.rows();
     }
     
     /**
