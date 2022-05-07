@@ -9,8 +9,7 @@
 
 An assembly of functions that faithfully match their Excel equivalents, and are ready for use by walkingkooka-spreadsheet-server.
 
-This is mostly an assembly of the following repos which concentrate on `ExpressionFunction` implementations. Customisation of said functions will be done
-to emulate the semantics of Excel functions as necessary.
+This is mostly an assembly of the following repos which concentrate on `ExpressionFunction` implementations. 
 
 - [boolean](https://github.com/mP1/walkingkooka-tree-expression-function-boolean)
 - [datetime](https://github.com/mP1/walkingkooka-tree-expression-function-datetime)
@@ -21,6 +20,13 @@ to emulate the semantics of Excel functions as necessary.
 - [spreadsheet](https://github.com/mP1/walkingkooka-spreadsheet-expression-function)
 - [stat](https://github.com/mP1/walkingkooka-tree-expression-function-stat)
 - [string](https://github.com/mP1/walkingkooka-tree-expression-function-string)
+
+All the functions in the above repos have been executed using the default environment which has several important
+different semantics that exist within a spreadsheet formula or function evaluation.
+
+- All java exceptions thrown by an expression or function are converted to the correct error, the normal function execution simply throws exception.
+  This is important because an expression like `isError(1/0)` needs the divide by error as its argument rather than lettering the exception propogate. 
+- The functions include tests that use spreadsheet context that handles value converting using spreadsheet rules and formatters.
 
 
 
