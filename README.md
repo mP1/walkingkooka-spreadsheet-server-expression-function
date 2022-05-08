@@ -34,6 +34,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 
 - address
 - and()
+- cell()
 - char()
 - choose()
 - clean()

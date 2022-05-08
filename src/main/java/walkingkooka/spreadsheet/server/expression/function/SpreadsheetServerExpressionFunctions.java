@@ -45,6 +45,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         Lists.of(
                 address(),
                 and(),
+                cell(),
                 charFunction(),
                 choose(),
                 clean(),
@@ -91,6 +92,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> and() {
         return BooleanExpressionFunctions.and();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#cell}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> cell() {
+        return SpreadsheetExpressionFunctions.cell();
     }
 
     /**
