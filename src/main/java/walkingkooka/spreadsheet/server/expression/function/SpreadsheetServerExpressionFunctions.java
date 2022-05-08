@@ -73,6 +73,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 rows(),
                 switchFunction(),
                 t(),
+                text(),
                 trueFunction(),
                 unichar(),
                 unicode(),
@@ -317,6 +318,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> t() {
         return StringExpressionFunctions.t();
+    }
+
+    /**
+     * {@see StringExpressionFunctions#text}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> text() {
+        return StringExpressionFunctions.text();
     }
 
     /**
