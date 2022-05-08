@@ -94,11 +94,11 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 names.size());
     }
 
-    // evaluateAndCheck tests...........................................................................................
+    // evaluateAndValueCheck tests......................................................................................
 
     @Test
     public void testMathExpression() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=1+2+3",
                 EXPRESSION_NUMBER_KIND.create(1 + 2 + 3)
         );
@@ -106,7 +106,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testMathExpressionWithReferences() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=1+A2+A3",
                 Maps.of(
                         "A2", "=2",
@@ -118,7 +118,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testMathExpressionEvaluationFailureDivideByZero() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=1/0",
                 SpreadsheetErrorKind.DIV0.setMessage("Division by zero")
         );
@@ -126,7 +126,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testMathExpressionEvaluationFailureReferenceNotFound() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=1+A2+A3",
                 Maps.of(
                         "A2", "=2"
@@ -137,7 +137,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testFunctionNameCaseInsensitive() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=TRUE()",
                 true
         );
@@ -147,7 +147,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testAddress() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=address(1, 2)",
                 SpreadsheetSelection.parseCell("$B$1")
         );
@@ -155,7 +155,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testAndTrueTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=and(true(), true())",
                 Boolean.TRUE
         );
@@ -163,7 +163,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testAndTrue1() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=and(true(), 1)",
                 Boolean.TRUE
         );
@@ -171,7 +171,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testAndTrue0() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=and(true(), 0)",
                 Boolean.FALSE
         );
@@ -179,7 +179,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testAndTrueTrueTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=and(true(), true(), true())",
                 Boolean.TRUE
         );
@@ -187,7 +187,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testCell() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=cell(\"address\", B2)",
                 Maps.of("b2", "=1*2"),
                 SpreadsheetSelection.parseCell("B2")
@@ -196,7 +196,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testChar65() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=char(65)",
                 'A'
         );
@@ -204,7 +204,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testChooseFirst() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=choose(1, 111, 222, 333)",
                 EXPRESSION_NUMBER_KIND.create(111)
         );
@@ -212,7 +212,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testChooseSecond() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=choose(2, 111, 222, 333)",
                 EXPRESSION_NUMBER_KIND.create(222)
         );
@@ -220,7 +220,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testChooseThird() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=choose(3, 111, true(), \"Third\")",
                 "Third"
         );
@@ -228,7 +228,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testClean() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=clean(\"\t\nNeeds cleaning \r\")",
                 "Needs cleaning "
         );
@@ -236,7 +236,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testCodeCapitalA() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=code(\"A\")",
                 EXPRESSION_NUMBER_KIND.create(65)
         );
@@ -244,7 +244,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testConcatSingleValues() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=concat(A2,A3)",
                 Maps.of("A2", "'abc", "A3", "'123"),
                 "abc123"
@@ -253,7 +253,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testColumn() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=column(C1)",
                 EXPRESSION_NUMBER_KIND.create(3)
         );
@@ -261,7 +261,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testColumns() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=columns(Z99)",
                 EXPRESSION_NUMBER_KIND.create(1)
         );
@@ -269,7 +269,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testColumnsWithRange() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=columns(B1:D1)",
                 EXPRESSION_NUMBER_KIND.create(3)
         );
@@ -277,7 +277,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testConcatRange() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=concat(A2:A3)",
                 Maps.of("A2", "'abc", "A3", "'123"),
                 "abc123"
@@ -286,7 +286,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testConcatSingleValuesAndRange() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=concat(\"First\",A2:A3,\"!!!\",B1:B2)",
                 Maps.of(
                         "A2", "'abc",
@@ -300,7 +300,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testFalse() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=false()",
                 Boolean.FALSE
         );
@@ -308,7 +308,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testFormulaText() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=formulatext(A2)",
                 Maps.of("A2", "=1+2+3"),
                 "=1+2+3"
@@ -317,7 +317,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=if(true(), 111, 222)",
                 EXPRESSION_NUMBER_KIND.create(111)
         );
@@ -325,7 +325,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfTrueCaseInsensitiveStringCompare() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=if(\"abc\" = \"ABC\", 111, 222)",
                 EXPRESSION_NUMBER_KIND.create(111)
         );
@@ -333,7 +333,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfTrueCaseInsensitiveStringCompareDifferent() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=if(\"abc\" = \"different\", 111, 222)",
                 EXPRESSION_NUMBER_KIND.create(222)
         );
@@ -341,7 +341,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfFalse() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=if(false(), 111, 222)",
                 EXPRESSION_NUMBER_KIND.create(222)
         );
@@ -349,7 +349,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfsFirst() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=ifs(true(), 111, false(), 222)",
                 EXPRESSION_NUMBER_KIND.create(111)
         );
@@ -357,7 +357,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfsSecond() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=ifs(\"abc\"=\"different\", 111, true(), 222)",
                 EXPRESSION_NUMBER_KIND.create(222)
         );
@@ -365,7 +365,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIfsSecondStringCaseInsensitiveEquals() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=ifs(\"abc\"=\"different\", 111, \"same\"=\"SAME\", 222)",
                 EXPRESSION_NUMBER_KIND.create(222)
         );
@@ -373,7 +373,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsBlankNoCell() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isBlank(B2)",
                 true
         );
@@ -381,7 +381,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsBlankCell() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isBlank(B2)",
                 Maps.of("B2", "'NotBlank"),
                 false
@@ -390,7 +390,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsErrWithError() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isErr(1/0)",
                 true
         );
@@ -398,7 +398,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsErrWithNumber() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isErr(123)",
                 false
         );
@@ -406,7 +406,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsErrorWithErroror() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isError(1/0)",
                 true
         );
@@ -414,7 +414,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsErrorWithNumber() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isError(123)",
                 false
         );
@@ -422,7 +422,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsNaWithError() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isNa(1/0)",
                 false
         );
@@ -430,7 +430,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testIsNaWithNumber() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=isNa(123)",
                 false
         );
@@ -438,7 +438,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     
     @Test
     public void testLeft() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=left(\"abc\")",
                 "a"
         );
@@ -446,7 +446,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testLeft2() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=left(\"abc\", 2)",
                 "ab"
         );
@@ -454,7 +454,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testLen() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=len(\"hello\")",
                 EXPRESSION_NUMBER_KIND.create(5)
         );
@@ -462,7 +462,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testLower() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=lower(\"ABCxyz\")",
                 "abcxyz"
         );
@@ -470,7 +470,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testMid() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=mid(\"apple\", 2, 3)",
                 "ppl"
         );
@@ -478,7 +478,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testNotFalse() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=not(false())",
                 Boolean.TRUE
         );
@@ -486,7 +486,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testNotTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=not(true())",
                 Boolean.FALSE
         );
@@ -494,7 +494,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testNotZero() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=not(0)",
                 Boolean.TRUE
         );
@@ -502,7 +502,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testOffset() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=offset(B2,1,2,3,3)",
                 SpreadsheetSelection.parseCellRange("D3:F5" )
         );
@@ -510,7 +510,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testOrTrueTrueTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=or(true(), true(), true())",
                 Boolean.TRUE
         );
@@ -518,7 +518,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testOrFalseFalseTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=or(false(), false(), true())",
                 Boolean.TRUE
         );
@@ -526,7 +526,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testOrFalseFalseFalseFalse() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=or(false(), false(), false(), false())",
                 Boolean.FALSE
         );
@@ -534,7 +534,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testRight() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=right(\"abc\")",
                 "c"
         );
@@ -542,7 +542,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testRight2() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=right(\"abc\", 2)",
                 "bc"
         );
@@ -550,7 +550,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testRow() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=row(A99)",
                 EXPRESSION_NUMBER_KIND.create(99)
         );
@@ -558,7 +558,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testRowsWithCell() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=rows(Z99)",
                 EXPRESSION_NUMBER_KIND.create(1)
         );
@@ -566,7 +566,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testRowsWithRange() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=rows(B1:D1)",
                 EXPRESSION_NUMBER_KIND.create(1)
         );
@@ -574,7 +574,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testRowsWithRange2() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=rows(B3:D6)",
                 EXPRESSION_NUMBER_KIND.create(4)
         );
@@ -582,7 +582,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testSwitchFirst() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",
                 "One"
         );
@@ -590,7 +590,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testSwitchSecond() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=switch(\"TWO22\", 1, \"One\", \"Two22\", \"Two\", 3, 333, \"switch-default\")",
                 "Two"
         );
@@ -598,7 +598,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testSwitchDefaults() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=switch(999, 1, \"One\", 22, \"Two\", 3, 333, \"switch-default\")",
                 "switch-default"
         );
@@ -606,15 +606,23 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testText() {
-        this.evaluateAndCheck(
+        this.evaluateAndFormattedCheck(
                 "=text(\"abc\")",
-                "abc"
+                TextNode.text("abcabc")
+        );
+    }
+
+    @Test
+    public void testTWithText() {
+        this.evaluateAndValueCheck(
+                "=t(\"abc123\")",
+                "abc123"
         );
     }
 
     @Test
     public void testTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=true()",
                 Boolean.TRUE
         );
@@ -622,7 +630,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testTrue2() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=true()",
                 Maps.of("A2", "=true()"),
                 Boolean.TRUE
@@ -631,7 +639,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testUnichar97() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=unichar(97)",
                 'a'
         );
@@ -639,7 +647,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testUnichar1000() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=unichar(1000)",
                 Character.valueOf((char) 1000)
         );
@@ -647,7 +655,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testUnicodeA() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=unicode(\"A\")",
                 EXPRESSION_NUMBER_KIND.create((int) 'A')
         );
@@ -656,7 +664,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testUnicodeChar1000() {
         final char c = 1000;
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=unicode(\"" + c + "\")",
                 EXPRESSION_NUMBER_KIND.create((int) c)
         );
@@ -664,7 +672,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testUpper() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=upper(\"ABCxyz\")",
                 "ABCXYZ"
         );
@@ -672,7 +680,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testXorTrueTrueTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=xor(true(), true(), true())",
                 Boolean.TRUE
         );
@@ -680,7 +688,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testXorFalseFalseTrue() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=xor(true(), false(), true())",
                 Boolean.FALSE
         );
@@ -688,36 +696,61 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testXorFalseFalseFalseFalse() {
-        this.evaluateAndCheck(
+        this.evaluateAndValueCheck(
                 "=xor(false(), false(), false(), false())",
                 Boolean.FALSE
         );
     }
 
-    private void evaluateAndCheck(final String cellFormula,
-                                  final Object expectedResult) {
-        this.evaluateAndCheck(
+    // evaluateAndCheckValue............................................................................................
+
+    private void evaluateAndValueCheck(final String cellFormula,
+                                       final Object expectedValue) {
+        this.evaluateAndValueCheck(
                 cellFormula,
                 Maps.empty(),
-                expectedResult
+                expectedValue
         );
     }
 
-    private void evaluateAndCheck(final String cellFormula,
-                                  final Map<String, String> preload,
-                                  final Object expectedResult) {
+    private void evaluateAndValueCheck(final String cellFormula,
+                                       final Map<String, String> preload,
+                                       final Object expectedValue) {
         this.evaluateAndCheck(
                 SpreadsheetSelection.parseCell("A1"),
                 cellFormula,
                 preload,
-                Optional.ofNullable(expectedResult)
+                Optional.ofNullable(expectedValue),
+                null // not checking formatted
+        );
+    }
+
+    private void evaluateAndFormattedCheck(final String cellFormula,
+                                           final TextNode expectedValue) {
+        this.evaluateAndFormattedCheck(
+                cellFormula,
+                Maps.empty(),
+                expectedValue
+        );
+    }
+
+    private void evaluateAndFormattedCheck(final String cellFormula,
+                                           final Map<String, String> preload,
+                                           final TextNode expectedFormatted) {
+        this.evaluateAndCheck(
+                SpreadsheetSelection.parseCell("A1"),
+                cellFormula,
+                preload,
+                null, // no value
+                Optional.ofNullable(expectedFormatted)
         );
     }
 
     private void evaluateAndCheck(final SpreadsheetCellReference cellReference,
                                   final String cellFormula,
                                   final Map<String, String> preload,
-                                  final Object expectedResult) {
+                                  final Optional<?> expectedValue,
+                                  final Optional<TextNode> formatted) {
         final SpreadsheetMetadata metadata = SpreadsheetMetadata.EMPTY
                 .set(SpreadsheetMetadataPropertyName.SPREADSHEET_ID, SpreadsheetId.parse("1234"))
                 .set(SpreadsheetMetadataPropertyName.SPREADSHEET_NAME, SpreadsheetName.with("Untitled5678"))
@@ -800,14 +833,28 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 ).cell(cellReference)
                 .orElseThrow(() -> new AssertionError("Missing " + cellReference + " after saving " + cellFormula));
 
-        this.checkEquals(
-                expectedResult,
-                saved.formula().value(),
-                cellReference + "=" + cellFormula + "\n" +
-                        preload.entrySet().stream()
-                                .map(e -> e.getKey() + "=" + e.getValue())
-                                .collect(Collectors.joining("\n"))
-        );
+        if (null != formatted) {
+            this.checkEquals(
+                    formatted,
+                    saved.formatted(),
+                    cellReference + "=" + cellFormula + "\n" +
+                            preload.entrySet().stream()
+                                    .map(e -> e.getKey() + "=" + e.getValue())
+                                    .collect(Collectors.joining("\n"))
+            );
+        }
+
+        if (null != expectedValue) {
+            this.checkEquals(
+                    expectedValue,
+                    saved.formula()
+                            .value(),
+                    cellReference + "=" + cellFormula + "\n" +
+                            preload.entrySet().stream()
+                                    .map(e -> e.getKey() + "=" + e.getValue())
+                                    .collect(Collectors.joining("\n"))
+            );
+        }
     }
 
     // PublicStaticHelperTesting........................................................................................
