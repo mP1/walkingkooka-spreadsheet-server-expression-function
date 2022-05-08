@@ -185,6 +185,15 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCell() {
+        this.evaluateAndCheck(
+                "=cell(\"address\", B2)",
+                Maps.of("b2", "=1*2"),
+                SpreadsheetSelection.parseCell("B2")
+        );
+    }
+
+    @Test
     public void testChar65() {
         this.evaluateAndCheck(
                 "=char(65)",
