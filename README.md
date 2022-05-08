@@ -63,6 +63,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - switch()
 - t()
 - text()
+- textjoin()
 - true()
 - unichar()
 - unicode()

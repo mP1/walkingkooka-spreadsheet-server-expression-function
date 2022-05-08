@@ -74,6 +74,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 switchFunction(),
                 t(),
                 text(),
+                textJoin(),
                 trueFunction(),
                 unichar(),
                 unicode(),
@@ -326,6 +327,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> text() {
         return StringExpressionFunctions.text();
     }
+
+    /**
+     * {@see StringExpressionFunctions#textJoin}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> textJoin() {
+        return TEXTJOIN;
+    }
+
+    private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> TEXTJOIN = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>textJoin()
+            .setName(FunctionExpressionName.with("textJoin"));
 
     /**
      * {@see BooleanExpressionFunctions#trueFunction}
