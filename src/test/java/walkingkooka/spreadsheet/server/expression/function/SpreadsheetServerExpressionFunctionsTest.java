@@ -604,6 +604,31 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testTWithCell() {
+        this.evaluateAndCheck(
+                "=t(B2)",
+                Maps.of("B2", "'xyz123"),
+                "xyz123"
+        );
+    }
+
+    @Test
+    public void testTWithNumber() {
+        this.evaluateAndCheck(
+                "=t(1.5)",
+                ""
+        );
+    }
+
+    @Test
+    public void testTWithText() {
+        this.evaluateAndCheck(
+                "=t(\"abc123\")",
+                "abc123"
+        );
+    }
+
+    @Test
     public void testTrue() {
         this.evaluateAndCheck(
                 "=true()",
