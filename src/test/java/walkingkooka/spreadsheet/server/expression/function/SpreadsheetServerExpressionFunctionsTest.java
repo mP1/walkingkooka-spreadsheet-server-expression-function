@@ -57,6 +57,7 @@ import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.text.TextNode;
 
 import java.lang.reflect.Method;
 import java.math.MathContext;
@@ -604,27 +605,10 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testTWithCell() {
+    public void testText() {
         this.evaluateAndCheck(
-                "=t(B2)",
-                Maps.of("B2", "'xyz123"),
-                "xyz123"
-        );
-    }
-
-    @Test
-    public void testTWithNumber() {
-        this.evaluateAndCheck(
-                "=t(1.5)",
-                ""
-        );
-    }
-
-    @Test
-    public void testTWithText() {
-        this.evaluateAndCheck(
-                "=t(\"abc123\")",
-                "abc123"
+                "=text(\"abc\")",
+                "abc"
         );
     }
 
@@ -709,7 +693,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 Boolean.FALSE
         );
     }
-    
+
     private void evaluateAndCheck(final String cellFormula,
                                   final Object expectedResult) {
         this.evaluateAndCheck(
@@ -749,7 +733,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
                 .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.UNLIMITED.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
-                .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@"))
+                .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@@"))
                 .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
 
         final SpreadsheetEngine engine = SpreadsheetEngines.basic(
