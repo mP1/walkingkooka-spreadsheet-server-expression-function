@@ -613,6 +613,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testTextJoin() {
+        this.evaluateAndFormattedCheck(
+                "=textJoin(\",\", true(), \"a\", \"b\", \"\", \"d\")",
+                TextNode.text("a,b,da,b,d")
+        );
+    }
+
+    @Test
     public void testTWithText() {
         this.evaluateAndValueCheck(
                 "=t(\"abc123\")",
