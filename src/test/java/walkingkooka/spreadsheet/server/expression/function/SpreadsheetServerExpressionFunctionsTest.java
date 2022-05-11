@@ -342,6 +342,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testHour() {
+        this.evaluateAndValueCheck(
+                "=hour(time(12, 58, 59))",
+                EXPRESSION_NUMBER_KIND.create(12)
+        );
+    }
+
+    @Test
     public void testIfTrue() {
         this.evaluateAndValueCheck(
                 "=if(true(), 111, 222)",
