@@ -717,6 +717,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testTrim() {
+        this.evaluateAndValueCheck(
+                "=trim(\"  a  b  c  \")",
+                "a b c"
+        );
+    }
+
+    @Test
     public void testTrue() {
         this.evaluateAndValueCheck(
                 "=true()",
