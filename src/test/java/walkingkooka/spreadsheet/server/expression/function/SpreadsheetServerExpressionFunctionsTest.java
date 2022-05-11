@@ -62,6 +62,7 @@ import walkingkooka.tree.text.TextNode;
 import java.lang.reflect.Method;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Locale;
@@ -295,6 +296,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         "B2", "'Last"
                 ),
                 "Firstabc123!!!SecondLastLast"
+        );
+    }
+
+    @Test
+    public void testDate() {
+        this.evaluateAndValueCheck(
+                "=date(1999, 12, 31)",
+                LocalDate.of(1999, 12, 31)
         );
     }
 

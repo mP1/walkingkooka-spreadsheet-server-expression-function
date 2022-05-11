@@ -29,8 +29,10 @@ import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
+import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
+import java.time.LocalDate;
 import java.util.function.Consumer;
 
 /**
@@ -53,6 +55,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 column(),
                 columns(),
                 concat(),
+                date(),
                 falseFunction(),
                 formulaText(),
                 ifFunction(),
@@ -175,6 +178,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                             ExpressionFunctionKind.RESOLVE_REFERENCES
                     )
             );
+
+    /**
+     * {@see DateTimeExpressionFunctions#date}
+     */
+    public static ExpressionFunction<LocalDate, SpreadsheetExpressionFunctionContext> date() {
+        return DateTimeExpressionFunctions.date();
+    }
 
     /**
      * {@see BooleanExpressionFunctions#falseFunction}
