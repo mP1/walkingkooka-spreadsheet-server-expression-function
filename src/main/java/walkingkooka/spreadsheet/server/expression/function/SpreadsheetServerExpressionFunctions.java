@@ -73,6 +73,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 right(),
                 row(),
                 rows(),
+                substitute(),
                 switchFunction(),
                 t(),
                 text(),
@@ -325,7 +326,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> rows() {
         return SpreadsheetExpressionFunctions.rows();
     }
-    
+
+    /**
+     * {@see StringExpressionFunctions#substitute}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> substitute() {
+        return StringExpressionFunctions.substitute();
+    }
+
     /**
      * {@see BooleanExpressionFunctions#switchFunction}
      */

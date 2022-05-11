@@ -605,6 +605,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSubstitute() {
+        this.evaluateAndValueCheck(
+                "=substitute(\"123-456-7890\",\"-\",\"\") ",
+                "1234567890"
+        );
+    }
+
+    @Test
     public void testSwitchFirst() {
         this.evaluateAndValueCheck(
                 "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",
