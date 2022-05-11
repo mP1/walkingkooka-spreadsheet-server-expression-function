@@ -533,6 +533,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testProper() {
+        this.evaluateAndValueCheck(
+                "=proper(\"apple\")",
+                "Apple"
+        );
+    }
+
+    @Test
+    public void testProper2() {
+        this.evaluateAndValueCheck(
+                "=proper(\"apple, pears\")",
+                "Apple, Pears"
+        );
+    }
+
+    @Test
     public void testRight() {
         this.evaluateAndValueCheck(
                 "=right(\"abc\")",

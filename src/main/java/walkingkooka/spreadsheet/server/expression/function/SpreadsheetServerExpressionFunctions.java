@@ -68,6 +68,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 not(),
                 offset(),
                 or(),
+                proper(),
                 right(),
                 row(),
                 rows(),
@@ -284,6 +285,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> or() {
         return BooleanExpressionFunctions.or();
+    }
+
+    /**
+     * {@see StringExpressionFunctions#proper}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> proper() {
+        return StringExpressionFunctions.proper();
     }
 
     /**
