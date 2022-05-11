@@ -661,6 +661,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSearchCaseInsensitiveFound() {
+        this.evaluateAndValueCheck(
+                "=search(\"bc\", \"ABCDE\")",
+                EXPRESSION_NUMBER_KIND.create(2)
+        );
+    }
+
+    @Test
+    public void testSearchCaseSensitiveFound() {
+        this.evaluateAndValueCheck(
+                "=search(\"bc\", \"abcde\")",
+                EXPRESSION_NUMBER_KIND.create(2)
+        );
+    }
+
+    @Test
+    public void testSearchNotFound() {
+        this.evaluateAndValueCheck(
+                "=search(\"!\", \"abcde\")",
+                EXPRESSION_NUMBER_KIND.create(0)
+        );
+    }
+
+    @Test
     public void testSubstitute() {
         this.evaluateAndValueCheck(
                 "=substitute(\"123-456-7890\",\"-\",\"\") ",

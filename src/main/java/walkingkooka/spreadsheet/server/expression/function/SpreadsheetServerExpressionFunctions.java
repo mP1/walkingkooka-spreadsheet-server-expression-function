@@ -75,6 +75,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 right(),
                 row(),
                 rows(),
+                search(),
                 substitute(),
                 switchFunction(),
                 t(),
@@ -342,6 +343,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> rows() {
         return SpreadsheetExpressionFunctions.rows();
     }
+
+    /**
+     * {@see StringExpressionFunctions#searchCaseInsensitive}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> search() {
+        return SEARCH;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> SEARCH = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>searchCaseInsensitive()
+            .setName(FunctionExpressionName.with("search"));
 
     /**
      * {@see StringExpressionFunctions#substitute}
