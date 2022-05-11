@@ -98,6 +98,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 unichar(),
                 unicode(),
                 upper(),
+                year(),
                 xor()
         ).forEach(functions::accept);
     }
@@ -514,6 +515,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> UPPER = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>upperCase()
             .setName(FunctionExpressionName.with("upper"));
+
+    /**
+     * {@see DateTimeExpressionFunctions#year}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> year() {
+        return DateTimeExpressionFunctions.year();
+    }
     
     /**
      * {@see BooleanExpressionFunctions#xor}

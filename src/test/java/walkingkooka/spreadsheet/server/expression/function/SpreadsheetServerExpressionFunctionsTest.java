@@ -881,6 +881,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testYear() {
+        this.evaluateAndValueCheck(
+                "=year(date(1999, 12, 31))",
+                EXPRESSION_NUMBER_KIND.create(1999)
+        );
+    }
+
+    @Test
     public void testXorTrueTrueTrue() {
         this.evaluateAndValueCheck(
                 "=xor(true(), true(), true())",
