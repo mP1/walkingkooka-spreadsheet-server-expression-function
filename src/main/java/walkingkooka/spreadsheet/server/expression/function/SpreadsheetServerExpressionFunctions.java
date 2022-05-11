@@ -61,6 +61,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 days(),
                 falseFunction(),
                 formulaText(),
+                hour(),
                 ifFunction(),
                 ifs(),
                 isBlank(),
@@ -216,6 +217,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> formulaText() {
         return SpreadsheetExpressionFunctions.formulaText();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions#hour}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> hour() {
+        return DateTimeExpressionFunctions.hour();
     }
 
     /**

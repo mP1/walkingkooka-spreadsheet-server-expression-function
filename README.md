@@ -47,6 +47,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - days()
 - false()
 - formulaText(),
+- hour()
 - if()
 - ifs()
 - isBlank(),
