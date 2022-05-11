@@ -567,6 +567,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testMinute() {
+        this.evaluateAndValueCheck(
+                "=minute(time(12, 58, 59))",
+                EXPRESSION_NUMBER_KIND.create(58)
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndValueCheck(
                 "=not(false())",
