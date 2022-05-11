@@ -56,6 +56,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 columns(),
                 concat(),
                 date(),
+                day(),
                 falseFunction(),
                 formulaText(),
                 ifFunction(),
@@ -184,6 +185,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<LocalDate, SpreadsheetExpressionFunctionContext> date() {
         return DateTimeExpressionFunctions.date();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions#day}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> day() {
+        return DateTimeExpressionFunctions.day();
     }
 
     /**

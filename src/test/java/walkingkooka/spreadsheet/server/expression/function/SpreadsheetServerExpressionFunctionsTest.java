@@ -308,6 +308,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDay() {
+        this.evaluateAndValueCheck(
+                "=day(date(1999, 12, 31))",
+                EXPRESSION_NUMBER_KIND.create(31)
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndValueCheck(
                 "=false()",
