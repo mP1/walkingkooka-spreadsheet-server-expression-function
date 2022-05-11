@@ -80,6 +80,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 t(),
                 text(),
                 textJoin(),
+                trim(),
                 trueFunction(),
                 unichar(),
                 unicode(),
@@ -381,6 +382,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> TEXTJOIN = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>textJoin()
             .setName(FunctionExpressionName.with("textJoin"));
 
+    /**
+     * {@see StringExpressionFunctions#trim}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> trim() {
+        return TRIM;
+    }
+
+    private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> TRIM = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>spaceTrim()
+            .setName(FunctionExpressionName.with("trim"));
+    
     /**
      * {@see BooleanExpressionFunctions#trueFunction}
      */

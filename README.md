@@ -69,6 +69,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - t()
 - text()
 - textjoin()
+- trim()
 - true()
 - unichar()
 - unicode()
