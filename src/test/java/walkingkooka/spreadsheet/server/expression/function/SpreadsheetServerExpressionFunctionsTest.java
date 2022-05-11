@@ -64,6 +64,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
@@ -762,6 +763,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         this.evaluateAndFormattedCheck(
                 "=textJoin(\",\", true(), \"a\", \"b\", \"\", \"d\")",
                 TextNode.text("a,b,da,b,d")
+        );
+    }
+
+    @Test
+    public void testTime() {
+        this.evaluateAndValueCheck(
+                "=time(12, 58, 59)",
+                LocalTime.of(12, 58, 59)
         );
     }
 
