@@ -43,6 +43,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - columns()
 - concat()
 - date()
+- day()
 - false()
 - formulaText(),
 - if()
