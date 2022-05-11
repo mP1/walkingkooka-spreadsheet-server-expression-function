@@ -61,6 +61,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - lower(),
 - mid(),
 - minutes()
+- month()
 - not()
 - offset()
 - or()

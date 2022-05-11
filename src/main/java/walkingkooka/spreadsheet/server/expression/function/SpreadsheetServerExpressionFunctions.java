@@ -75,6 +75,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 lower(),
                 mid(),
                 minute(),
+                month(),
                 not(),
                 offset(),
                 or(),
@@ -329,6 +330,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> minute() {
         return DateTimeExpressionFunctions.minute();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions#month}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> month() {
+        return DateTimeExpressionFunctions.month();
     }
 
     /**

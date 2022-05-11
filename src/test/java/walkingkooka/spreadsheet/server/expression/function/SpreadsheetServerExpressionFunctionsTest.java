@@ -575,6 +575,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testMonth() {
+        this.evaluateAndValueCheck(
+                "=month(date(1999, 12, 31))",
+                EXPRESSION_NUMBER_KIND.create(12)
+        );
+    }
+
+    @Test
     public void testNotFalse() {
         this.evaluateAndValueCheck(
                 "=not(false())",
