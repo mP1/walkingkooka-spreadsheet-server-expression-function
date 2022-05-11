@@ -58,6 +58,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - offset()
 - or()
 - proper()
+- rept()
 - right()
 - row()
 - rows()

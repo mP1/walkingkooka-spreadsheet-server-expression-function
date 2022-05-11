@@ -549,6 +549,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRept() {
+        this.evaluateAndValueCheck(
+                "=rept(\"abc\", 3)",
+                "abcabcabc"
+        );
+    }
+
+    @Test
     public void testRight() {
         this.evaluateAndValueCheck(
                 "=right(\"abc\")",
