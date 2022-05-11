@@ -743,6 +743,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSecond() {
+        this.evaluateAndValueCheck(
+                "=second(time(12, 58, 59))",
+                EXPRESSION_NUMBER_KIND.create(59)
+        );
+    }
+
+    @Test
     public void testSubstitute() {
         this.evaluateAndValueCheck(
                 "=substitute(\"123-456-7890\",\"-\",\"\") ",
