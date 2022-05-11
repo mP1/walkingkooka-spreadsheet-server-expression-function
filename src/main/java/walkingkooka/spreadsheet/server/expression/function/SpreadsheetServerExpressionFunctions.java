@@ -61,6 +61,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isErr(),
                 isError(),
                 isNa(),
+                isNonText(),
                 isText(),
                 left(),
                 len(),
@@ -233,6 +234,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isNa() {
         return SpreadsheetExpressionFunctions.isNa();
+    }
+
+    /**
+     * {@see StringExpressionFunctions#isNonText}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isNonText() {
+        return StringExpressionFunctions.isNonText();
     }
 
     /**
