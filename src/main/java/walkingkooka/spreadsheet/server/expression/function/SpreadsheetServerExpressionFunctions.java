@@ -33,6 +33,7 @@ import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunction
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.function.Consumer;
 
 /**
@@ -87,6 +88,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 t(),
                 text(),
                 textJoin(),
+                time(),
                 trim(),
                 trueFunction(),
                 unichar(),
@@ -427,6 +429,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> TEXTJOIN = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>textJoin()
             .setName(FunctionExpressionName.with("textJoin"));
 
+    /**
+     * {@see DateTimeExpressionFunctions#time}
+     */
+    public static ExpressionFunction<LocalTime, SpreadsheetExpressionFunctionContext> time() {
+        return DateTimeExpressionFunctions.time();
+    }
+    
     /**
      * {@see StringExpressionFunctions#trim}
      */
