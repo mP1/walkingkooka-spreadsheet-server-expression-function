@@ -437,6 +437,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsNonTextWithEmptyCell() {
+        this.evaluateAndValueCheck(
+                "=isNonText(Z99)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsNonTextWithError() {
+        this.evaluateAndValueCheck(
+                "=isNonText(1/0)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsNonTextWithString() {
+        this.evaluateAndValueCheck(
+                "=isNonText(\"abc\")",
+                false
+        );
+    }
+
+    @Test
     public void testIsTextWithError() {
         this.evaluateAndValueCheck(
                 "=isText(1/0)",

@@ -50,6 +50,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isErr(),
 - isError(),
 - isNa(),
+- isNonText(),
 - isText(),
 - left(),
 - len(),
