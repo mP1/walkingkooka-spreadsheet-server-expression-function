@@ -71,6 +71,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 offset(),
                 or(),
                 proper(),
+                replace(),
                 rept(),
                 right(),
                 row(),
@@ -312,6 +313,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> proper() {
         return StringExpressionFunctions.proper();
+    }
+
+    /**
+     * {@see StringExpressionFunctions#replace}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> replace() {
+        return StringExpressionFunctions.replace();
     }
 
     /**

@@ -605,6 +605,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testReplace() {
+        this.evaluateAndValueCheck(
+                "=replace(\"XYZ123\",4,3,\"456\")",
+                "XYZ456"
+        );
+    }
+
+    @Test
     public void testRept() {
         this.evaluateAndValueCheck(
                 "=rept(\"abc\", 3)",
