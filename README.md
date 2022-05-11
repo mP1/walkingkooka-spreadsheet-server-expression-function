@@ -62,6 +62,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - right()
 - row()
 - rows()
+- substitute()
 - switch()
 - t()
 - text()
