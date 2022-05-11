@@ -435,6 +435,38 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 false
         );
     }
+
+    @Test
+    public void testIsTextWithError() {
+        this.evaluateAndValueCheck(
+                "=isText(1/0)",
+                false
+        );
+    }
+
+    @Test
+    public void testIsTextWithNumber() {
+        this.evaluateAndValueCheck(
+                "=isText(123)",
+                false
+        );
+    }
+
+    @Test
+    public void testIsTextWithEmptyString() {
+        this.evaluateAndValueCheck(
+                "=isText(\"\")",
+                true
+        );
+    }
+
+    @Test
+    public void testIsTextWithString() {
+        this.evaluateAndValueCheck(
+                "=isText(\"abc\")",
+                true
+        );
+    }
     
     @Test
     public void testLeft() {
