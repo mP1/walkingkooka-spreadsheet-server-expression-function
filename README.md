@@ -44,6 +44,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - concat()
 - date()
 - day()
+- days()
 - false()
 - formulaText(),
 - if()
