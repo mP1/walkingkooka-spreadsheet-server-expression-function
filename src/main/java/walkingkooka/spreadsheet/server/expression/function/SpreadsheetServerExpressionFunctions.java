@@ -96,6 +96,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 offset(),
                 or(),
                 pi(),
+                product(),
                 proper(),
                 replace(),
                 rept(),
@@ -492,6 +493,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> pi() {
         return NumberExpressionFunctions.pi();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#product}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> product() {
+        return NumberExpressionFunctions.product();
     }
 
     /**

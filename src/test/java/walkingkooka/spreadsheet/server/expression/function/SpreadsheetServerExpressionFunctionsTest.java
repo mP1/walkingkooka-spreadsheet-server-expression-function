@@ -815,6 +815,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testProduct() {
+        this.evaluateAndValueCheck(
+                "=product(2, 5)",
+                EXPRESSION_NUMBER_KIND.create(10)
+        );
+    }
+
+    @Test
     public void testProper() {
         this.evaluateAndValueCheck(
                 "=proper(\"apple\")",

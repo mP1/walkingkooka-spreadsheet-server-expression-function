@@ -79,6 +79,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - offset()
 - or()
 - pi()
+- product()
 - proper()
 - replace()
 - rept()
