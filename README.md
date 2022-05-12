@@ -48,7 +48,6 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - day()
 - days()
 - even()
-- exp()
 - false()
 - formulaText(),
 - hour()
