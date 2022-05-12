@@ -95,6 +95,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 odd(),
                 offset(),
                 or(),
+                pi(),
                 proper(),
                 replace(),
                 rept(),
@@ -484,6 +485,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> or() {
         return BooleanExpressionFunctions.or();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#pi}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> pi() {
+        return NumberExpressionFunctions.pi();
     }
 
     /**

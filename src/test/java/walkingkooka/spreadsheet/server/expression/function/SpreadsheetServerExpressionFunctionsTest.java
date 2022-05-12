@@ -807,6 +807,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testPi() {
+        this.evaluateAndValueCheck(
+                "=pi()",
+                EXPRESSION_NUMBER_KIND.create(3.141593)
+        );
+    }
+
+    @Test
     public void testProper() {
         this.evaluateAndValueCheck(
                 "=proper(\"apple\")",
