@@ -438,6 +438,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testInt() {
+        this.evaluateAndValueCheck(
+                "=int(1.8)",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
     public void testIsBlankNoCell() {
         this.evaluateAndValueCheck(
                 "=isBlank(B2)",
