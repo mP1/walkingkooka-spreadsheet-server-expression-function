@@ -81,6 +81,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - pi()
 - product()
 - proper()
+- quotient()
 - replace()
 - rept()
 - right()

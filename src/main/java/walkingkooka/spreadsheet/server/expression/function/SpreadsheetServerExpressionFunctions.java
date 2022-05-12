@@ -98,6 +98,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 pi(),
                 product(),
                 proper(),
+                quotient(),
                 replace(),
                 rept(),
                 right(),
@@ -507,6 +508,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> proper() {
         return StringExpressionFunctions.proper();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#quotient}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> quotient() {
+        return NumberExpressionFunctions.quotient();
     }
 
     /**

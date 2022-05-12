@@ -839,6 +839,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testQuotient() {
+        this.evaluateAndValueCheck(
+                "=quotient(12, 3)",
+                EXPRESSION_NUMBER_KIND.create(4)
+        );
+    }
+
+    @Test
     public void testReplace() {
         this.evaluateAndValueCheck(
                 "=replace(\"XYZ123\",4,3,\"456\")",
