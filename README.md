@@ -55,6 +55,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isError(),
 - isNa(),
 - isNonText(),
+- isoWeekNum()
 - isText(),
 - left(),
 - len(),
