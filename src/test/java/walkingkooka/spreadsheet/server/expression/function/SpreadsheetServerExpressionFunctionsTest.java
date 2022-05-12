@@ -527,6 +527,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsEvenWithEvenNumber() {
+        this.evaluateAndValueCheck(
+                "=isEven(2)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsEvenWithOddNumber() {
+        this.evaluateAndValueCheck(
+                "=isEven(1)",
+                false
+        );
+    }
+
+    @Test
     public void testIsNaWithError() {
         this.evaluateAndValueCheck(
                 "=isNa(1/0)",

@@ -25,7 +25,6 @@ import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.spreadsheet.reference.SpreadsheetExpressionReference;
 import walkingkooka.tree.expression.ExpressionNumber;
-import walkingkooka.tree.expression.ExpressionNumberFunctions;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionKind;
@@ -75,6 +74,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isDate(),
                 isErr(),
                 isError(),
+                isEven(),
                 isNa(),
                 isNonText(),
                 isoWeekNum(),
@@ -324,6 +324,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isError() {
         return SpreadsheetExpressionFunctions.isError();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#isEven}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isEven() {
+        return NumberExpressionFunctions.isEven();
     }
 
     /**
