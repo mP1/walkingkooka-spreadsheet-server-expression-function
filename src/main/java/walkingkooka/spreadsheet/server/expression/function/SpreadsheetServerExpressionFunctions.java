@@ -83,6 +83,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isText(),
                 left(),
                 len(),
+                ln(),
                 lower(),
                 mid(),
                 minute(),
@@ -393,6 +394,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> LEN = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>stringLength()
             .setName(FunctionExpressionName.with("len"));
+
+
+    /**
+     * {@see NumberExpressionFunctions#ln}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> ln() {
+        return NumberExpressionFunctions.ln();
+    }
 
     /**
      * {@see StringExpressionFunctions#lower}

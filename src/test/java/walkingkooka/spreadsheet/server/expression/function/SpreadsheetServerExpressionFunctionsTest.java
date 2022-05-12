@@ -679,6 +679,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testLn() {
+        this.evaluateAndValueCheck(
+                "=ln(2)",
+                EXPRESSION_NUMBER_KIND.create(0.6931472)
+        );
+    }
+
+    @Test
     public void testLower() {
         this.evaluateAndValueCheck(
                 "=lower(\"ABCxyz\")",
@@ -1128,7 +1136,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
                 .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
-                .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.UNLIMITED.getPrecision())
+                .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
                 .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@@"))
                 .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
