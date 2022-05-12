@@ -357,6 +357,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testFloor() {
+        this.evaluateAndValueCheck(
+                "=floor(1.8)",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
     public void testFormulaText() {
         this.evaluateAndValueCheck(
                 "=formulatext(A2)",
