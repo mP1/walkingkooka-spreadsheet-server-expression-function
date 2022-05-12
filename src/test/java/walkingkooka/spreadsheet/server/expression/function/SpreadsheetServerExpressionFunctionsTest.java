@@ -495,6 +495,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsoWeekNum() {
+        this.evaluateAndValueCheck(
+                "=isoWeekNum(date(1999,12,31))",
+                EXPRESSION_NUMBER_KIND.create(52)
+        );
+    }
+
+    @Test
     public void testIsTextWithError() {
         this.evaluateAndValueCheck(
                 "=isText(1/0)",

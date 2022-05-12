@@ -69,6 +69,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isError(),
                 isNa(),
                 isNonText(),
+                isoWeekNum(),
                 isText(),
                 left(),
                 len(),
@@ -287,6 +288,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isNonText() {
         return StringExpressionFunctions.isNonText();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions.isoWeekNum}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> isoWeekNum() {
+        return DateTimeExpressionFunctions.isoWeekNum();
     }
 
     /**
