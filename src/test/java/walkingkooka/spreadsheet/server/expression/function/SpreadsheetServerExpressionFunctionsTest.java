@@ -687,6 +687,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testLog() {
+        this.evaluateAndValueCheck(
+                "=log(3, 2)",
+                EXPRESSION_NUMBER_KIND.create(1.584962)
+        );
+    }
+
+    @Test
     public void testLower() {
         this.evaluateAndValueCheck(
                 "=lower(\"ABCxyz\")",
