@@ -423,6 +423,38 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsDateWithDate() {
+        this.evaluateAndValueCheck(
+                "=isDate(today())",
+                true
+        );
+    }
+
+    @Test
+    public void testIsDateWithNumber() {
+        this.evaluateAndValueCheck(
+                "=isDate(1)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsDateWithString() {
+        this.evaluateAndValueCheck(
+                "=isDate(\"31/12/2000\")",
+                true
+        );
+    }
+
+    @Test
+    public void testIsDateWithTime() {
+        this.evaluateAndValueCheck(
+                "=isDate(time(1,1,1))",
+                true
+        );
+    }
+
+    @Test
     public void testIsErrWithError() {
         this.evaluateAndValueCheck(
                 "=isErr(1/0)",
