@@ -51,6 +51,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 abs(),
                 address(),
                 and(),
+                ceil(),
                 cell(),
                 charFunction(),
                 choose(),
@@ -130,6 +131,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> and() {
         return BooleanExpressionFunctions.and();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#ceil}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> ceil() {
+        return NumberExpressionFunctions.ceil();
     }
 
     /**
