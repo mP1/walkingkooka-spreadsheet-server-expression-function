@@ -25,11 +25,13 @@ import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.spreadsheet.reference.SpreadsheetExpressionReference;
 import walkingkooka.tree.expression.ExpressionNumber;
+import walkingkooka.tree.expression.ExpressionNumberFunctions;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunctions;
+import walkingkooka.tree.expression.function.number.NumberExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.time.LocalDate;
@@ -46,6 +48,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
+                abs(),
                 address(),
                 and(),
                 cell(),
@@ -106,6 +109,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 year(),
                 xor()
         ).forEach(functions::accept);
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#abs}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> abs() {
+        return NumberExpressionFunctions.abs();
     }
 
     /**
