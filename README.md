@@ -75,6 +75,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - mod()
 - month()
 - not()
+- odd()
 - offset()
 - or()
 - proper()
