@@ -583,6 +583,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsNumberWithNonNumberString() {
+        this.evaluateAndValueCheck(
+                "=isNumber(\"ABC\")",
+                false
+        );
+    }
+
+    @Test
+    public void testIsNumberWithNumber() {
+        this.evaluateAndValueCheck(
+                "=isNumber(2)",
+                true
+        );
+    }
+
+    @Test
     public void testIsOddWithEvenNumber() {
         this.evaluateAndValueCheck(
                 "=isOdd(2)",

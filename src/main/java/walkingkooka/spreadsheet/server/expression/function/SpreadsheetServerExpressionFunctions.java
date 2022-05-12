@@ -77,6 +77,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isEven(),
                 isNa(),
                 isNonText(),
+                isNumber(),
                 isOdd(),
                 isoWeekNum(),
                 isText(),
@@ -346,6 +347,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isNonText() {
         return StringExpressionFunctions.isNonText();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#isNumber}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isNumber() {
+        return NumberExpressionFunctions.isNumber();
     }
 
     /**
