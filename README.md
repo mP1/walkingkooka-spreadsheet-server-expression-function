@@ -60,6 +60,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isEven(),
 - isNa(),
 - isNonText(),
+- isOdd()
 - isoWeekNum()
 - isText(),
 - left(),

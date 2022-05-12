@@ -583,6 +583,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsOddWithEvenNumber() {
+        this.evaluateAndValueCheck(
+                "=isOdd(2)",
+                false
+        );
+    }
+
+    @Test
+    public void testIsOddWithOddNumber() {
+        this.evaluateAndValueCheck(
+                "=isOdd(1)",
+                true
+        );
+    }
+
+    @Test
     public void testIsoWeekNum() {
         this.evaluateAndValueCheck(
                 "=isoWeekNum(date(1999,12,31))",
