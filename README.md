@@ -68,6 +68,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - len(),
 - ln(),
 - log(),
+- log10(),
 - lower(),
 - mid(),
 - minutes()

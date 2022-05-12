@@ -85,6 +85,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 len(),
                 ln(),
                 log(),
+                log10(),
                 lower(),
                 mid(),
                 minute(),
@@ -408,6 +409,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> log() {
         return NumberExpressionFunctions.log();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#log10}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> log10() {
+        return NumberExpressionFunctions.log10();
     }
     
     /**
