@@ -815,6 +815,16 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testToday() {
+        this.evaluateAndValueCheck(
+                "=year(today())",
+                EXPRESSION_NUMBER_KIND.create(
+                        LocalDateTime.now().getYear()
+                )
+        );
+    }
+
+    @Test
     public void testTrim() {
         this.evaluateAndValueCheck(
                 "=trim(\"  a  b  c  \")",

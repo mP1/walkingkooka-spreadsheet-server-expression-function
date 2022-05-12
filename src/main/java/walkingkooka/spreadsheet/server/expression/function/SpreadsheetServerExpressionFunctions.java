@@ -93,6 +93,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 text(),
                 textJoin(),
                 time(),
+                today(),
                 trim(),
                 trueFunction(),
                 unichar(),
@@ -470,7 +471,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<LocalTime, SpreadsheetExpressionFunctionContext> time() {
         return DateTimeExpressionFunctions.time();
     }
-    
+
+    /**
+     * {@see DateTimeExpressionFunctions#today}
+     */
+    public static ExpressionFunction<LocalDate, SpreadsheetExpressionFunctionContext> today() {
+        return DateTimeExpressionFunctions.today();
+    }
+
     /**
      * {@see StringExpressionFunctions#trim}
      */
