@@ -196,6 +196,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCeil() {
+        this.evaluateAndValueCheck(
+                "=ceil(1.75)",
+                EXPRESSION_NUMBER_KIND.create(2)
+        );
+    }
+
+    @Test
     public void testCell() {
         this.evaluateAndValueCheck(
                 "=cell(\"address\", B2)",

@@ -35,6 +35,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - abs()
 - address
 - and()
+- ceil()
 - cell()
 - char()
 - choose()
