@@ -65,6 +65,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 ifFunction(),
                 ifs(),
                 isBlank(),
+                isDate(),
                 isErr(),
                 isError(),
                 isNa(),
@@ -261,6 +262,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                             ExpressionFunctionKind.EVALUATE_PARAMETERS
                     )
             );
+
+    /**
+     * {@see DateTimeExpressionFunctions#isDate}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> isDate() {
+        return DateTimeExpressionFunctions.isDate();
+    }
 
     /**
      * {@see SpreadsheetExpressionFunctions#isErr}
