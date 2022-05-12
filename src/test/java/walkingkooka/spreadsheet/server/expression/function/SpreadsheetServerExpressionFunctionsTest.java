@@ -767,6 +767,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testOdd() {
+        this.evaluateAndValueCheck(
+                "=odd(12.3)",
+                EXPRESSION_NUMBER_KIND.create(13)
+        );
+    }
+
+    @Test
     public void testOffset() {
         this.evaluateAndValueCheck(
                 "=offset(B2,1,2,3,3)",
