@@ -65,6 +65,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 days(),
                 even(),
                 falseFunction(),
+                floor(),
                 formulaText(),
                 hour(),
                 ifFunction(),
@@ -245,6 +246,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> falseFunction() {
         return BooleanExpressionFunctions.falseFunction();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#floor}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> floor() {
+        return NumberExpressionFunctions.floor();
     }
 
     /**
