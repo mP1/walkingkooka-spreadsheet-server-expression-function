@@ -66,6 +66,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isText(),
 - left(),
 - len(),
+- ln(),
 - lower(),
 - mid(),
 - minutes()
