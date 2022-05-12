@@ -32,6 +32,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 
 # Functions
 
+- abs()
 - address
 - and()
 - cell()

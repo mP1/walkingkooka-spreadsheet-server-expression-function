@@ -148,6 +148,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     // function tests...................................................................................................
 
     @Test
+    public void testAbs() {
+        this.evaluateAndValueCheck(
+                "=abs(-1.5)+abs(0.5)",
+                EXPRESSION_NUMBER_KIND.create(2)
+        );
+    }
+
+    @Test
     public void testAddress() {
         this.evaluateAndValueCheck(
                 "=address(1, 2)",
