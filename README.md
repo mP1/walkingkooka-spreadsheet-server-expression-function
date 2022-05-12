@@ -84,5 +84,6 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - unichar()
 - unicode()
 - upper()
+- weeknum()
 - year()
 - xor()

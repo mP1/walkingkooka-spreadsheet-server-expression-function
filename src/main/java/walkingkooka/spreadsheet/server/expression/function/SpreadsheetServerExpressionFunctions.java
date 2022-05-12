@@ -98,6 +98,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 unichar(),
                 unicode(),
                 upper(),
+                weekNum(),
                 year(),
                 xor()
         ).forEach(functions::accept);
@@ -484,6 +485,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> trueFunction() {
         return BooleanExpressionFunctions.<SpreadsheetExpressionFunctionContext>trueFunction();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions#weekNum}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> weekNum() {
+        return DateTimeExpressionFunctions.weekNum();
     }
 
     /**

@@ -881,6 +881,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testWeeknum() {
+        this.evaluateAndValueCheck(
+                "=weeknum(date(2000, 2, 1))",
+                EXPRESSION_NUMBER_KIND.create(6)
+        );
+    }
+
+    @Test
     public void testYear() {
         this.evaluateAndValueCheck(
                 "=year(date(1999, 12, 31))",
