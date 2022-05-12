@@ -98,6 +98,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 unichar(),
                 unicode(),
                 upper(),
+                weekDay(),
                 weekNum(),
                 year(),
                 xor()
@@ -488,13 +489,6 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see DateTimeExpressionFunctions#weekNum}
-     */
-    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> weekNum() {
-        return DateTimeExpressionFunctions.weekNum();
-    }
-
-    /**
      * {@see StringExpressionFunctions#character}
      */
     public static ExpressionFunction<Character, SpreadsheetExpressionFunctionContext> unichar() {
@@ -524,6 +518,20 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> UPPER = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>upperCase()
             .setName(FunctionExpressionName.with("upper"));
 
+    /**
+     * {@see DateTimeExpressionFunctions#weekDay}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> weekDay() {
+        return DateTimeExpressionFunctions.weekday();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions#weekNum}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> weekNum() {
+        return DateTimeExpressionFunctions.weekNum();
+    }
+    
     /**
      * {@see DateTimeExpressionFunctions#year}
      */
