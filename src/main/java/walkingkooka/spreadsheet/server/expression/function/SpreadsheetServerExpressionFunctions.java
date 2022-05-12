@@ -70,6 +70,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 hour(),
                 ifFunction(),
                 ifs(),
+                intFunction(),
                 isBlank(),
                 isDate(),
                 isErr(),
@@ -281,6 +282,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionFunctionContext> ifs() {
         return BooleanExpressionFunctions.ifs();
+    }
+    
+    /**
+     * {@see NumberExpressionFunctions#intFunction}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> intFunction() {
+        return NumberExpressionFunctions.intFunction();
     }
 
     /**
