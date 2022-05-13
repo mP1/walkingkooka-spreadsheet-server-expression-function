@@ -85,6 +85,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - replace()
 - rept()
 - right()
+- roundDown()
 - row()
 - rows()
 - search()
