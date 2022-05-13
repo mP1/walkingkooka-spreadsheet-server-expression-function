@@ -63,6 +63,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 column(),
                 columns(),
                 concat(),
+                cos(),
                 date(),
                 day(),
                 days(),
@@ -255,6 +256,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                             ExpressionFunctionKind.RESOLVE_REFERENCES
                     )
             );
+
+    /**
+     * {@see NumberTrigonomteryExpressionFunctions#cos}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> cos() {
+        return NumberTrigonomteryExpressionFunctions.cos();
+    }
 
     /**
      * {@see DateTimeExpressionFunctions#date}

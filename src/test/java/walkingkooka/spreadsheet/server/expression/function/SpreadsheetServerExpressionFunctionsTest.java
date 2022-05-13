@@ -341,6 +341,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCos() {
+        this.evaluateAndValueCheck(
+                "=cos(1)",
+                EXPRESSION_NUMBER_KIND.create(0.5403023)
+        );
+    }
+
+    @Test
     public void testDate() {
         this.evaluateAndValueCheck(
                 "=date(1999, 12, 31)",
