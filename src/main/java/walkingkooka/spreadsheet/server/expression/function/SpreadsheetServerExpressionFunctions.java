@@ -103,6 +103,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 rept(),
                 right(),
                 roundDown(),
+                roundUp(),
                 row(),
                 rows(),
                 search(),
@@ -547,6 +548,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> roundDown() {
         return NumberExpressionFunctions.roundDown();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#roundUp}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> roundUp() {
+        return NumberExpressionFunctions.roundUp();
     }
 
     /**
