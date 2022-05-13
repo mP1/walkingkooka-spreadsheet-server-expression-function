@@ -100,6 +100,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 proper(),
                 quotient(),
                 rand(),
+                randBetween(),
                 replace(),
                 rept(),
                 right(),
@@ -529,6 +530,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> RAND = NumberExpressionFunctions.<SpreadsheetExpressionFunctionContext>random()
             .setName(FunctionExpressionName.with("rand"));
+
+    /**
+     * {@see NumberExpressionFunctions#randomBetween}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> randBetween() {
+        return RANDBETWEEN;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> RANDBETWEEN = NumberExpressionFunctions.<SpreadsheetExpressionFunctionContext>randomBetween()
+            .setName(FunctionExpressionName.with("randBetween"));
     
     /**
      * {@see StringExpressionFunctions#replace}
