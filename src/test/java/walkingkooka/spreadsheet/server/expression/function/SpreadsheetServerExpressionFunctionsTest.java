@@ -1095,6 +1095,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testTanh() {
+        this.evaluateAndValueCheck(
+                "=tanh(2)",
+                EXPRESSION_NUMBER_KIND.create(0.9640276)
+        );
+    }
+
+    @Test
     public void testText() {
         this.evaluateAndFormattedCheck(
                 "=text(\"abc\")",
