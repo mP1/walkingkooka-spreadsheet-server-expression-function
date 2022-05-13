@@ -373,6 +373,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDegrees() {
+        this.evaluateAndValueCheck(
+                "=degrees(1.5)",
+                EXPRESSION_NUMBER_KIND.create(85.943655)
+        );
+    }
+
+    @Test
     public void testEven() {
         this.evaluateAndValueCheck(
                 "=even(1.7)",
