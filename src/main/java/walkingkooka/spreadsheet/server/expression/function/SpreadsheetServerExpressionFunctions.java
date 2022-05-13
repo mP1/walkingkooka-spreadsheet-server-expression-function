@@ -121,6 +121,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 today(),
                 trim(),
                 trueFunction(),
+                trunc(),
                 unichar(),
                 unicode(),
                 upper(),
@@ -695,6 +696,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return BooleanExpressionFunctions.<SpreadsheetExpressionFunctionContext>trueFunction();
     }
 
+    /**
+     * {@see NumberExpressionFunctions#trunc}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> trunc() {
+        return NumberExpressionFunctions.trunc();
+    }
+    
     /**
      * {@see StringExpressionFunctions#character}
      */

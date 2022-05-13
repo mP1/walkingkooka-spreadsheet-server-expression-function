@@ -103,6 +103,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - time()
 - trim()
 - true()
+- trunc()
 - unichar()
 - unicode()
 - upper()

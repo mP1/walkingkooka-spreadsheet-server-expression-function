@@ -1114,6 +1114,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testTrunc() {
+        this.evaluateAndValueCheck(
+                "=trunc(999.999,1)",
+                EXPRESSION_NUMBER_KIND.create(999.9)
+        );
+    }
+
+    @Test
+    public void testTruncWithNegativePlaces() {
+        this.evaluateAndValueCheck(
+                "=trunc(999.999,-2)",
+                EXPRESSION_NUMBER_KIND.create(900)
+        );
+    }
+
+    @Test
     public void testUnichar97() {
         this.evaluateAndValueCheck(
                 "=unichar(97)",
