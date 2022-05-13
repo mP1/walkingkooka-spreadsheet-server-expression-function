@@ -975,6 +975,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSignWithNegativeNumber() {
+        this.evaluateAndValueCheck(
+                "=sign(-123)",
+                EXPRESSION_NUMBER_KIND.create(-1)
+        );
+    }
+
+    @Test
+    public void testSignWithZero() {
+        this.evaluateAndValueCheck(
+                "=sign(0)",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testSignWithPositiveNumber() {
+        this.evaluateAndValueCheck(
+                "=sign(+123)",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
     public void testSubstitute() {
         this.evaluateAndValueCheck(
                 "=substitute(\"123-456-7890\",\"-\",\"\") ",
