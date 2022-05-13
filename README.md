@@ -83,6 +83,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - proper()
 - quotient()
 - rand()
+- randBetween()
 - replace()
 - rept()
 - right()

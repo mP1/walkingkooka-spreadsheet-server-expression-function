@@ -855,6 +855,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRandBetween() {
+        this.evaluateAndValueCheck(
+                "=randBetween(2, 34) >= 2",
+                true
+        );
+    }
+
+    @Test
     public void testReplace() {
         this.evaluateAndValueCheck(
                 "=replace(\"XYZ123\",4,3,\"456\")",
