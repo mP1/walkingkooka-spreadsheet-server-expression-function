@@ -99,6 +99,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - second()
 - sign()
 - sin()
+- sinh()
 - sqrt()
 - substitute()
 - switch()
