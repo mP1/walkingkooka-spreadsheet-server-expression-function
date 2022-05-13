@@ -999,6 +999,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSqrtWithNegativeNumber() {
+        this.evaluateAndValueCheck(
+                "=sqrt(-1)",
+                SpreadsheetErrorKind.VALUE.setMessage("Illegal sqrt(x) for x < 0: x = -1")
+        );
+    }
+
+    @Test
+    public void testSqrtWithPositiveNumber() {
+        this.evaluateAndValueCheck(
+                "=sqrt(100)",
+                EXPRESSION_NUMBER_KIND.create(10)
+        );
+    }
+
+    @Test
     public void testSubstitute() {
         this.evaluateAndValueCheck(
                 "=substitute(\"123-456-7890\",\"-\",\"\") ",
