@@ -103,6 +103,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - substitute()
 - switch()
 - t()
+- tan()
 - text()
 - textjoin()
 - time()

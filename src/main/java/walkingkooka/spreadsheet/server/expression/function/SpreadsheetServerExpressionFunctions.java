@@ -121,6 +121,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 substitute(),
                 switchFunction(),
                 t(),
+                tan(),
                 text(),
                 textJoin(),
                 time(),
@@ -688,6 +689,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> t() {
         return StringExpressionFunctions.t();
+    }
+
+    /**
+     * {@see NumberTrigonomteryExpressionFunctions#tan}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> tan() {
+        return NumberTrigonomteryExpressionFunctions.tan();
     }
 
     /**
