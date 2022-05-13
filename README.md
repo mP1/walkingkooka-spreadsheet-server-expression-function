@@ -36,6 +36,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - acos()
 - address
 - and()
+- asin()
 - ceil()
 - cell()
 - char()
