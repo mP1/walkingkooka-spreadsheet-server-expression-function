@@ -381,6 +381,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDecimal() {
+        this.evaluateAndValueCheck(
+                "=decimal(\"11\", 2)",
+                EXPRESSION_NUMBER_KIND.create(3)
+        );
+    }
+
+    @Test
     public void testE() {
         this.evaluateAndValueCheck(
                 "=e()",
