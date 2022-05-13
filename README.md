@@ -33,6 +33,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 # Functions
 
 - abs()
+- acos()
 - address
 - and()
 - ceil()

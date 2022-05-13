@@ -156,6 +156,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testAcos() {
+        this.evaluateAndValueCheck(
+                "=acos(0.5)",
+                EXPRESSION_NUMBER_KIND.create(1.047198)
+        );
+    }
+
+    @Test
     public void testAddress() {
         this.evaluateAndValueCheck(
                 "=address(1, 2)",

@@ -31,6 +31,7 @@ import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunctions;
 import walkingkooka.tree.expression.function.number.NumberExpressionFunctions;
+import walkingkooka.tree.expression.function.number.trigonometry.NumberTrigonomteryExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.time.LocalDate;
@@ -48,6 +49,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> functions) {
         Lists.of(
                 abs(),
+                acos(),
                 address(),
                 and(),
                 ceil(),
@@ -137,6 +139,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> abs() {
         return NumberExpressionFunctions.abs();
+    }
+
+    /**
+     * {@see NumberTrigonomteryExpressionFunctions#acos}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> acos() {
+        return NumberTrigonomteryExpressionFunctions.acos();
     }
 
     /**
