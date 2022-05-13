@@ -68,6 +68,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 day(),
                 days(),
                 degrees(),
+                e(),
                 even(),
                 falseFunction(),
                 floor(),
@@ -298,7 +299,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> degrees() {
         return NumberTrigonomteryExpressionFunctions.degrees();
     }
-    
+
+    /**
+     * {@see NumberExpressionFunctions#e}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> e() {
+        return NumberExpressionFunctions.e();
+    }
+
     /**
      * {@see NumberExpressionFunctions#even}
      */
