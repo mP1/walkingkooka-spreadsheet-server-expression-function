@@ -93,6 +93,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - rows()
 - search()
 - second()
+- sign()
 - substitute()
 - switch()
 - t()

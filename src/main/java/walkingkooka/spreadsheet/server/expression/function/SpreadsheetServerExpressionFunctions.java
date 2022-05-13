@@ -110,6 +110,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 rows(),
                 search(),
                 second(),
+                sign(),
                 substitute(),
                 switchFunction(),
                 t(),
@@ -608,6 +609,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> second() {
         return DateTimeExpressionFunctions.second();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#sign}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> sign() {
+        return NumberExpressionFunctions.sign();
     }
 
     /**
