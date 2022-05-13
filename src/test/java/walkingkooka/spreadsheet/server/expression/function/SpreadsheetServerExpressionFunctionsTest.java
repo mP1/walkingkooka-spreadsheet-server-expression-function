@@ -212,6 +212,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testAtan() {
+        this.evaluateAndValueCheck(
+                "=atan(0.5)",
+                EXPRESSION_NUMBER_KIND.create(0.4636476)
+        );
+    }
+
+    @Test
     public void testCeil() {
         this.evaluateAndValueCheck(
                 "=ceil(1.75)",

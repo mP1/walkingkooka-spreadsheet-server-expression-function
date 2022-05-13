@@ -37,6 +37,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - address
 - and()
 - asin()
+- atan()
 - ceil()
 - cell()
 - char()
