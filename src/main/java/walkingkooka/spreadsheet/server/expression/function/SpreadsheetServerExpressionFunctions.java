@@ -117,6 +117,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 second(),
                 sign(),
                 sin(),
+                sinh(),
                 sqrt(),
                 substitute(),
                 switchFunction(),
@@ -656,12 +657,18 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return NumberExpressionFunctions.sign();
     }
 
-
     /**
      * {@see NumberTrigonomteryExpressionFunctions#sin}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> sin() {
         return NumberTrigonomteryExpressionFunctions.sin();
+    }
+
+    /**
+     * {@see NumberTrigonomteryExpressionFunctions#sinh}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> sinh() {
+        return NumberTrigonomteryExpressionFunctions.sinh();
     }
 
     /**
