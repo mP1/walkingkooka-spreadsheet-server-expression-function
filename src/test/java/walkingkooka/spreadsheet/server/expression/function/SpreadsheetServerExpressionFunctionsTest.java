@@ -879,6 +879,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRoundDown() {
+        this.evaluateAndValueCheck(
+                "=roundDown(1.25, 1)",
+                EXPRESSION_NUMBER_KIND.create(1.2)
+        );
+    }
+
+    @Test
     public void testRow() {
         this.evaluateAndValueCheck(
                 "=row(A99)",
