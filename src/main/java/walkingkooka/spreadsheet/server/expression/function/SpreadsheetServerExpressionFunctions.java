@@ -99,6 +99,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 product(),
                 proper(),
                 quotient(),
+                rand(),
                 replace(),
                 rept(),
                 right(),
@@ -519,6 +520,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return NumberExpressionFunctions.quotient();
     }
 
+    /**
+     * {@see NumberExpressionFunctions#random}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> rand() {
+        return RAND;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> RAND = NumberExpressionFunctions.<SpreadsheetExpressionFunctionContext>random()
+            .setName(FunctionExpressionName.with("rand"));
+    
     /**
      * {@see StringExpressionFunctions#replace}
      */
