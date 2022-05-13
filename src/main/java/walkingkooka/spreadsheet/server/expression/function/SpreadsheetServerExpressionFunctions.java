@@ -104,6 +104,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 product(),
                 proper(),
                 quotient(),
+                radians(),
                 rand(),
                 randBetween(),
                 replace(),
@@ -561,6 +562,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return NumberExpressionFunctions.quotient();
     }
 
+    /**
+     * {@see NumberTrigonomteryExpressionFunctions#radians}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> radians() {
+        return NumberTrigonomteryExpressionFunctions.radians();
+    }
+    
     /**
      * {@see NumberExpressionFunctions#random}
      */

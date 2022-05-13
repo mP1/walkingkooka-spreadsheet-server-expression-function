@@ -879,6 +879,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRadians() {
+        this.evaluateAndValueCheck(
+                "=radians(90)",
+                EXPRESSION_NUMBER_KIND.create(1.5707961)
+        );
+    }
+
+    @Test
     public void testRand() {
         this.evaluateAndValueCheck(
                 "=rand() > 0",
