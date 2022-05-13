@@ -1031,6 +1031,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSin() {
+        this.evaluateAndValueCheck(
+                "=sin(1)",
+                EXPRESSION_NUMBER_KIND.create(0.841471)
+        );
+    }
+
+    @Test
     public void testSqrtWithNegativeNumber() {
         this.evaluateAndValueCheck(
                 "=sqrt(-1)",
