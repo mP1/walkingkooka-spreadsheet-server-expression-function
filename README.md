@@ -104,6 +104,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - switch()
 - t()
 - tan()
+- tanh()
 - text()
 - textjoin()
 - time()
