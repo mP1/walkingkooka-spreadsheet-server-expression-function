@@ -847,6 +847,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRand() {
+        this.evaluateAndValueCheck(
+                "=rand() > 0",
+                true
+        );
+    }
+
+    @Test
     public void testReplace() {
         this.evaluateAndValueCheck(
                 "=replace(\"XYZ123\",4,3,\"456\")",
