@@ -943,6 +943,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testRoman() {
+        this.evaluateAndValueCheck(
+                "=roman(123)",
+                "CXXIII"
+        );
+    }
+
+    @Test
     public void testRoundDown() {
         this.evaluateAndValueCheck(
                 "=roundDown(1.25, 1)",
