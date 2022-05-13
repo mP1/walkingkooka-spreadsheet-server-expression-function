@@ -111,6 +111,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 search(),
                 second(),
                 sign(),
+                sqrt(),
                 substitute(),
                 switchFunction(),
                 t(),
@@ -618,6 +619,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return NumberExpressionFunctions.sign();
     }
 
+    /**
+     * {@see NumberExpressionFunctions#sqrt}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> sqrt() {
+        return NumberExpressionFunctions.sqrt();
+    }
+    
     /**
      * {@see StringExpressionFunctions#substitute}
      */

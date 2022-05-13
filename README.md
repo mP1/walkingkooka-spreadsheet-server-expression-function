@@ -94,6 +94,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - search()
 - second()
 - sign()
+- sqrt()
 - substitute()
 - switch()
 - t()
