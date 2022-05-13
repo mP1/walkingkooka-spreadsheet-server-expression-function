@@ -67,6 +67,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 date(),
                 day(),
                 days(),
+                decimal(),
                 degrees(),
                 e(),
                 even(),
@@ -291,6 +292,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> days() {
         return DateTimeExpressionFunctions.days();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#decimal}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> decimal() {
+        return NumberExpressionFunctions.decimal();
     }
 
     /**
