@@ -52,6 +52,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - day()
 - days()
 - degrees(),
+- e(),
 - even()
 - false()
 - formulaText(),

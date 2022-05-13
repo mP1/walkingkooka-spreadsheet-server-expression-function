@@ -381,6 +381,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testE() {
+        this.evaluateAndValueCheck(
+                "=e()",
+                EXPRESSION_NUMBER_KIND.create(2.718282)
+        );
+    }
+
+    @Test
     public void testEven() {
         this.evaluateAndValueCheck(
                 "=even(1.7)",
