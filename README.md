@@ -95,6 +95,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - mod()
 - month()
 - not()
+- oct2bin()
 - odd()
 - offset()
 - or()
