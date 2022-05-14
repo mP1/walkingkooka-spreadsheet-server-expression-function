@@ -86,6 +86,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 floor(),
                 formulaText(),
                 hex2bin(),
+                hex2dec(),
                 hour(),
                 ifFunction(),
                 ifs(),
@@ -439,6 +440,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> hex2bin() {
         return EngineeringExpressionFunctions.hex2bin();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#hex2dec}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> hex2dec() {
+        return EngineeringExpressionFunctions.hex2dec();
     }
 
     /**
