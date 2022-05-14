@@ -54,6 +54,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 and(),
                 asin(),
                 atan(),
+                base(),
                 ceil(),
                 cell(),
                 charFunction(),
@@ -186,6 +187,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> atan() {
         return NumberTrigonomteryExpressionFunctions.atan();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#base}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> base() {
+        return NumberExpressionFunctions.base();
     }
 
     /**
