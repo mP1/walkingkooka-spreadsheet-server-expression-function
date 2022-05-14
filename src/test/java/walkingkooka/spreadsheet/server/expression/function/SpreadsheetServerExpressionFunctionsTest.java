@@ -526,6 +526,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testHex2Oct() {
+        this.evaluateAndValueCheck(
+                "=hex2oct(\"ff\")",
+                "377"
+        );
+    }
+
+    @Test
     public void testHour() {
         this.evaluateAndValueCheck(
                 "=hour(time(12, 58, 59))",
