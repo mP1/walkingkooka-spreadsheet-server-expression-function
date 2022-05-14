@@ -445,6 +445,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDec2Oct() {
+        this.evaluateAndValueCheck(
+                "=dec2oct(\"255\")",
+                "377"
+        );
+    }
+
+    @Test
     public void testDegrees() {
         this.evaluateAndValueCheck(
                 "=degrees(1.5)",
