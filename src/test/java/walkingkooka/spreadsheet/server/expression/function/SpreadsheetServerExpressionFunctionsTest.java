@@ -935,6 +935,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testOct2Dec() {
+        this.evaluateAndValueCheck(
+                "=oct2dec(\"34\")",
+                "28"
+        );
+    }
+
+    @Test
     public void testOdd() {
         this.evaluateAndValueCheck(
                 "=odd(12.3)",
