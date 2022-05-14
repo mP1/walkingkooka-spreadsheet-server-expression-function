@@ -69,6 +69,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - formulaText(),
 - hex2bin()
 - hex2dec()
+- hex2oct()
 - hour()
 - int()
 - if()
