@@ -76,6 +76,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 day(),
                 days(),
                 decimal(),
+                dec2bin(),
                 degrees(),
                 e(),
                 even(),
@@ -358,6 +359,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> days() {
         return DateTimeExpressionFunctions.days();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#dec2bin}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> dec2bin() {
+        return EngineeringExpressionFunctions.dec2bin();
     }
 
     /**
