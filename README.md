@@ -97,6 +97,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - not()
 - oct2bin()
 - oct2dec()
+- oct2hex()
 - odd()
 - offset()
 - or()

@@ -943,6 +943,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testOct2Hex() {
+        this.evaluateAndValueCheck(
+                "=oct2hex(\"34\")",
+                "1c"
+        );
+    }
+
+    @Test
     public void testOdd() {
         this.evaluateAndValueCheck(
                 "=odd(12.3)",
