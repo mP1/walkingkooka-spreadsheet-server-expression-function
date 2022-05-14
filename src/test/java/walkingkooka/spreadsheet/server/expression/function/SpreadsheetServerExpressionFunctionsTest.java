@@ -268,6 +268,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testBitXor() {
+        this.evaluateAndValueCheck(
+                "=bitxor(7, 3)",
+                EXPRESSION_NUMBER_KIND.create(4)
+        );
+    }
+
+    @Test
     public void testCeil() {
         this.evaluateAndValueCheck(
                 "=ceil(1.75)",
