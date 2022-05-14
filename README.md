@@ -43,6 +43,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - bin2hex()
 - bin2oct()
 - bitAnd()
+- bitOr()
 - ceil()
 - cell()
 - char()
