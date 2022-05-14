@@ -260,6 +260,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testBitOr() {
+        this.evaluateAndValueCheck(
+                "=bitor(3, 6)",
+                EXPRESSION_NUMBER_KIND.create(7)
+        );
+    }
+
+    @Test
     public void testCeil() {
         this.evaluateAndValueCheck(
                 "=ceil(1.75)",

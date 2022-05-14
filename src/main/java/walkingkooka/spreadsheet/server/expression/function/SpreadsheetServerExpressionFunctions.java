@@ -60,6 +60,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 bin2hex(),
                 bin2oct(),
                 bitAnd(),
+                bitOr(),
                 ceil(),
                 cell(),
                 charFunction(),
@@ -231,6 +232,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> BITAND = EngineeringExpressionFunctions.<SpreadsheetExpressionFunctionContext>bitAnd()
             .setName(FunctionExpressionName.with("bitAnd"));
+
+    /**
+     * {@see EngineeringExpressionFunctions#bitOr}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> bitOr() {
+        return BITOR;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> BITOR = EngineeringExpressionFunctions.<SpreadsheetExpressionFunctionContext>bitOr()
+            .setName(FunctionExpressionName.with("bitOr"));
 
     /**
      * {@see NumberExpressionFunctions#ceil}
