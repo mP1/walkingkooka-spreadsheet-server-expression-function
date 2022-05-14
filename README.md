@@ -59,6 +59,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - day()
 - days()
 - dec2bin()
+- dec2hex()
 - decimal()
 - degrees(),
 - e(),

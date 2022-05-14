@@ -437,6 +437,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDec2Hex() {
+        this.evaluateAndValueCheck(
+                "=dec2hex(\"255\")",
+                "ff"
+        );
+    }
+
+    @Test
     public void testDegrees() {
         this.evaluateAndValueCheck(
                 "=degrees(1.5)",
