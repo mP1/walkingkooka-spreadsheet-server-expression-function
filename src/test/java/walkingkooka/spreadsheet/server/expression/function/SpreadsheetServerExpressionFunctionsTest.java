@@ -510,6 +510,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testHex2Bin() {
+        this.evaluateAndValueCheck(
+                "=hex2bin(\"f\")",
+                "1111"
+        );
+    }
+
+    @Test
     public void testHour() {
         this.evaluateAndValueCheck(
                 "=hour(time(12, 58, 59))",
