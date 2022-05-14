@@ -40,6 +40,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - atan()
 - base()
 - bin2dec()
+- bin2hex()
 - ceil()
 - cell()
 - char()
