@@ -429,9 +429,17 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testDec2Bin() {
+    public void testDec2BinFromString() {
         this.evaluateAndValueCheck(
                 "=dec2bin(\"14\")",
+                "1110"
+        );
+    }
+
+    @Test
+    public void testDec2BinFromNumber() {
+        this.evaluateAndValueCheck(
+                "=dec2bin(14)",
                 "1110"
         );
     }
