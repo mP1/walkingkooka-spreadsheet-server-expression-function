@@ -114,6 +114,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 mod(),
                 month(),
                 not(),
+                oct2bin(),
                 odd(),
                 offset(),
                 or(),
@@ -650,6 +651,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionFunctionContext> not() {
         return BooleanExpressionFunctions.not();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#oct2bin}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> oct2bin() {
+        return EngineeringExpressionFunctions.oct2bin();
     }
 
     /**
