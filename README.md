@@ -60,6 +60,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - days()
 - dec2bin()
 - dec2hex()
+- dec2oct()
 - decimal()
 - degrees(),
 - e(),

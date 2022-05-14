@@ -78,6 +78,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 decimal(),
                 dec2bin(),
                 dec2hex(),
+                dec2oct(),
                 degrees(),
                 e(),
                 even(),
@@ -374,6 +375,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> dec2hex() {
         return EngineeringExpressionFunctions.dec2hex();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#dec2oct}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> dec2oct() {
+        return EngineeringExpressionFunctions.dec2oct();
     }
 
     /**
