@@ -116,6 +116,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 not(),
                 oct2bin(),
                 oct2dec(),
+                oct2hex(),
                 odd(),
                 offset(),
                 or(),
@@ -666,6 +667,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> oct2dec() {
         return EngineeringExpressionFunctions.oct2dec();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#oct2hex}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> oct2hex() {
+        return EngineeringExpressionFunctions.oct2hex();
     }
     
     /**
