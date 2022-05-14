@@ -220,6 +220,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testBase() {
+        this.evaluateAndValueCheck(
+                "=base(13, 2)",
+                "1101"
+        );
+    }
+
+    @Test
     public void testCeil() {
         this.evaluateAndValueCheck(
                 "=ceil(1.75)",
