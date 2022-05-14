@@ -115,6 +115,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 month(),
                 not(),
                 oct2bin(),
+                oct2dec(),
                 odd(),
                 offset(),
                 or(),
@@ -660,6 +661,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return EngineeringExpressionFunctions.oct2bin();
     }
 
+    /**
+     * {@see EngineeringExpressionFunctions#oct2dec}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> oct2dec() {
+        return EngineeringExpressionFunctions.oct2dec();
+    }
+    
     /**
      * {@see NumberExpressionFunctions#odd}
      */
