@@ -30,6 +30,7 @@ import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunctions;
+import walkingkooka.tree.expression.function.engineering.EngineeringExpressionFunctions;
 import walkingkooka.tree.expression.function.number.NumberExpressionFunctions;
 import walkingkooka.tree.expression.function.number.trigonometry.NumberTrigonomteryExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
@@ -55,6 +56,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 asin(),
                 atan(),
                 base(),
+                bin2dec(),
                 ceil(),
                 cell(),
                 charFunction(),
@@ -194,6 +196,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> base() {
         return NumberExpressionFunctions.base();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#bin2dec}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> bin2dec() {
+        return EngineeringExpressionFunctions.bin2dec();
     }
 
     /**

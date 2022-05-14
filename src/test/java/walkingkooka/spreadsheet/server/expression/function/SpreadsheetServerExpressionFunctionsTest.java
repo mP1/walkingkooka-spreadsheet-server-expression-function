@@ -228,6 +228,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testBin2Dec() {
+        this.evaluateAndValueCheck(
+                "=bin2dec(\"1101\")",
+                "13"
+        );
+    }
+
+    @Test
     public void testCeil() {
         this.evaluateAndValueCheck(
                 "=ceil(1.75)",
