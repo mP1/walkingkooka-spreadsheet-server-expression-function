@@ -58,6 +58,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 base(),
                 bin2dec(),
                 bin2hex(),
+                bin2oct(),
                 ceil(),
                 cell(),
                 charFunction(),
@@ -211,6 +212,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> bin2hex() {
         return EngineeringExpressionFunctions.bin2hex();
+    }
+
+    /**
+     * {@see EngineeringExpressionFunctions#bin2oct}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> bin2oct() {
+        return EngineeringExpressionFunctions.bin2oct();
     }
 
     /**
