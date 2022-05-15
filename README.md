@@ -92,6 +92,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - log10(),
 - lower(),
 - mid(),
+- min(),
 - minutes()
 - mod()
 - month()

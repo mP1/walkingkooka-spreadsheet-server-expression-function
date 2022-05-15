@@ -112,6 +112,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 log10(),
                 lower(),
                 mid(),
+                min(),
                 minute(),
                 mod(),
                 month(),
@@ -634,6 +635,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> mid() {
         return StringExpressionFunctions.mid();
+    }
+
+    /**
+     * {@see StatExpressionFunctions#min}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> min() {
+        return StatExpressionFunctions.min();
     }
 
     /**

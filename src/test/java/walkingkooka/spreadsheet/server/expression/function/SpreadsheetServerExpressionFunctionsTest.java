@@ -900,6 +900,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testMin() {
+        this.evaluateAndValueCheck(
+                "=min(1,20,300,B1:D1)",
+                Maps.of(
+                        "B1", "1000",
+                        "C1", "2000",
+                        "D1", "-999"
+                ),
+                EXPRESSION_NUMBER_KIND.create(-999)
+        );
+    }
+
+    @Test
     public void testMinute() {
         this.evaluateAndValueCheck(
                 "=minute(time(12, 58, 59))",
