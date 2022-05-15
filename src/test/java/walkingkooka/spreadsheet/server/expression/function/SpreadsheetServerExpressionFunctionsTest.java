@@ -220,6 +220,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testAverage() {
+        this.evaluateAndValueCheck(
+                "=average(1,20,300,B1:D1)",
+                Maps.of(
+                        "B1", "1000",
+                        "C1", "2000",
+                        "D1", "3000"
+                ),
+                EXPRESSION_NUMBER_KIND.create(1053.5)
+        );
+    }
+
+    @Test
     public void testBase() {
         this.evaluateAndValueCheck(
                 "=base(13, 2)",
