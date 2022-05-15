@@ -126,6 +126,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - sinh()
 - sqrt()
 - substitute()
+- sum(),
 - switch()
 - t()
 - tan()
