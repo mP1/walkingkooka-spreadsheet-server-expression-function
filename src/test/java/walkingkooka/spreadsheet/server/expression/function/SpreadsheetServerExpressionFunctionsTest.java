@@ -1286,6 +1286,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSum() {
+        this.evaluateAndValueCheck(
+                "=sum(1,20,300,B1:D1)",
+                Maps.of(
+                        "B1", "1000",
+                        "C1", "2000",
+                        "D1", "9999"
+                ),
+                EXPRESSION_NUMBER_KIND.create(13320)
+        );
+    }
+
+    @Test
     public void testSwitchFirst() {
         this.evaluateAndValueCheck(
                 "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",
