@@ -38,6 +38,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - and()
 - asin()
 - atan()
+- average()
 - base()
 - bin2dec()
 - bin2hex()

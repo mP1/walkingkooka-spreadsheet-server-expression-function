@@ -33,6 +33,7 @@ import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunction
 import walkingkooka.tree.expression.function.engineering.EngineeringExpressionFunctions;
 import walkingkooka.tree.expression.function.number.NumberExpressionFunctions;
 import walkingkooka.tree.expression.function.number.trigonometry.NumberTrigonomteryExpressionFunctions;
+import walkingkooka.tree.expression.function.stat.StatExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.time.LocalDate;
@@ -55,6 +56,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 and(),
                 asin(),
                 atan(),
+                average(),
                 base(),
                 bin2dec(),
                 bin2hex(),
@@ -203,6 +205,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> atan() {
         return NumberTrigonomteryExpressionFunctions.atan();
+    }
+
+    /**
+     * {@see StatExpressionFunctions#average}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> average() {
+        return StatExpressionFunctions.average();
     }
 
     /**
