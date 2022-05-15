@@ -111,6 +111,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 log(),
                 log10(),
                 lower(),
+                max(),
                 mid(),
                 min(),
                 minute(),
@@ -630,6 +631,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> LOWER = StringExpressionFunctions.<SpreadsheetExpressionFunctionContext>lowerCase()
             .setName(FunctionExpressionName.with("lower"));
 
+    /**
+     * {@see StatExpressionFunctions#max}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> max() {
+        return StatExpressionFunctions.max();
+    }
+    
     /**
      * {@see StringExpressionFunctions#mid}
      */
