@@ -136,6 +136,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 rept(),
                 right(),
                 roman(),
+                round(),
                 roundDown(),
                 roundUp(),
                 row(),
@@ -816,6 +817,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<String, SpreadsheetExpressionFunctionContext> roman() {
         return NumberExpressionFunctions.roman();
     }
+
+    /**
+     * {@see NumberExpressionFunctions#roundHalf}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> round() {
+        return ROUND;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> ROUND = NumberExpressionFunctions.<SpreadsheetExpressionFunctionContext>roundHalf()
+            .setName(FunctionExpressionName.with("round"));
 
     /**
      * {@see NumberExpressionFunctions#roundDown}
