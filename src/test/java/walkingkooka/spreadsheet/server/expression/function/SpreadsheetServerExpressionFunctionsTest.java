@@ -506,6 +506,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testExp() {
+        this.evaluateAndValueCheck(
+                "=exp(1)",
+                EXPRESSION_NUMBER_KIND.create(2.718282)
+        );
+    }
+
+    @Test
     public void testFalse() {
         this.evaluateAndValueCheck(
                 "=false()",

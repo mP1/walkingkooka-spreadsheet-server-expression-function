@@ -66,6 +66,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - degrees(),
 - e(),
 - even()
+- exp()
 - false()
 - formulaText(),
 - hex2bin()

@@ -84,6 +84,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 degrees(),
                 e(),
                 even(),
+                exp(),
                 falseFunction(),
                 floor(),
                 formulaText(),
@@ -428,6 +429,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> even() {
         return NumberExpressionFunctions.even();
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#exp}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> exp() {
+        return NumberExpressionFunctions.exp();
     }
 
     /**
