@@ -116,6 +116,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - rept()
 - right()
 - roman()
+- round()
 - roundDown()
 - roundUp()
 - row()
