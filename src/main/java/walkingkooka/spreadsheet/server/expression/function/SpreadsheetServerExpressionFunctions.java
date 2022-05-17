@@ -160,6 +160,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 trim(),
                 trueFunction(),
                 trunc(),
+                type(),
                 unichar(),
                 unicode(),
                 upper(),
@@ -996,6 +997,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> trunc() {
         return NumberExpressionFunctions.trunc();
+    }
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#type}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionFunctionContext> type() {
+        return SpreadsheetExpressionFunctions.type();
     }
 
     /**

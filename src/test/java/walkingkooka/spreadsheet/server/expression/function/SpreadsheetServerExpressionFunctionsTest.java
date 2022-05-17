@@ -1438,6 +1438,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testTypeWithNumber() {
+        this.evaluateAndValueCheck(
+                "=type(123)",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testTypeWithDate() {
+        this.evaluateAndValueCheck(
+                "=type(date(2000, 1, 1))",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testTypeWithErrorDivByZero() {
+        this.evaluateAndValueCheck(
+                "=type(1/0)",
+                EXPRESSION_NUMBER_KIND.create(16)
+        );
+    }
+
+    @Test
     public void testUnichar97() {
         this.evaluateAndValueCheck(
                 "=unichar(97)",
