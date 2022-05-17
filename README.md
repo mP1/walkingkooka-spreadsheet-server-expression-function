@@ -139,6 +139,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - trim()
 - true()
 - trunc()
+- type()
 - unichar()
 - unicode()
 - upper()
