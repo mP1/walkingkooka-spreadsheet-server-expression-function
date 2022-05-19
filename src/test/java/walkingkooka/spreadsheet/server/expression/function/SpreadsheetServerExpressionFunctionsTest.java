@@ -395,6 +395,16 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         );
     }
 
+
+    @Test
+    public void testConcatRangeMissingCell() {
+        this.evaluateAndValueCheck(
+                "=concat(A2:A5)",
+                Maps.of("A2", "'abc", "A4", "'123"),
+                "abc123"
+        );
+    }
+
     @Test
     public void testConcatSingleValuesAndRange() {
         this.evaluateAndValueCheck(
