@@ -22,7 +22,7 @@ import org.junit.Test;
 
 import walkingkooka.collect.list.Lists;
 import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
-import walkingkooka.spreadsheet.function.FakeSpreadsheetExpressionFunctionContext;
+import walkingkooka.spreadsheet.function.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 
@@ -38,7 +38,7 @@ public class JunitTest {
                 SpreadsheetExpressionFunctions.column()
                         .apply(
                                 Lists.of(SpreadsheetSelection.parseCell("E1")),
-                                new FakeSpreadsheetExpressionFunctionContext() {
+                                new FakeSpreadsheetExpressionEvaluationContext() {
 
                                     @Override
                                     public ExpressionNumberKind expressionNumberKind() {
