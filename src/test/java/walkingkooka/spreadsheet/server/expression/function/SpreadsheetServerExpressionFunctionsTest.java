@@ -37,7 +37,7 @@ import walkingkooka.spreadsheet.engine.SpreadsheetEngineContext;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContexts;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
-import walkingkooka.spreadsheet.function.SpreadsheetExpressionFunctionContext;
+import walkingkooka.spreadsheet.function.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStore;
@@ -1631,7 +1631,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 metadata
         );
 
-        final Map<String, ExpressionFunction<?, SpreadsheetExpressionFunctionContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
+        final Map<String, ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
         SpreadsheetServerExpressionFunctions.visit(
                 (f -> nameToFunctions.put(f.name().value(), f))
         );

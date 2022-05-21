@@ -17,13 +17,6 @@
 
 package walkingkooka.spreadsheet.server.expression.function.sample;
 
-import org.junit.jupiter.api.Assertions;
-import walkingkooka.collect.list.Lists;
-import walkingkooka.spreadsheet.function.FakeSpreadsheetExpressionFunctionContext;
-import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
-import walkingkooka.spreadsheet.server.expression.function.SpreadsheetServerExpressionFunctions;
-import walkingkooka.tree.expression.ExpressionNumberKind;
-
 public final class Sample {
     public static void main(final String[] args) {
     }
