@@ -89,6 +89,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 Arrays.stream(
                                 SpreadsheetServerExpressionFunctions.class.getDeclaredMethods()
                         )
+                        .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
                         .filter(m -> m.getReturnType() == ExpressionFunction.class)
                         .map(Method::getName)
                         .collect(Collectors.toCollection(Sets::sorted))
@@ -870,9 +871,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testLen() {
+    public void testLenWithNumber() {
+        this.evaluateAndValueCheck(
+                "=len(1.23)",
+                this.metadataWithStrangeNumberFormatPattern(),
+                EXPRESSION_NUMBER_KIND.create(4)
+        );
+    }
+
+    @Test
+    public void testLenWithString() {
         this.evaluateAndValueCheck(
                 "=len(\"hello\")",
+                this.metadataWithStrangeNumberFormatPattern(),
                 EXPRESSION_NUMBER_KIND.create(5)
         );
     }
@@ -902,9 +913,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testLower() {
+    public void testLowerWithNumber() {
+        this.evaluateAndValueCheck(
+                "=lower(1.25)",
+                this.metadataWithStrangeNumberFormatPattern(),
+                "1.25"
+        );
+    }
+
+    @Test
+    public void testLowerWithString() {
         this.evaluateAndValueCheck(
                 "=lower(\"ABCxyz\")",
+                this.metadataWithStrangeNumberFormatPattern(),
                 "abcxyz"
         );
     }
@@ -1505,9 +1526,20 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testUpper() {
+    public void testUpperWithNumber() {
+        this.evaluateAndValueCheck(
+                "=upper(1.25)",
+                this.metadataWithStrangeNumberFormatPattern(),
+                "1.25"
+        );
+    }
+
+
+    @Test
+    public void testUpperWithString() {
         this.evaluateAndValueCheck(
                 "=upper(\"ABCxyz\")",
+                this.metadataWithStrangeNumberFormatPattern(),
                 "ABCXYZ"
         );
     }
@@ -1572,12 +1604,36 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     private void evaluateAndValueCheck(final String cellFormula,
+                                       final SpreadsheetMetadata metadata,
+                                       final Object expectedValue) {
+        this.evaluateAndValueCheck(
+                cellFormula,
+                Maps.empty(),
+                metadata,
+                expectedValue
+        );
+    }
+
+    private void evaluateAndValueCheck(final String cellFormula,
                                        final Map<String, String> preload,
+                                       final Object expectedValue) {
+        this.evaluateAndValueCheck(
+                cellFormula,
+                preload,
+                this.metadata(),
+                expectedValue
+        );
+    }
+
+    private void evaluateAndValueCheck(final String cellFormula,
+                                       final Map<String, String> preload,
+                                       final SpreadsheetMetadata metadata,
                                        final Object expectedValue) {
         this.evaluateAndCheck(
                 SpreadsheetSelection.parseCell("A1"),
                 cellFormula,
                 preload,
+                metadata,
                 Optional.ofNullable(expectedValue),
                 null // not checking formatted
         );
@@ -1609,7 +1665,18 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                   final Map<String, String> preload,
                                   final Optional<?> expectedValue,
                                   final Optional<TextNode> formatted) {
-        final SpreadsheetMetadata metadata = SpreadsheetMetadata.EMPTY
+        this.evaluateAndCheck(
+                cellReference,
+                cellFormula,
+                preload,
+                this.metadata(),
+                expectedValue,
+                formatted
+        );
+    }
+
+    private SpreadsheetMetadata metadata() {
+        return SpreadsheetMetadata.EMPTY
                 .set(SpreadsheetMetadataPropertyName.SPREADSHEET_ID, SpreadsheetId.parse("1234"))
                 .set(SpreadsheetMetadataPropertyName.SPREADSHEET_NAME, SpreadsheetName.with("Untitled5678"))
                 .set(SpreadsheetMetadataPropertyName.LOCALE, LOCALE)
@@ -1624,9 +1691,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
                 .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
+                .set(SpreadsheetMetadataPropertyName.NUMBER_FORMAT_PATTERN, SpreadsheetPattern.parseNumberFormatPattern("#.###"))
                 .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@@"))
                 .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
+    }
 
+    private SpreadsheetMetadata metadataWithStrangeNumberFormatPattern() {
+        return this.metadata()
+                .set(SpreadsheetMetadataPropertyName.NUMBER_FORMAT_PATTERN, SpreadsheetPattern.parseNumberFormatPattern("\"Number:\"#.###"));
+    }
+
+    private void evaluateAndCheck(final SpreadsheetCellReference cellReference,
+                                  final String cellFormula,
+                                  final Map<String, String> preload,
+                                  final SpreadsheetMetadata metadata,
+                                  final Optional<?> expectedValue,
+                                  final Optional<TextNode> formatted) {
         final SpreadsheetEngine engine = SpreadsheetEngines.basic(
                 metadata
         );

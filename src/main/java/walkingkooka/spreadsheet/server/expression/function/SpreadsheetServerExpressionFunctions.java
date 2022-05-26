@@ -608,8 +608,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return LEN;
     }
 
-    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> LEN = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>stringLength()
-            .setName(FunctionExpressionName.with("len"));
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> LEN = unformattedNumber(
+            StringExpressionFunctions.stringLength(),
+            "len"
+    );
 
     /**
      * {@see NumberExpressionFunctions#ln}
@@ -617,7 +619,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> ln() {
         return NumberExpressionFunctions.ln();
     }
-    
+
     /**
      * {@see NumberExpressionFunctions#log}
      */
@@ -631,7 +633,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> log10() {
         return NumberExpressionFunctions.log10();
     }
-    
+
     /**
      * {@see StringExpressionFunctions#lower}
      */
@@ -639,8 +641,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return LOWER;
     }
 
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> LOWER = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>lowerCase()
-            .setName(FunctionExpressionName.with("lower"));
+    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> LOWER = unformattedNumber(
+            StringExpressionFunctions.lowerCase(),
+            "lower"
+    );
 
     /**
      * {@see StatExpressionFunctions#max}
@@ -648,7 +652,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> max() {
         return StatExpressionFunctions.max();
     }
-    
+
     /**
      * {@see StringExpressionFunctions#mid}
      */
@@ -1033,8 +1037,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return UPPER;
     }
 
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> UPPER = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>upperCase()
-            .setName(FunctionExpressionName.with("upper"));
+    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> UPPER = unformattedNumber(
+            StringExpressionFunctions.upperCase(),
+            "upper"
+    );
 
     /**
      * {@see DateTimeExpressionFunctions#weekDay}
@@ -1056,12 +1062,21 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> year() {
         return DateTimeExpressionFunctions.year();
     }
-    
+
     /**
      * {@see BooleanExpressionFunctions#xor}
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> xor() {
         return BooleanExpressionFunctions.xor();
+    }
+
+    private static <T> ExpressionFunction<T, SpreadsheetExpressionEvaluationContext> unformattedNumber(final ExpressionFunction<T, SpreadsheetExpressionEvaluationContext> function,
+                                                                                                       final String name) {
+        return UnformattedNumberExpressionFunction.with(
+                function.setName(
+                        FunctionExpressionName.with(name)
+                )
+        );
     }
 
     /**
