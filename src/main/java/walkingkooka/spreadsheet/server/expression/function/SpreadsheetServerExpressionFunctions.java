@@ -347,14 +347,17 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return CONCAT;
     }
 
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
+    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = UnformattedNumberExpressionFunction.with(
+            StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
             .setKinds(
                     Sets.of(
-                            ExpressionFunctionKind.FLATTEN,
+                            ExpressionFunctionKind.CONVERT_PARAMETERS,
                             ExpressionFunctionKind.EVALUATE_PARAMETERS,
+                            ExpressionFunctionKind.FLATTEN,
                             ExpressionFunctionKind.RESOLVE_REFERENCES
                     )
-            );
+            )
+    );
 
     /**
      * {@see NumberTrigonomteryExpressionFunctions#cos}
