@@ -355,15 +355,6 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testConcatSingleValues() {
-        this.evaluateAndValueCheck(
-                "=concat(A2,A3)",
-                Maps.of("A2", "'abc", "A3", "'123"),
-                "abc123"
-        );
-    }
-
-    @Test
     public void testColumn() {
         this.evaluateAndValueCheck(
                 "=column(C1)",
@@ -388,20 +379,59 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testConcatRange() {
+    public void testConcatNumber() {
         this.evaluateAndValueCheck(
-                "=concat(A2:A3)",
+                "=concat(1.25)",
+                this.metadataWithStrangeNumberFormatPattern(),
+                "1.25"
+        );
+    }
+
+    @Test
+    public void testConcatString() {
+        this.evaluateAndValueCheck(
+                "=concat(\"abc\")",
+                this.metadataWithStrangeNumberFormatPattern(),
+                "abc"
+        );
+    }
+
+    @Test
+    public void testConcatSingleValues() {
+        this.evaluateAndValueCheck(
+                "=concat(A2,A3)",
                 Maps.of("A2", "'abc", "A3", "'123"),
+                this.metadataWithStrangeNumberFormatPattern(),
                 "abc123"
         );
     }
 
+    @Test
+    public void testConcatRange() {
+        this.evaluateAndValueCheck(
+                "=concat(A2:A3)",
+                Maps.of("A2", "'abc", "A3", "'123"),
+                this.metadataWithStrangeNumberFormatPattern(),
+                "abc123"
+        );
+    }
+
+    @Test
+    public void testConcatRangeIncludesNumbers() {
+        this.evaluateAndValueCheck(
+                "=concat(A2:A3)",
+                Maps.of("A2", "'abc", "A3", "=123"),
+                this.metadataWithStrangeNumberFormatPattern(),
+                "abc123"
+        );
+    }
 
     @Test
     public void testConcatRangeMissingCell() {
         this.evaluateAndValueCheck(
                 "=concat(A2:A5)",
                 Maps.of("A2", "'abc", "A4", "'123"),
+                this.metadataWithStrangeNumberFormatPattern(),
                 "abc123"
         );
     }
@@ -416,6 +446,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         "B1", "'SecondLast",
                         "B2", "'Last"
                 ),
+                this.metadataWithStrangeNumberFormatPattern(),
                 "Firstabc123!!!SecondLastLast"
         );
     }
