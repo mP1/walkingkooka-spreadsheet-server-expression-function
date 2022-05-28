@@ -84,7 +84,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testVisit() {
         final Set<FunctionExpressionName> names = Sets.sorted();
-        SpreadsheetServerExpressionFunctions.visit((e) -> names.add(e.name()));
+        SpreadsheetServerExpressionFunctions.visit(
+                (e) -> {
+                    final FunctionExpressionName name = e.name();
+                    if (!names.add(name)) {
+                        throw new IllegalStateException("Duplicate function name: " + name);
+                    }
+                }
+        );
 
         this.checkEquals(
                 Arrays.stream(
