@@ -64,6 +64,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - dec2oct()
 - decimal()
 - degrees(),
+- delta(),
 - e(),
 - even()
 - exp()
