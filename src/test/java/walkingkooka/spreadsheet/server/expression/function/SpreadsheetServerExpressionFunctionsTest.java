@@ -1084,6 +1084,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testNumberValue() {
+        this.evaluateAndValueCheck(
+                "=numberValue(\"1G234D5\", \"D\", \"G\")",
+                EXPRESSION_NUMBER_KIND.create(1234.5)
+        );
+    }
+
+    @Test
     public void testOct2Bin() {
         this.evaluateAndValueCheck(
                 "=oct2bin(\"34\")",

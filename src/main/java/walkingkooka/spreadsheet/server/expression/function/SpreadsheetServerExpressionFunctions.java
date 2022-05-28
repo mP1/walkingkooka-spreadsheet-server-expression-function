@@ -121,6 +121,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 mod(),
                 month(),
                 not(),
+                numberValue(),
                 oct2bin(),
                 oct2dec(),
                 oct2hex(),
@@ -716,6 +717,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> not() {
         return BooleanExpressionFunctions.not();
+    }
+
+    /**
+     * {@see NumberValueExpressionFunction#INSTANCE}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> numberValue() {
+        return NumberValueExpressionFunction.INSTANCE;
     }
 
     /**
