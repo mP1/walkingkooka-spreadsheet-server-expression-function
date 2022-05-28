@@ -533,6 +533,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDeltaNumbersEquals() {
+        this.evaluateAndValueCheck(
+                "=delta(1.25, \"1.25\")",
+                true
+        );
+    }
+
+    @Test
     public void testE() {
         this.evaluateAndValueCheck(
                 "=e()",
