@@ -67,6 +67,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - delta(),
 - e(),
 - even()
+- exact()
 - exp()
 - false()
 - formulaText(),

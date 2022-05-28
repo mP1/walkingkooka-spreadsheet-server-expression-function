@@ -557,6 +557,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testExactDifferentCaseStrings() {
+        this.evaluateAndValueCheck(
+                "=exact(\"ABC\", \"abc\")",
+                false
+        );
+    }
+
+    @Test
+    public void testExactSameStrings() {
+        this.evaluateAndValueCheck(
+                "=exact(\"ABC\", \"ABC\")",
+                true
+        );
+    }
+
+    @Test
+    public void testExactSameString2() {
+        this.evaluateAndValueCheck(
+                "=exact(\"12.5\",12.5)",
+                true
+        );
+    }
+
+    @Test
     public void testExp() {
         this.evaluateAndValueCheck(
                 "=exp(1)",
