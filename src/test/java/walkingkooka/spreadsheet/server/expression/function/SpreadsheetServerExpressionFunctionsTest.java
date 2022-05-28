@@ -36,8 +36,8 @@ import walkingkooka.spreadsheet.engine.SpreadsheetEngine;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContext;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContexts;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
-import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
+import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStore;
@@ -54,6 +54,7 @@ import walkingkooka.spreadsheet.store.SpreadsheetColumnStores;
 import walkingkooka.spreadsheet.store.SpreadsheetRowStores;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepositories;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
+import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -1572,6 +1573,39 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 "=upper(\"ABCxyz\")",
                 this.metadataWithStrangeNumberFormatPattern(),
                 "ABCXYZ"
+        );
+    }
+
+    @Test
+    public void testValueWithNumber() {
+        this.evaluateAndValueCheck(
+                "=value(123)",
+                EXPRESSION_NUMBER_KIND.create(123)
+        );
+    }
+
+    @Test
+    public void testValueWithString() {
+        this.evaluateAndValueCheck(
+                "=value(\"123\")",
+                EXPRESSION_NUMBER_KIND.create(123)
+        );
+    }
+
+    @Test
+    public void testValueWithInvalidString() {
+        String message = null;
+
+        try {
+            final Object object = SpreadsheetErrorKind.VALUE.setMessage("Ignored");
+            final ExpressionNumber ignore = (ExpressionNumber) object;
+        } catch (final ClassCastException expected) {
+            message = expected.getMessage();
+        }
+
+        this.evaluateAndValueCheck(
+                "=value(\"abc\")",
+                SpreadsheetErrorKind.VALUE.setMessage(message)
         );
     }
 

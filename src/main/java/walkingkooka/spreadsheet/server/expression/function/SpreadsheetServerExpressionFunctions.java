@@ -164,6 +164,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 unichar(),
                 unicode(),
                 upper(),
+                value(),
                 weekDay(),
                 weekNum(),
                 year(),
@@ -1044,6 +1045,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
             StringExpressionFunctions.upperCase(),
             "upper"
     );
+
+    /**
+     * {@see NumberExpressionFunctions#number}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> value() {
+        return VALUE;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> VALUE = NumberExpressionFunctions.<SpreadsheetExpressionEvaluationContext>number()
+            .setName(FunctionExpressionName.with("value"));
 
     /**
      * {@see DateTimeExpressionFunctions#weekDay}
