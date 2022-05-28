@@ -85,6 +85,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 delta(),
                 e(),
                 even(),
+                exact(),
                 exp(),
                 falseFunction(),
                 floor(),
@@ -444,6 +445,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> even() {
         return NumberExpressionFunctions.even();
     }
+
+    /**
+     * {@see StringExpressionFunctions#equalsCaseSensitive}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> exact() {
+        return EXACT;
+    }
+
+    private final static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> EXACT = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>equalsCaseSensitive()
+            .setName(FunctionExpressionName.with("exact"));
 
     /**
      * {@see NumberExpressionFunctions#exp}
