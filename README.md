@@ -70,6 +70,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - exact()
 - exp()
 - false()
+- find()
 - formulaText(),
 - hex2bin()
 - hex2dec()
@@ -101,6 +102,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - mod()
 - month()
 - not()
+- numberValue()
 - oct2bin()
 - oct2dec()
 - oct2hex()
