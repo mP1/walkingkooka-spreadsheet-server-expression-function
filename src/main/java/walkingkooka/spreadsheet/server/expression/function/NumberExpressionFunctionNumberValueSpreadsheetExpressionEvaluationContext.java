@@ -42,21 +42,21 @@ import java.util.Optional;
  * A {@link SpreadsheetExpressionEvaluationContext} that has a main goal of preparing parameters with a converter
  * that uses the provided decimal separator and group separator.
  */
-final class NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext implements SpreadsheetExpressionEvaluationContext {
+final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext implements SpreadsheetExpressionEvaluationContext {
 
-    static NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext with(final char decimalSeparator,
-                                                                                final char groupSeparator,
-                                                                                final SpreadsheetExpressionEvaluationContext context) {
-        return new NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext(
+    static NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext with(final char decimalSeparator,
+                                                                                          final char groupSeparator,
+                                                                                          final SpreadsheetExpressionEvaluationContext context) {
+        return new NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext(
                 decimalSeparator,
                 groupSeparator,
                 context
         );
     }
 
-    private NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext(final char decimalSeparator,
-                                                                                final char groupSeparator,
-                                                                                final SpreadsheetExpressionEvaluationContext context) {
+    private NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext(final char decimalSeparator,
+                                                                                      final char groupSeparator,
+                                                                                      final SpreadsheetExpressionEvaluationContext context) {
         super();
 
         this.decimalSeparator = decimalSeparator;

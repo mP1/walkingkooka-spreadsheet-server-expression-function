@@ -21,7 +21,6 @@ import walkingkooka.Cast;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionPurityContext;
-import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
@@ -35,24 +34,17 @@ import java.util.Set;
  * The excel numbervalue fnction which converts text to a {@link ExpressionNumber}. This is achieved by converting
  * the first parameter using a context that uses the decimal-separator and group-separator parameters.
  */
-final class NumberValueExpressionFunction implements ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> {
+final class NumberExpressionFunctionNumberValue extends NumberExpressionFunction {
 
     /**
      * Singleton
      */
-    final static NumberValueExpressionFunction INSTANCE = new NumberValueExpressionFunction();
+    final static NumberExpressionFunctionNumberValue INSTANCE = new NumberExpressionFunctionNumberValue();
 
-    private NumberValueExpressionFunction() {
+    private NumberExpressionFunctionNumberValue() {
+        super("numberValue");
         this.function = StringExpressionFunctions.value();
     }
-
-
-    @Override
-    public FunctionExpressionName name() {
-        return NAME;
-    }
-
-    private final static FunctionExpressionName NAME = FunctionExpressionName.with("numberValue");
 
     @Override
     public Set<ExpressionFunctionKind> kinds() {
@@ -80,18 +72,13 @@ final class NumberValueExpressionFunction implements ExpressionFunction<Expressi
     );
 
     @Override
-    public Class<ExpressionNumber> returnType() {
-        return this.function.returnType();
-    }
-
-    @Override
     public ExpressionNumber apply(final List<Object> parameters,
                                   final SpreadsheetExpressionEvaluationContext context) {
         this.checkParameterCount(parameters);
 
         return this.apply0(
                 parameters.subList(0, 1),
-                NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext.with(
+                NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.with(
                         DECIMAL_SEPARATOR.get(parameters, 1).orElse(context.decimalSeparator()),
                         GROUP_SEPARATOR.get(parameters, 2).orElse(context.groupingSeparator()),
                         context
@@ -117,9 +104,4 @@ final class NumberValueExpressionFunction implements ExpressionFunction<Expressi
     }
 
     private final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function;
-
-    @Override
-    public String toString() {
-        return this.name().toString();
-    }
 }
