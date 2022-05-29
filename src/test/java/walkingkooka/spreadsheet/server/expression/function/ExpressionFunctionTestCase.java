@@ -22,6 +22,7 @@ import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
+import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.ExpressionPurityTesting;
 import walkingkooka.tree.expression.FunctionExpressionName;
@@ -32,6 +33,8 @@ public abstract class ExpressionFunctionTestCase<F extends ExpressionFunction<T,
         ExpressionPurityTesting,
         TypeNameTesting<F>,
         ClassTesting2<F> {
+
+    final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.DEFAULT;
 
     ExpressionFunctionTestCase() {
         super();

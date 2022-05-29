@@ -28,8 +28,6 @@ import java.util.stream.Collectors;
 
 public abstract class NumberExpressionFunctionTestCase<F extends ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext>> extends ExpressionFunctionTestCase<F, ExpressionNumber> {
 
-    final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.DEFAULT;
-
     NumberExpressionFunctionTestCase() {
         super();
     }
