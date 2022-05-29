@@ -28,6 +28,7 @@ import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.spreadsheet.SpreadsheetCell;
+import walkingkooka.spreadsheet.SpreadsheetError;
 import walkingkooka.spreadsheet.SpreadsheetErrorKind;
 import walkingkooka.spreadsheet.SpreadsheetFormula;
 import walkingkooka.spreadsheet.SpreadsheetId;
@@ -600,6 +601,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         this.evaluateAndValueCheck(
                 "=false()",
                 Boolean.FALSE
+        );
+    }
+
+    @Test
+    public void testFindFound() {
+        this.evaluateAndValueCheck(
+                "=find(\"abc\", \"before abc\")",
+                EXPRESSION_NUMBER_KIND.create(1 + "before ".length())
+        );
+    }
+
+    @Test
+    public void testFindNotFound() {
+        this.evaluateAndValueCheck(
+                "=find(\"Not found\", \"123\")",
+                SpreadsheetErrorKind.VALUE.setMessage("\"Not found\" not found in \"123\"")
         );
     }
 

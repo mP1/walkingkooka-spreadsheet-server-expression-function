@@ -88,6 +88,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 exact(),
                 exp(),
                 falseFunction(),
+                find(),
                 floor(),
                 formulaText(),
                 hex2bin(),
@@ -469,6 +470,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> falseFunction() {
         return BooleanExpressionFunctions.falseFunction();
+    }
+
+    /**
+     * {@see ObjectExpressionFunctionFind}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionEvaluationContext> find() {
+        return ObjectExpressionFunctionFind.INSTANCE;
     }
 
     /**
