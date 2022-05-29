@@ -30,9 +30,7 @@ import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
-import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
-import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -40,9 +38,7 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class NumberValueExpressionFunctionTest implements ExpressionFunctionTesting<NumberValueExpressionFunction, ExpressionNumber, SpreadsheetExpressionEvaluationContext> {
-
-    private final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.BIG_DECIMAL;
+public final class NumberExpressionFunctionNumberValueTest extends NumberExpressionFunctionTestCase<NumberExpressionFunctionNumberValue> {
 
     @Test
     public void testCustomDecimalSeparatorCustomGroupingSeparator() {
@@ -81,12 +77,12 @@ public final class NumberValueExpressionFunctionTest implements ExpressionFuncti
     }
 
     @Override
-    public NumberValueExpressionFunction createBiFunction() {
-        return NumberValueExpressionFunction.INSTANCE;
+    public NumberExpressionFunctionNumberValue createBiFunction() {
+        return NumberExpressionFunctionNumberValue.INSTANCE;
     }
 
     @Override
-    public SpreadsheetExpressionEvaluationContext createContext() {
+    final SpreadsheetExpressionEvaluationContext createContext(final ExpressionNumberKind kind) {
         return SpreadsheetExpressionEvaluationContexts.basic(
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
@@ -103,7 +99,7 @@ public final class NumberValueExpressionFunctionTest implements ExpressionFuncti
                         .set(SpreadsheetMetadataPropertyName.CELL_CHARACTER_WIDTH, 1)
                         .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
                         .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
-                        .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
+                        .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, kind)
                         .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                         .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
                         .set(SpreadsheetMetadataPropertyName.NUMBER_FORMAT_PATTERN, SpreadsheetPattern.parseNumberFormatPattern("#.###"))
@@ -119,7 +115,7 @@ public final class NumberValueExpressionFunctionTest implements ExpressionFuncti
     }
 
     @Override
-    public Class<NumberValueExpressionFunction> type() {
-        return NumberValueExpressionFunction.class;
+    public Class<NumberExpressionFunctionNumberValue> type() {
+        return NumberExpressionFunctionNumberValue.class;
     }
 }

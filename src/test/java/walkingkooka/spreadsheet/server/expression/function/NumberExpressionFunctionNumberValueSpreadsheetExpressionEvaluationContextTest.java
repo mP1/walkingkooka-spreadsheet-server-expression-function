@@ -22,7 +22,7 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 
 import java.math.MathContext;
 
-public final class NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContextTest implements SpreadsheetExpressionEvaluationContextTesting<NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext> {
+public final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContextTest implements SpreadsheetExpressionEvaluationContextTesting<NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext> {
 
     private final static String CURRENCY_SYMBOL = "AUD";
     private final static char DECIMAL_SEPARATOR = '/';
@@ -55,8 +55,8 @@ public final class NumberValueExpressionFunctionSpreadsheetExpressionEvaluationC
     }
 
     @Override
-    public NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext createContext() {
-        return NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext.with(
+    public NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext createContext() {
+        return NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.with(
                 DECIMAL_SEPARATOR,
                 GROUPING_SEPARATOR,
                 new FakeSpreadsheetExpressionEvaluationContext() {
@@ -145,7 +145,7 @@ public final class NumberValueExpressionFunctionSpreadsheetExpressionEvaluationC
     }
 
     @Override
-    public Class<NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext> type() {
-        return NumberValueExpressionFunctionSpreadsheetExpressionEvaluationContext.class;
+    public Class<NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext> type() {
+        return NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.class;
     }
 }
