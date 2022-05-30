@@ -21,12 +21,11 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
-import walkingkooka.tree.expression.function.ExpressionFunction;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class NumberExpressionFunctionTestCase<F extends ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext>> extends ExpressionFunctionTestCase<F, ExpressionNumber> {
+public abstract class NumberExpressionFunctionTestCase<F extends NumberExpressionFunction> extends ExpressionFunctionTestCase<F, ExpressionNumber> {
 
     NumberExpressionFunctionTestCase() {
         super();
