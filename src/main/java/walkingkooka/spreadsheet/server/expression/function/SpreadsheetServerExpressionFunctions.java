@@ -988,10 +988,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see StringExpressionFunctions#text}
+     * {@see StringExpressionFunctionText}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> text() {
-        return StringExpressionFunctions.text();
+        return StringExpressionFunctionText.INSTANCE;
     }
 
     /**
