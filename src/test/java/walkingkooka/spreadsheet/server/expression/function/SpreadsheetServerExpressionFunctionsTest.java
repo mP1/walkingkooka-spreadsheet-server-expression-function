@@ -17,6 +17,7 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.map.Maps;
@@ -28,7 +29,6 @@ import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.spreadsheet.SpreadsheetCell;
-import walkingkooka.spreadsheet.SpreadsheetError;
 import walkingkooka.spreadsheet.SpreadsheetErrorKind;
 import walkingkooka.spreadsheet.SpreadsheetFormula;
 import walkingkooka.spreadsheet.SpreadsheetId;
@@ -1482,10 +1482,43 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testText() {
-        this.evaluateAndFormattedCheck(
-                "=text(\"abc\")",
-                TextNode.text("abcabc")
+    public void testTextWithDate() {
+        this.evaluateAndValueCheck(
+                "=text(date(1999,12,31), \"yyyy mm dd\")",
+                "1999 12 31"
+        );
+    }
+
+    @Test
+    @Disabled("Waiting for Context#now https://github.com/mP1/walkingkooka-tree-expression-function-datetime/issues/66")
+    public void testTextWithDateTime() {
+        this.evaluateAndValueCheck(
+                "=text(datetime(1999,12,31,12,58,59), \"yyyy mm dd hh mm ss\")",
+                "1999 12 31 12 58 59"
+        );
+    }
+
+    @Test
+    public void testTextWithNumber() {
+        this.evaluateAndValueCheck(
+                "=text(123.5, \"$0000.0000$\")",
+                "$0123.5000$"
+        );
+    }
+
+    @Test
+    public void testTextWithString() {
+        this.evaluateAndValueCheck(
+                "=text(\"abc\", \"Ignored-pattern\")",
+                "abc"
+        );
+    }
+
+    @Test
+    public void testTextWithTime() {
+        this.evaluateAndValueCheck(
+                "=text(time(12,58,59), \"ss hh mm\")",
+                "59 12 58"
         );
     }
 
