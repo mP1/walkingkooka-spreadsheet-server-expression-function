@@ -66,8 +66,6 @@ final class UnformattedNumberExpressionFunction<T> implements ExpressionFunction
         return Sets.empty(); // dont want parameters to be prepared in any way.
     }
 
-    private Set<ExpressionFunctionKind> kinds;
-
     @Override
     public T apply(final List<Object> parameters,
                    final SpreadsheetExpressionEvaluationContext context) {
