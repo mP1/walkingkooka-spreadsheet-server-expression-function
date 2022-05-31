@@ -1103,6 +1103,15 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         );
     }
 
+
+    @Test
+    public void testNow() {
+        this.evaluateAndValueCheck(
+                "=now()",
+                NOW.get()
+        );
+    }
+
     @Test
     public void testNumberValue() {
         this.evaluateAndValueCheck(
