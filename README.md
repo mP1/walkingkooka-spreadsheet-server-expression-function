@@ -71,6 +71,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - exp()
 - false()
 - find()
+- fixed()
 - formulaText(),
 - hex2bin()
 - hex2dec()

@@ -90,6 +90,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 exp(),
                 falseFunction(),
                 find(),
+                fixed(),
                 floor(),
                 formulaText(),
                 hex2bin(),
@@ -479,6 +480,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionEvaluationContext> find() {
         return ObjectExpressionFunctionFind.INSTANCE;
+    }
+
+    /**
+     * {@see NumberExpressionFunctions#fixed()}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> fixed() {
+        return NumberExpressionFunctions.fixed();
     }
 
     /**
