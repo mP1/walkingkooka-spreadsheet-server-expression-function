@@ -858,6 +858,46 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsLogicalWithBooleanTrue() {
+        this.evaluateAndValueCheck(
+                "=isLogical(true())",
+                true
+        );
+    }
+
+    @Test
+    public void testIsLogicalWithBooleanFalse() {
+        this.evaluateAndValueCheck(
+                "=isLogical(false())",
+                true
+        );
+    }
+
+    @Test
+    public void testIsLogicalWithMissingCell() {
+        this.evaluateAndValueCheck(
+                "=isLogical(B2)",
+                false
+        );
+    }
+
+    @Test
+    public void testIsLogicalWithNumber() {
+        this.evaluateAndValueCheck(
+                "=isLogical(123)",
+                false
+        );
+    }
+
+    @Test
+    public void testIsLogicalWithString() {
+        this.evaluateAndValueCheck(
+                "=isLogical(\"abc\")",
+                false
+        );
+    }
+
+    @Test
     public void testIsNaWithError() {
         this.evaluateAndValueCheck(
                 "=isNa(1/0)",
