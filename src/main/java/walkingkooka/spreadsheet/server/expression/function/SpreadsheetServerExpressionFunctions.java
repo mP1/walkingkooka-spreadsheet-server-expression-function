@@ -37,6 +37,7 @@ import walkingkooka.tree.expression.function.stat.StatExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.function.Consumer;
 
@@ -122,6 +123,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 mod(),
                 month(),
                 not(),
+                now(),
                 numberValue(),
                 oct2bin(),
                 oct2dec(),
@@ -725,6 +727,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> not() {
         return BooleanExpressionFunctions.not();
+    }
+
+    /**
+     * {@see DateTimeExpressionFunctions#now}
+     */
+    public static ExpressionFunction<LocalDateTime, SpreadsheetExpressionEvaluationContext> now() {
+        return DateTimeExpressionFunctions.now();
     }
 
     /**

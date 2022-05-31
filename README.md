@@ -102,6 +102,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - mod()
 - month()
 - not()
+- now()
 - numberValue()
 - oct2bin()
 - oct2dec()
