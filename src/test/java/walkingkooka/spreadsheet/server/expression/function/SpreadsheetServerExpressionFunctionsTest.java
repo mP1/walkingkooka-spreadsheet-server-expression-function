@@ -83,7 +83,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     private final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.BIG_DECIMAL;
 
-    private final static Supplier<LocalDateTime> NOW = LocalDateTime::now;
+    private final static Supplier<LocalDateTime> NOW = () -> LocalDateTime.of(1999, 12, 31, 12, 58, 59);
 
     @Test
     public void testVisit() {
@@ -1552,10 +1552,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testToday() {
         this.evaluateAndValueCheck(
-                "=year(today())",
-                EXPRESSION_NUMBER_KIND.create(
-                        LocalDateTime.now().getYear()
-                )
+                "=today()",
+                NOW.get().toLocalDate()
         );
     }
 
