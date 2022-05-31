@@ -84,6 +84,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isErr(),
 - isError(),
 - isEven(),
+- isFormula()
 - isLogical()
 - isNa(),
 - isNonText(),
