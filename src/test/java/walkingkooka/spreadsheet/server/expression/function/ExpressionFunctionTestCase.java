@@ -29,12 +29,17 @@ import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 
+import java.time.LocalDateTime;
+import java.util.function.Supplier;
+
 public abstract class ExpressionFunctionTestCase<F extends ExpressionFunction<T, SpreadsheetExpressionEvaluationContext>, T> implements ExpressionFunctionTesting<F, T, SpreadsheetExpressionEvaluationContext>,
         ExpressionPurityTesting,
         TypeNameTesting<F>,
         ClassTesting2<F> {
 
     final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.DEFAULT;
+
+    final static Supplier<LocalDateTime> NOW = LocalDateTime::now;
 
     ExpressionFunctionTestCase() {
         super();

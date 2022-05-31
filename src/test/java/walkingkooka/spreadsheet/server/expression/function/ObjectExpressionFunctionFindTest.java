@@ -97,7 +97,8 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                 },
                 (r) -> {
                     throw new UnsupportedOperationException();
-                }
+                },
+                NOW
         );
     }
 

@@ -110,7 +110,8 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                 },
                 (r) -> {
                     throw new UnsupportedOperationException();
-                }
+                },
+                LocalDateTime::now
         );
     }
 

@@ -73,6 +73,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public final class SpreadsheetServerExpressionFunctionsTest implements PublicStaticHelperTesting<SpreadsheetServerExpressionFunctions> {
@@ -81,6 +82,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("http://server.example.com");
 
     private final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.BIG_DECIMAL;
+
+    private final static Supplier<LocalDateTime> NOW = LocalDateTime::now;
 
     @Test
     public void testVisit() {
@@ -1870,7 +1873,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                   final Optional<?> expectedValue,
                                   final Optional<TextNode> formatted) {
         final SpreadsheetEngine engine = SpreadsheetEngines.basic(
-                metadata
+                metadata,
+                NOW
         );
 
         final Map<String, ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
@@ -1910,7 +1914,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                     throw new UnsupportedOperationException();
                 },
                 repo,
-                SERVER_URL
+                SERVER_URL,
+                NOW
         );
 
         // save all the preload cells, these will contain references in the test cell.
