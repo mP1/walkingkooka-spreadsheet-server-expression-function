@@ -105,6 +105,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isErr(),
                 isError(),
                 isEven(),
+                isLogical(),
                 isNa(),
                 isNonText(),
                 isNumber(),
@@ -593,6 +594,16 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> isEven() {
         return NumberExpressionFunctions.isEven();
     }
+
+    /**
+     * {@see BooleanExpressionFunctions#isBoolean}
+     */
+    public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> isLogical() {
+        return IS_LOGICAL;
+    }
+
+    private final static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> IS_LOGICAL = BooleanExpressionFunctions.<SpreadsheetExpressionEvaluationContext>isBoolean()
+            .setName(FunctionExpressionName.with("isLogical"));
 
     /**
      * {@see SpreadsheetExpressionFunctions#isNa}
