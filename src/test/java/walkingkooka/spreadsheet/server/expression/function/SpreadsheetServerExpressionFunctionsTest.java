@@ -624,6 +624,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testFixedWithNumber() {
+        this.evaluateAndValueCheck(
+                "=fixed(123.456)",
+                "123.46"
+        );
+    }
+
+    @Test
+    public void testFixedWithNumberAndDecimals() {
+        this.evaluateAndValueCheck(
+                "=fixed(123.567, 1)",
+                "123.6"
+        );
+    }
+
+    @Test
+    public void testFixedWithNumberAndDecimalsAndCommas() {
+        this.evaluateAndValueCheck(
+                "=fixed(1234.567, 1, false())",
+                "1,234.6"
+        );
+    }
+
+    @Test
     public void testFloor() {
         this.evaluateAndValueCheck(
                 "=floor(1.8)",
