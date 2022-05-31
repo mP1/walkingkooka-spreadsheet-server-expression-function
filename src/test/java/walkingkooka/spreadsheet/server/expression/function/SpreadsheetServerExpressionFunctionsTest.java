@@ -858,6 +858,23 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIsFormulaWithCellWithFormula() {
+        this.evaluateAndValueCheck(
+                "=isFormula(B2)",
+                Maps.of("B2", "=1"),
+                true
+        );
+    }
+
+    @Test
+    public void testIsFormulaWithMissingCell() {
+        this.evaluateAndValueCheck(
+                "=isFormula(B2)",
+                false
+        );
+    }
+
+    @Test
     public void testIsLogicalWithBooleanTrue() {
         this.evaluateAndValueCheck(
                 "=isLogical(true())",
