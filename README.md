@@ -58,6 +58,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - cos()
 - count()
 - countA()
+- countBlank()
 - date()
 - day()
 - days()
