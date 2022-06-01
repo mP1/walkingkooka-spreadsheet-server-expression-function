@@ -79,6 +79,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 concat(),
                 cos(),
                 count(),
+                countA(),
                 date(),
                 day(),
                 days(),
@@ -395,6 +396,26 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return filter(
                 parameters,
                 p -> p instanceof ExpressionNumber | p instanceof LocalDate | p instanceof LocalDateTime | p instanceof LocalTime,
+                context
+        );
+    }
+
+    /**
+     * Counts the values present in the parameter values, skipping missing or null values.
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> countA() {
+        return COUNTA;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNTA = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
+            .mapParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
+            .setName(FunctionExpressionName.with("countA"));
+
+    private static List<Object> filterNonNull(final List<Object> parameters,
+                                            final SpreadsheetExpressionEvaluationContext context) {
+        return filter(
+                parameters,
+                p -> null != p,
                 context
         );
     }
