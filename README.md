@@ -56,6 +56,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - columns()
 - concat()
 - cos()
+- count()
 - date()
 - day()
 - days()

@@ -39,7 +39,10 @@ import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Collection of static factory methods for numerous {@link ExpressionFunction}.
@@ -75,6 +78,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 columns(),
                 concat(),
                 cos(),
+                count(),
                 date(),
                 day(),
                 days(),
@@ -374,6 +378,33 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> cos() {
         return NumberTrigonomteryExpressionFunctions.cos();
+    }
+
+    /**
+     * Counts the {@link ExpressionNumber} present in the parameter values
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> count() {
+        return COUNT;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNT = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
+            .mapParameters(SpreadsheetServerExpressionFunctions::filterNumbers);
+
+    private static List<Object> filterNumbers(final List<Object> parameters,
+                                              final SpreadsheetExpressionEvaluationContext context) {
+        return filter(
+                parameters,
+                p -> p instanceof ExpressionNumber | p instanceof LocalDate | p instanceof LocalDateTime | p instanceof LocalTime,
+                context
+        );
+    }
+
+    private static List<Object> filter(final List<Object> parameters,
+                                       final Predicate<Object> filter,
+                                       final SpreadsheetExpressionEvaluationContext context) {
+        return parameters.stream()
+                .filter(filter)
+                .collect(Collectors.toList());
     }
 
     /**
