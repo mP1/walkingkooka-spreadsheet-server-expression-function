@@ -80,6 +80,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 cos(),
                 count(),
                 countA(),
+                countBlank(),
                 date(),
                 day(),
                 days(),
@@ -417,6 +418,26 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return filter(
                 parameters,
                 p -> null != p,
+                context
+        );
+    }
+
+    /**
+     * Counts the missing values or cells or null values
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> countBlank() {
+        return COUNT_BLANK;
+    }
+
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNT_BLANK = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
+            .mapParameters(SpreadsheetServerExpressionFunctions::filterNull)
+            .setName(FunctionExpressionName.with("countBlank"));
+
+    private static List<Object> filterNull(final List<Object> parameters,
+                                           final SpreadsheetExpressionEvaluationContext context) {
+        return filter(
+                parameters,
+                p -> null == p,
                 context
         );
     }

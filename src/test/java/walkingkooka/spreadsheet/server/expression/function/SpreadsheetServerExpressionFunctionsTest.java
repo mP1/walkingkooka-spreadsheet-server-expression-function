@@ -605,6 +605,46 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCountBlankEmptyString() {
+        this.evaluateAndValueCheck(
+                "=countBlank(\"\")",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testCountBlankNotEmptyString() {
+        this.evaluateAndValueCheck(
+                "=countBlank(\"not-empty\")",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testCountBlankMissingCell() {
+        this.evaluateAndValueCheck(
+                "=countBlank(Z99)", // becomes a #REF which counts as a non empty cell
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testCountBlankRangeOfMixedValues() {
+        this.evaluateAndValueCheck(
+                "=countBlank(A2:A8)",
+                Maps.of(
+                        "A2", "=1", //
+                        "A3", "=today()", // LocalDate
+                        "A4", "=now()", // LocalDateTime
+                        "A5", "=\"2\"", // string with number
+                        "A6", "=\"abc\"", //
+                        "A8", "=\"\"" // not blank
+                ),
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
     public void testDate() {
         this.evaluateAndValueCheck(
                 "=date(1999, 12, 31)",
