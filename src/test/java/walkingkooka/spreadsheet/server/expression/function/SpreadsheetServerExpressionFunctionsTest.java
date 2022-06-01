@@ -472,6 +472,107 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCountWithDate() {
+        this.evaluateAndValueCheck(
+                "=count(date(1999, 12, 31))",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testCountWithDateTime() {
+        this.evaluateAndValueCheck(
+                "=count(now())",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testCountWithNumber() {
+        this.evaluateAndValueCheck(
+                "=count(1)",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testCountWithString() {
+        this.evaluateAndValueCheck(
+                "=count(\"abc\")",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testCountWithStringConvertible() {
+        this.evaluateAndValueCheck(
+                "=count(\"123\")",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testCountWithTime() {
+        this.evaluateAndValueCheck(
+                "=count(time(12, 58, 59))",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testCountWithRangeOfNumbers() {
+        this.evaluateAndValueCheck(
+                "=count(A2:A4)",
+                Maps.of(
+                        "A2", "=1",
+                        "A3", "=20",
+                        "A4", "=300"
+                ),
+                EXPRESSION_NUMBER_KIND.create(3)
+        );
+    }
+
+    @Test
+    public void testCountWithRangeIncludesEmptyCells() {
+        this.evaluateAndValueCheck(
+                "=count(A2:A4)",
+                Maps.of(
+                        "A2", "=1",
+                        "A4", "=300"
+                ),
+                EXPRESSION_NUMBER_KIND.create(2)
+        );
+    }
+
+    @Test
+    public void testCountWithRangeIncludesStrings() {
+        this.evaluateAndValueCheck(
+                "=count(A2:A4)",
+                Maps.of(
+                        "A2", "=1",
+                        "A3", "=\"2\"", // string not converted
+                        "A4", "=\"abc\""
+                ),
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testCountWithRangeMixed() {
+        this.evaluateAndValueCheck(
+                "=count(A2:A7)",
+                Maps.of(
+                        "A2", "=1", // 1
+                        "A3", "=today()", // 2 LocalDate
+                        "A4", "=now()", // 3 LocalDateTime
+                        "A5", "=\"2\"", // string with number - doesnt count
+                        "A6", "=\"abc\""
+                ),
+                EXPRESSION_NUMBER_KIND.create(3)
+        );
+    }
+
+    @Test
     public void testDate() {
         this.evaluateAndValueCheck(
                 "=date(1999, 12, 31)",
