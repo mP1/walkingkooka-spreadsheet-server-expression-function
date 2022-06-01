@@ -364,6 +364,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = UnformattedNumberExpressionFunction.with(
             StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
+                    .mapParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
             .setKinds(
                     Sets.of(
                             ExpressionFunctionKind.CONVERT_PARAMETERS,
