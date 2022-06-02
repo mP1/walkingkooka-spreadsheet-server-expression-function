@@ -725,6 +725,38 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testDollarWithNumberAndMissingDecimals() {
+        this.evaluateAndValueCheck(
+                "=dollar(123.4567)",
+                "$123.46"
+        );
+    }
+
+    @Test
+    public void testDollarWithStringAndMissingDecimals() {
+        this.evaluateAndValueCheck(
+                "=dollar(\"123.4567\")",
+                "$123.46"
+        );
+    }
+
+    @Test
+    public void testDollarWithNumberAndPlus2Decimals() {
+        this.evaluateAndValueCheck(
+                "=dollar(123.4567, 2)",
+                "$123.46"
+        );
+    }
+
+    @Test
+    public void testDollarWithNumberAndMinus2Decimals() {
+        this.evaluateAndValueCheck(
+                "=dollar(123.4567, -2)",
+                "$100"
+        );
+    }
+
+    @Test
     public void testE() {
         this.evaluateAndValueCheck(
                 "=e()",
