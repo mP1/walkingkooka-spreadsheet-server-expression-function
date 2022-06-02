@@ -1599,7 +1599,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testSearchCaseInsensitiveFound() {
+    public void testSearchCaseWithInsensitiveFound() {
         this.evaluateAndValueCheck(
                 "=search(\"bc\", \"ABCDE\")",
                 EXPRESSION_NUMBER_KIND.create(2)
@@ -1607,10 +1607,34 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testSearchCaseSensitiveFound() {
+    public void testSearchCaseWithSensitiveFound() {
         this.evaluateAndValueCheck(
                 "=search(\"bc\", \"abcde\")",
                 EXPRESSION_NUMBER_KIND.create(2)
+        );
+    }
+
+    @Test
+    public void testSearchCaseWithQuestionMark() {
+        this.evaluateAndValueCheck(
+                "=search(\"1?3\", \"before 123 after\")",
+                EXPRESSION_NUMBER_KIND.create(1 + "before ".length())
+        );
+    }
+
+    @Test
+    public void testSearchCaseWithQuestionMark2() {
+        this.evaluateAndValueCheck(
+                "=search(\"1?3\", \"before 111 123 after\")",
+                EXPRESSION_NUMBER_KIND.create(1 + "before 111 ".length())
+        );
+    }
+
+    @Test
+    public void testSearchCaseWithWildcard() {
+        this.evaluateAndValueCheck(
+                "=search(\"1*4\", \"before 1234 after\")",
+                EXPRESSION_NUMBER_KIND.create(1 + "before ".length())
         );
     }
 
