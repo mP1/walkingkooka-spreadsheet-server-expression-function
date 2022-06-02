@@ -39,10 +39,7 @@ import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Collection of static factory methods for numerous {@link ExpressionFunction}.
@@ -365,15 +362,15 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = UnformattedNumberExpressionFunction.with(
             StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
-                    .mapParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
-            .setKinds(
-                    Sets.of(
-                            ExpressionFunctionKind.CONVERT_PARAMETERS,
-                            ExpressionFunctionKind.EVALUATE_PARAMETERS,
-                            ExpressionFunctionKind.FLATTEN,
-                            ExpressionFunctionKind.RESOLVE_REFERENCES
+                    .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
+                    .setKinds(
+                            Sets.of(
+                                    ExpressionFunctionKind.CONVERT_PARAMETERS,
+                                    ExpressionFunctionKind.EVALUATE_PARAMETERS,
+                                    ExpressionFunctionKind.FLATTEN,
+                                    ExpressionFunctionKind.RESOLVE_REFERENCES
+                            )
                     )
-            )
     );
 
     /**
@@ -391,15 +388,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNT = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
-            .mapParameters(SpreadsheetServerExpressionFunctions::filterNumbers);
+            .filterParameters(SpreadsheetServerExpressionFunctions::filterNumbers);
 
-    private static List<Object> filterNumbers(final List<Object> parameters,
-                                              final SpreadsheetExpressionEvaluationContext context) {
-        return filter(
-                parameters,
-                p -> p instanceof ExpressionNumber | p instanceof LocalDate | p instanceof LocalDateTime | p instanceof LocalTime,
-                context
-        );
+    private static boolean filterNumbers(final Object value,
+                                         final SpreadsheetExpressionEvaluationContext context) {
+        return value instanceof ExpressionNumber |
+                value instanceof LocalDate |
+                value instanceof LocalDateTime |
+                value instanceof LocalTime;
     }
 
     /**
@@ -410,16 +406,12 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNTA = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
-            .mapParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
+            .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
             .setName(FunctionExpressionName.with("countA"));
 
-    private static List<Object> filterNonNull(final List<Object> parameters,
-                                            final SpreadsheetExpressionEvaluationContext context) {
-        return filter(
-                parameters,
-                p -> null != p,
-                context
-        );
+    private static boolean filterNonNull(final Object value,
+                                         final SpreadsheetExpressionEvaluationContext context) {
+        return null != value;
     }
 
     /**
@@ -430,24 +422,12 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNT_BLANK = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
-            .mapParameters(SpreadsheetServerExpressionFunctions::filterNull)
+            .filterParameters(SpreadsheetServerExpressionFunctions::filterNull)
             .setName(FunctionExpressionName.with("countBlank"));
 
-    private static List<Object> filterNull(final List<Object> parameters,
-                                           final SpreadsheetExpressionEvaluationContext context) {
-        return filter(
-                parameters,
-                p -> null == p,
-                context
-        );
-    }
-
-    private static List<Object> filter(final List<Object> parameters,
-                                       final Predicate<Object> filter,
-                                       final SpreadsheetExpressionEvaluationContext context) {
-        return parameters.stream()
-                .filter(filter)
-                .collect(Collectors.toList());
+    private static boolean filterNull(final Object value,
+                                         final SpreadsheetExpressionEvaluationContext context) {
+        return null == value;
     }
 
     /**
