@@ -87,6 +87,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 dec2oct(),
                 degrees(),
                 delta(),
+                dollar(),
                 e(),
                 even(),
                 exact(),
@@ -491,6 +492,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> delta() {
         return EngineeringExpressionFunctions.delta();
+    }
+
+    /**
+     * {@see StringExpressionFunctionDollar}
+     */
+    public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> dollar() {
+        return StringExpressionFunctionDollar.INSTANCE;
     }
 
     /**

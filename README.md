@@ -68,6 +68,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - decimal()
 - degrees(),
 - delta(),
+- dollar()
 - e(),
 - even()
 - exact()
