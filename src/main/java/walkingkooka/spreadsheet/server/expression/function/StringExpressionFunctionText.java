@@ -41,7 +41,6 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
 
     private StringExpressionFunctionText() {
         super("text");
-        this.function = StringExpressionFunctions.text();
     }
 
     @Override
@@ -90,6 +89,4 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
                         context
                 );
     }
-
-    private final ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> function;
 }
