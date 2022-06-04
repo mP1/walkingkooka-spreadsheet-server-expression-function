@@ -82,7 +82,7 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
     }
 
     @Override
-    final SpreadsheetExpressionEvaluationContext createContext(final ExpressionNumberKind kind) {
+    SpreadsheetExpressionEvaluationContext createContext(final ExpressionNumberKind kind) {
         return SpreadsheetExpressionEvaluationContexts.basic(
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
