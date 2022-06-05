@@ -23,8 +23,10 @@ import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.spreadsheet.SpreadsheetCell;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
+import walkingkooka.spreadsheet.parser.SpreadsheetParserToken;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.text.cursor.TextCursor;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumberKind;
@@ -73,6 +75,11 @@ final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationCo
     @Override
     public Optional<SpreadsheetCell> loadCell(final SpreadsheetCellReference reference) {
         return this.context.loadCell(reference);
+    }
+
+    @Override
+    public SpreadsheetParserToken parseFormula(final TextCursor cursor) {
+        return this.context.parseFormula(cursor);
     }
 
     @Override
