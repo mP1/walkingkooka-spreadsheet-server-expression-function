@@ -142,6 +142,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - sqrt()
 - substitute()
 - sum(),
+- sumIf(),
 - switch()
 - t()
 - tan()

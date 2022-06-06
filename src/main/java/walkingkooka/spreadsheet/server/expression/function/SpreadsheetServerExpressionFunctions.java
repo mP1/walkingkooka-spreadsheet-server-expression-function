@@ -163,6 +163,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 sqrt(),
                 substitute(),
                 sum(),
+                sumIf(),
                 switchFunction(),
                 t(),
                 tan(),
@@ -1063,6 +1064,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> sum() {
         return StatExpressionFunctions.sum();
+    }
+
+    /**
+     * {@see NumberExpressionFunctionIf#sumIf}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> sumIf() {
+        return NumberExpressionFunctionIf.sumIf();
     }
     
     /**

@@ -47,6 +47,14 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
         );
     }
 
+    static NumberExpressionFunctionIf sumIf() {
+        return new NumberExpressionFunctionIf(
+                "sumIf",
+                SpreadsheetServerExpressionFunctions.sum(),
+                ExpressionFunctionParameter.VALUE
+        );
+    }
+
     private final static ExpressionFunctionParameter<Object> CRITERIA = ExpressionFunctionParameterName.with("criteria")
             .required(Object.class);
 
