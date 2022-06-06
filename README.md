@@ -108,6 +108,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - maxIf(),
 - mid(),
 - min(),
+- minIf(),
 - minutes()
 - mod()
 - month()

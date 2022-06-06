@@ -1398,6 +1398,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testMinIf() {
+        this.evaluateAndValueCheck(
+                "=minIf(A2:A4, \">=19\")",
+                Maps.of(
+                        "A2", "=1",
+                        "A3", "=20",
+                        "A4", "=\"400\""
+                ),
+                EXPRESSION_NUMBER_KIND.create(20)
+        );
+    }
+
+    @Test
     public void testMinute() {
         this.evaluateAndValueCheck(
                 "=minute(time(12, 58, 59))",

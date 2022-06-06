@@ -63,6 +63,14 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
         );
     }
 
+    static NumberExpressionFunctionIf minIf() {
+        return new NumberExpressionFunctionIf(
+                "minIf",
+                SpreadsheetServerExpressionFunctions.min(),
+                ExpressionFunctionParameter.VALUE
+        );
+    }
+
     static NumberExpressionFunctionIf sumIf() {
         return new NumberExpressionFunctionIf(
                 "sumIf",

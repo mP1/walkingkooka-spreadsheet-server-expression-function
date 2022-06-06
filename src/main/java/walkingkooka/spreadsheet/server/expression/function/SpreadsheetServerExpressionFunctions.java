@@ -129,6 +129,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 maxIf(),
                 mid(),
                 min(),
+                minIf(),
                 minute(),
                 mod(),
                 month(),
@@ -813,6 +814,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> min() {
         return StatExpressionFunctions.min();
+    }
+
+    /**
+     * {@see NumberExpressionFunctionIf.minIf}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> minIf() {
+        return NumberExpressionFunctionIf.minIf();
     }
 
     /**
