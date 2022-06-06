@@ -668,7 +668,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         "A2", "=1", //
                         "A3", "=2", //
                         "A4", "=now()", // will be > 100
-                        "A5", "=\"200\"" // string with number
+                        "A5", "=\"200\"" // string are ignored
                 ),
                 EXPRESSION_NUMBER_KIND.one()
         );
