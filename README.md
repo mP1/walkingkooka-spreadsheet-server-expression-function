@@ -105,6 +105,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - log10(),
 - lower(),
 - max(),
+- maxIf(),
 - mid(),
 - min(),
 - minutes()

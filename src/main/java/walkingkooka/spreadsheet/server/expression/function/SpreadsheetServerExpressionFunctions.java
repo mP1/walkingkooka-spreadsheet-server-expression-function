@@ -126,6 +126,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 log10(),
                 lower(),
                 max(),
+                maxIf(),
                 mid(),
                 min(),
                 minute(),
@@ -791,6 +792,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> max() {
         return StatExpressionFunctions.max();
+    }
+
+    /**
+     * {@see NumberExpressionFunctionIf.maxIf}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> maxIf() {
+        return NumberExpressionFunctionIf.maxIf();
     }
 
     /**

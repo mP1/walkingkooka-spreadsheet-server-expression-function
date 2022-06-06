@@ -1364,6 +1364,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testMaxIf() {
+        this.evaluateAndValueCheck(
+                "=maxIf(A2:A4, \">=19\")",
+                Maps.of(
+                        "A2", "=1",
+                        "A3", "=20",
+                        "A4", "=\"400\""
+                ),
+                EXPRESSION_NUMBER_KIND.create(400)
+        );
+    }
+
+    @Test
     public void testMid() {
         this.evaluateAndValueCheck(
                 "=mid(\"apple\", 2, 3)",
