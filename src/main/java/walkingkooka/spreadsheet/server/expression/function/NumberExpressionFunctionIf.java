@@ -39,6 +39,14 @@ import java.util.stream.Collectors;
  */
 final class NumberExpressionFunctionIf extends NumberExpressionFunction {
 
+    static NumberExpressionFunctionIf averageIf() {
+        return new NumberExpressionFunctionIf(
+                "averageIf",
+                SpreadsheetServerExpressionFunctions.average(),
+                ExpressionFunctionParameter.VALUE
+        );
+    }
+
     static NumberExpressionFunctionIf countIf() {
         return new NumberExpressionFunctionIf(
                 "countIf",
