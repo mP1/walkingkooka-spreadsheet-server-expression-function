@@ -88,11 +88,16 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
                 context
         );
 
-        return this.function.apply(
-                this.filterParameters(
-                        value,
-                        criteria,
-                        context
+        final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function = this.function;
+
+        return function.apply(
+                context.prepareParameters(
+                        Cast.to(function),
+                        this.filterParameters(
+                                value,
+                                criteria,
+                                context
+                        )
                 ),
                 context
         );
