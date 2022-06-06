@@ -20,10 +20,6 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
-import walkingkooka.text.CaseSensitivity;
-import walkingkooka.text.cursor.TextCursor;
-import walkingkooka.text.cursor.TextCursors;
-import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -34,10 +30,13 @@ import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * A {@link NumberExpressionFunction} that wraps another function, using the 2nd parameter as a condition to filter the first parameter
+ * which may be a value or a {@link List} of values from a range etc.
+ */
 final class NumberExpressionFunctionIf extends NumberExpressionFunction {
 
     static NumberExpressionFunctionIf countIf() {
@@ -84,7 +83,7 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
                                   final SpreadsheetExpressionEvaluationContext context) {
         final Object value = ExpressionFunctionParameter.VALUE.getOrFail(parameters, 0);
 
-        final Predicate<Object> criteria = this.criteria(
+        final Predicate<Object> criteria = IfFunctionPredicate.with(
                 CRITERIA.getOrFail(parameters, 1),
                 context
         );
@@ -96,155 +95,6 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
                         context
                 ),
                 context
-        );
-    }
-
-    /**
-     * If the value is text is maybe criteria and it starts with an operator then an binary expression is constructed,
-     * otherwise the value will be the RHS of an equals expression.
-     */
-    private Predicate<Object> criteria(final Object value,
-                                       final SpreadsheetExpressionEvaluationContext context) {
-        return context.isText(value) ?
-                this.filterExpression(
-                        context.convertOrFail(value, String.class),
-                        context
-                ) :
-                this.equalsExpression(value, context);
-    }
-
-    /**
-     * First tests if the {@link String} begins with one of the operators and then parses the remainder as an
-     * {@link Expression}.
-     */
-    private Predicate<Object> filterExpression(final String value,
-                                               final SpreadsheetExpressionEvaluationContext context) {
-        return value.startsWith("<>") ?
-                this.notEqualsExpression(
-                        value.substring(2),
-                        context
-                ) :
-                value.startsWith("<=") ?
-                        this.lessThanEquals(
-                                value.substring(2),
-                                context
-                        ) :
-                        value.startsWith("<") ?
-                                this.lessThan(
-                                        value.substring(1),
-                                        context
-                                ) :
-                                value.startsWith(">=") ?
-                                        this.greaterThanEquals(
-                                                value.substring(2),
-                                                context
-                                        ) :
-                                        value.startsWith(">") ?
-                                                this.greaterThan(
-                                                        value.substring(1),
-                                                        context
-                                                ) :
-                                                value.startsWith("=") ?
-                                                        this.equalsExpression(
-                                                                value.substring(1),
-                                                                context
-                                                        ) :
-                                                        this.equalsString(value, context);
-    }
-
-    private Predicate<Object> notEqualsExpression(final String value,
-                                                  final SpreadsheetExpressionEvaluationContext context) {
-        return this.criteriaFilter(
-                value,
-                Expression::notEquals,
-                context
-        );
-    }
-
-    private Predicate<Object> lessThanEquals(final String value,
-                                             final SpreadsheetExpressionEvaluationContext context) {
-        return this.criteriaFilter(
-                value,
-                Expression::lessThanEquals,
-                context
-        );
-    }
-
-    private Predicate<Object> lessThan(final String value,
-                                       final SpreadsheetExpressionEvaluationContext context) {
-        return this.criteriaFilter(
-                value,
-                Expression::lessThan,
-                context
-        );
-    }
-
-    private Predicate<Object> greaterThanEquals(final String value,
-                                                final SpreadsheetExpressionEvaluationContext context) {
-        return this.criteriaFilter(
-                value,
-                Expression::greaterThanEquals,
-                context
-        );
-    }
-
-    private Predicate<Object> greaterThan(final String value,
-                                          final SpreadsheetExpressionEvaluationContext context) {
-        return this.criteriaFilter(
-                value,
-                Expression::greaterThan,
-                context
-        );
-    }
-
-    private Predicate<Object> equalsExpression(final String value,
-                                               final SpreadsheetExpressionEvaluationContext context) {
-        return this.criteriaFilter(
-                value,
-                Expression::equalsExpression,
-                context
-        );
-    }
-
-    private Predicate<Object> criteriaFilter(final String value,
-                                             final BiFunction<Expression, Expression, Expression> condition,
-                                             final SpreadsheetExpressionEvaluationContext context) {
-
-        return (v) -> (Boolean) context.evaluate(
-                condition.apply(
-                        Expression.value(v),
-                        context.parseExpression(
-                                TextCursors.charSequence(value)
-                        ).toExpression(context)
-                                .orElse(null)
-                )
-        );
-    }
-
-    /**
-     * Creates a {@link Predicate} which will accept the value and testing that using the glob pattern {@link String} value.
-     */
-    private Predicate<Object> equalsString(final String expression,
-                                           final SpreadsheetExpressionEvaluationContext context) {
-        return (v) ->
-                CaseSensitivity.SENSITIVE.globPattern(expression, '~')
-                        .test(
-                                context.convertOrFail(
-                                        context.evaluate(
-                                                Expression.value(v)
-                                        ),
-                                        String.class
-                                )
-                        );
-    }
-
-    private Predicate<Object> equalsExpression(final Object value,
-                                               final SpreadsheetExpressionEvaluationContext context) {
-        return (v) -> (Boolean) context.evaluate(
-                Expression.equalsExpression(
-                        Expression.value(v),
-                        Expression.value(value)
-                )
         );
     }
 
