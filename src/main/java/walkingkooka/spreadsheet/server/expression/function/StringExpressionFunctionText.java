@@ -20,11 +20,9 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
-import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
-import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.util.List;
 import java.util.Set;
