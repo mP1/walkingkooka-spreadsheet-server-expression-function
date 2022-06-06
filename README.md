@@ -39,6 +39,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - asin()
 - atan()
 - average()
+- averageIf()
 - base()
 - bin2dec()
 - bin2hex()

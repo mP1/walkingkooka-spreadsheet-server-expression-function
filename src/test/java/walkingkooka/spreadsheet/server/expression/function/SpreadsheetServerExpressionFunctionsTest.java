@@ -246,6 +246,19 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testAverageIfSomeValuesFiltered() {
+        this.evaluateAndValueCheck(
+                "=averageIf(A2:A4, \">99+1\")",
+                Maps.of(
+                        "A2", "=1", //
+                        "A3", "=200", //
+                        "A4", "=\"400\"" // string with number converted
+                ),
+                EXPRESSION_NUMBER_KIND.create(600 / 2)
+        );
+    }
+
+    @Test
     public void testBase() {
         this.evaluateAndValueCheck(
                 "=base(13, 2)",

@@ -58,6 +58,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 asin(),
                 atan(),
                 average(),
+                averageIf(),
                 base(),
                 bin2dec(),
                 bin2hex(),
@@ -234,6 +235,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> average() {
         return StatExpressionFunctions.average();
+    }
+
+    /**
+     * {@see NumberExpressionFunctionIf#averageIf}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> averageIf() {
+        return NumberExpressionFunctionIf.averageIf();
     }
 
     /**
