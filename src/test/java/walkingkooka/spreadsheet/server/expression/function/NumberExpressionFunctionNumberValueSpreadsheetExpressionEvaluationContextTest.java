@@ -55,7 +55,7 @@ public final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvalu
     }
 
     @Override
-    public void testParseFormulaNullFails() {
+    public void testParseExpressionNullFails() {
         throw new UnsupportedOperationException();
     }
 
