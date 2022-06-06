@@ -55,6 +55,14 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
         );
     }
 
+    static NumberExpressionFunctionIf maxIf() {
+        return new NumberExpressionFunctionIf(
+                "maxIf",
+                SpreadsheetServerExpressionFunctions.max(),
+                ExpressionFunctionParameter.VALUE
+        );
+    }
+
     static NumberExpressionFunctionIf sumIf() {
         return new NumberExpressionFunctionIf(
                 "sumIf",
