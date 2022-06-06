@@ -31,7 +31,6 @@ import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 
 import java.math.MathContext;
 import java.math.RoundingMode;

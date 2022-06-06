@@ -16,12 +16,8 @@
  */
 package walkingkooka.spreadsheet.server.expression.function;
 
-import walkingkooka.Either;
-import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumberKind;
-
-import java.util.Locale;
 
 public abstract class StringExpressionFunctionTestCase<F extends StringExpressionFunction> extends ExpressionFunctionTestCase<F, String> {
 

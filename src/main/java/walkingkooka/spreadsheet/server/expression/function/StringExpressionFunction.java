@@ -17,17 +17,10 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
-import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
-import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
-
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * Base class for many {@link ExpressionFunction} that returns {@link String}.

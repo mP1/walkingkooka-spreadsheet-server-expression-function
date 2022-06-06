@@ -17,7 +17,6 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
-import walkingkooka.Cast;
 import walkingkooka.reflect.ClassTesting2;
 import walkingkooka.reflect.JavaVisibility;
 

@@ -19,14 +19,8 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
-import walkingkooka.tree.expression.ExpressionEvaluationContext;
-import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
-
-import java.util.EnumSet;
-import java.util.Set;
 
 /**
  * Common abstract base class for all Object functions in this package.
