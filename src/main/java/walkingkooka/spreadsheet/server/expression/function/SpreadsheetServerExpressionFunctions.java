@@ -78,6 +78,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 count(),
                 countA(),
                 countBlank(),
+                countIf(),
                 date(),
                 day(),
                 days(),
@@ -429,6 +430,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private static boolean filterNull(final Object value,
                                          final SpreadsheetExpressionEvaluationContext context) {
         return null == value;
+    }
+
+    /**
+     * {@see NumberExpressionFunctionIf#countIf}
+     */
+    public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> countIf() {
+        return NumberExpressionFunctionIf.countIf();
     }
 
     /**

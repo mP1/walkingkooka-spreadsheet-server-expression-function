@@ -645,6 +645,36 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testCountIfOne() {
+        this.evaluateAndValueCheck(
+                "=countIf(123, 123)",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
+    public void testCountIfZero() {
+        this.evaluateAndValueCheck(
+                "=countIf(123, 456)",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testCountIfSomeValuesFiltered() {
+        this.evaluateAndValueCheck(
+                "=countIf(A2:A5, \">99+1\")",
+                Maps.of(
+                        "A2", "=1", //
+                        "A3", "=2", //
+                        "A4", "=now()", // will be > 100
+                        "A5", "=\"200\"" // string with number
+                ),
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
+    @Test
     public void testDate() {
         this.evaluateAndValueCheck(
                 "=date(1999, 12, 31)",
