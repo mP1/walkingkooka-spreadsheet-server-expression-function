@@ -1794,6 +1794,35 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSumIfOne() {
+        this.evaluateAndValueCheck(
+                "=sumIf(123, 123)",
+                EXPRESSION_NUMBER_KIND.create(123)
+        );
+    }
+
+    @Test
+    public void testSumIfZero() {
+        this.evaluateAndValueCheck(
+                "=sumIf(123, 456)",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testSumIfSomeValuesFiltered() {
+        this.evaluateAndValueCheck(
+                "=sumIf(A2:A4, \">99+1\")",
+                Maps.of(
+                        "A2", "=1", //
+                        "A3", "=200", //
+                        "A4", "=\"400\"" // string with number converted
+                ),
+                EXPRESSION_NUMBER_KIND.create(600)
+        );
+    }
+
+    @Test
     public void testSwitchFirst() {
         this.evaluateAndValueCheck(
                 "=switch(1, 1, \"One\", 2, \"Two\", 3, 333)",

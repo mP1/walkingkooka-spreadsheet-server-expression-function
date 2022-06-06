@@ -81,6 +81,45 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
         );
     }
 
+    // sumIf.........................................................................................................
+
+    @Test
+    public void testSumIf() {
+        this.sumIfAndCheck(
+                Lists.of(
+                        1,
+                        2
+                ),
+                1,
+                1
+        );
+    }
+
+    @Test
+    public void testSumIfHalfFiltered() {
+        this.sumIfAndCheck(
+                Lists.of(
+                        1,
+                        2,
+                        100,
+                        200
+                ),
+                "> 80 + 10",
+                100 + 200
+        );
+    }
+
+    private void sumIfAndCheck(final List<Object> values,
+                                 final Object condition,
+                                 final Number expected) {
+        this.applyIfAndCheck(
+                NumberExpressionFunctionIf.sumIf(),
+                values,
+                condition,
+                expected
+        );
+    }
+
     // NumberExpressionFunctionIf......................................................................................
 
     private void applyIfAndCheck(final NumberExpressionFunctionIf function,
