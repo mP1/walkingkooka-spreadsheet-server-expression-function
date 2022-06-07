@@ -42,40 +42,35 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
     static NumberExpressionFunctionIf averageIf() {
         return new NumberExpressionFunctionIf(
                 "averageIf",
-                SpreadsheetServerExpressionFunctions.average(),
-                ExpressionFunctionParameter.VALUE
+                SpreadsheetServerExpressionFunctions.average()
         );
     }
 
     static NumberExpressionFunctionIf countIf() {
         return new NumberExpressionFunctionIf(
                 "countIf",
-                SpreadsheetServerExpressionFunctions.count(),
-                ExpressionFunctionParameter.VALUE
+                SpreadsheetServerExpressionFunctions.count()
         );
     }
 
     static NumberExpressionFunctionIf maxIf() {
         return new NumberExpressionFunctionIf(
                 "maxIf",
-                SpreadsheetServerExpressionFunctions.max(),
-                ExpressionFunctionParameter.VALUE
+                SpreadsheetServerExpressionFunctions.max()
         );
     }
 
     static NumberExpressionFunctionIf minIf() {
         return new NumberExpressionFunctionIf(
                 "minIf",
-                SpreadsheetServerExpressionFunctions.min(),
-                ExpressionFunctionParameter.VALUE
+                SpreadsheetServerExpressionFunctions.min()
         );
     }
 
     static NumberExpressionFunctionIf sumIf() {
         return new NumberExpressionFunctionIf(
                 "sumIf",
-                SpreadsheetServerExpressionFunctions.sum(),
-                ExpressionFunctionParameter.VALUE
+                SpreadsheetServerExpressionFunctions.sum()
         );
     }
 
@@ -83,15 +78,9 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
             .required(Object.class);
 
     private NumberExpressionFunctionIf(final String name,
-                                       final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function,
-                                       final ExpressionFunctionParameter<?> value) {
+                                       final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function) {
         super(name);
         this.function = function;
-
-        this.parameters = Lists.of(
-                value,
-                CRITERIA
-        );
     }
 
     @Override
@@ -105,10 +94,13 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
 
     @Override
     public List<ExpressionFunctionParameter<?>> parameters() {
-        return this.parameters;
+        return PARAMETERS;
     }
 
-    private final List<ExpressionFunctionParameter<?>> parameters;
+    private final List<ExpressionFunctionParameter<?>> PARAMETERS = Lists.of(
+            ExpressionFunctionParameter.VALUE,
+            CRITERIA
+    );
 
     @Override
     public ExpressionNumber apply(final List<Object> parameters,
