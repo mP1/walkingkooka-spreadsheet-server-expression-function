@@ -233,12 +233,6 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
                     );
                 }
 
-//                if(Object.class == target) {
-//                    return this.successfulConversion(
-//                            value,
-//                            target
-//                    );
-//                }
                 return this.failConversion(value, target);
             }
 
