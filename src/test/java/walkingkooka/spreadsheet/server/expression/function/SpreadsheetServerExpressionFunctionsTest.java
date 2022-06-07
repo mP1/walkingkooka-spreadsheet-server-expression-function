@@ -79,7 +79,7 @@ import java.util.stream.Collectors;
 public final class SpreadsheetServerExpressionFunctionsTest implements PublicStaticHelperTesting<SpreadsheetServerExpressionFunctions> {
 
     private final static Locale LOCALE = Locale.forLanguageTag("EN-AU");
-    private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("http://server.example.com");
+    private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("https://server.example.com");
 
     private final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.BIG_DECIMAL;
 
