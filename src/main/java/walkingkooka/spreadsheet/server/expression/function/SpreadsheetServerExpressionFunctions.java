@@ -1170,7 +1170,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      * {@see BooleanExpressionFunctions#trueFunction}
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> trueFunction() {
-        return BooleanExpressionFunctions.<SpreadsheetExpressionEvaluationContext>trueFunction();
+        return BooleanExpressionFunctions.trueFunction();
     }
 
     /**
