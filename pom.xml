@@ -9,7 +9,7 @@
   <packaging>jar</packaging>
 
   <name>walkingkooka-spreadsheet-server-expression-function</name>
-  <url>http://www.github.com/mP1/walkingkooka-spreadsheet-server-expression-function</url>
+  <url>https://www.github.com/mP1/walkingkooka-spreadsheet-server-expression-function</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
