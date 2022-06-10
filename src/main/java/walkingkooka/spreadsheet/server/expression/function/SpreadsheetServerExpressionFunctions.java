@@ -105,6 +105,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 hour(),
                 ifFunction(),
                 ifs(),
+                indirect(),
                 intFunction(),
                 isBlank(),
                 isDate(),
@@ -627,7 +628,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<Object, SpreadsheetExpressionEvaluationContext> ifs() {
         return BooleanExpressionFunctions.ifs();
     }
-    
+
+    /**
+     * {@see SpreadsheetExpressionFunctions#indirect}
+     */
+    public static ExpressionFunction<SpreadsheetCellReference, SpreadsheetExpressionEvaluationContext> indirect() {
+        return SpreadsheetExpressionFunctions.indirect();
+    }
+
     /**
      * {@see NumberExpressionFunctions#intFunction}
      */
