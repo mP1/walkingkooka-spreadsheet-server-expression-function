@@ -1001,6 +1001,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testIndirect() {
+        this.evaluateAndValueCheck(
+                "=indirect(\"Z99\")",
+                SpreadsheetSelection.parseCell("Z99")
+        );
+    }
+
+    @Test
     public void testInt() {
         this.evaluateAndValueCheck(
                 "=int(1.8)",

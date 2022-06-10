@@ -86,6 +86,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - int()
 - if()
 - ifs()
+- indirect()
 - isBlank(),
 - isErr(),
 - isError(),
