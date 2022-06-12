@@ -59,7 +59,10 @@ import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.TextNode;
+import walkingkooka.tree.text.TextStyle;
+import walkingkooka.tree.text.TextStylePropertyName;
 
 import java.lang.reflect.Method;
 import java.math.MathContext;
@@ -2281,7 +2284,12 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
                 .set(SpreadsheetMetadataPropertyName.NUMBER_FORMAT_PATTERN, SpreadsheetPattern.parseNumberFormatPattern("#.###"))
                 .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@@"))
-                .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
+                .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20)
+                .set(
+                        SpreadsheetMetadataPropertyName.STYLE,
+                        TextStyle.EMPTY.set(TextStylePropertyName.WIDTH, Length.pixel(50.0))
+                                .set(TextStylePropertyName.HEIGHT, Length.pixel(50.0))
+                );
     }
 
     private SpreadsheetMetadata metadataWithStrangeNumberFormatPattern() {
