@@ -20,6 +20,7 @@ package walkingkooka.spreadsheet.server.expression.function;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
+import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
@@ -38,6 +39,7 @@ import walkingkooka.spreadsheet.engine.SpreadsheetEngineContext;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContexts;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
+import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
@@ -71,6 +73,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -2391,6 +2394,57 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                     .collect(Collectors.joining("\n"))
             );
         }
+    }
+
+    // isPure..........................................................................................................
+
+    // NOW()
+    // TODAY()
+    // RAND()
+    // RANDBETWEEN()
+    // OFFSET()
+    // INDIRECT()
+    // CELL() // depends on arguments
+    // INFO() // depends on arguments
+    @Test
+    public void testIsPure() {
+        final SpreadsheetExpressionEvaluationContext context = SpreadsheetExpressionEvaluationContexts.fake();
+
+        final List<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> functions = Lists.array();
+        SpreadsheetServerExpressionFunctions.visit(functions::add);
+
+        final List<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> pureFunctions = Lists.array();
+
+        functions.forEach(f -> {
+            final boolean pure;
+
+            final FunctionExpressionName name = f.name();
+
+            switch(name.value().toLowerCase()) {
+                case "now":
+                case "today":
+                case "rand":
+                case "randbetween":
+                case "offset":
+                case "cell":
+                case "info":
+                    pure = false;
+                    break;
+                default:
+                    pure = true;
+                    break;
+            }
+
+            if(f.isPure(context) != pure) {
+                pureFunctions.add(f);
+            }
+        });
+
+        this.checkEquals(
+                Lists.empty(),
+                pureFunctions,
+                () -> "functions"
+        );
     }
 
     // PublicStaticHelperTesting........................................................................................
