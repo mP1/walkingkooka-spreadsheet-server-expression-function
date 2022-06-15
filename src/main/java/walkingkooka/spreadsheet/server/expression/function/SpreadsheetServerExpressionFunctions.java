@@ -188,7 +188,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 weekNum(),
                 year(),
                 xor()
-        ).forEach(functions::accept);
+        ).forEach(functions);
     }
 
     /**
