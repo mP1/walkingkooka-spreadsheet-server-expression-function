@@ -2307,8 +2307,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                   final Optional<?> expectedValue,
                                   final Optional<TextNode> formatted) {
         final SpreadsheetEngine engine = SpreadsheetEngines.basic(
-                metadata,
-                NOW
+                metadata
         );
 
         final Map<String, ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
