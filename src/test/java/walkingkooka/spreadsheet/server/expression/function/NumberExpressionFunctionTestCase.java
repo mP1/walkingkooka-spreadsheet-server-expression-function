@@ -35,14 +35,16 @@ public abstract class NumberExpressionFunctionTestCase<F extends NumberExpressio
     public final void applyAndCheck2(final F function,
                                      final List<Object> parameters,
                                      final ExpressionNumber result) {
-        this.applyAndCheck2(
-                function,
-                parameters.stream()
-                        .map(i -> EXPRESSION_NUMBER_KIND.create((Number) i))
-                        .collect(Collectors.toList()),
-                this.createContext(),
-                result
-        );
+        for(final ExpressionNumberKind kind : ExpressionNumberKind.values()) {
+            this.applyAndCheck2(
+                    function,
+                    parameters.stream()
+                            .map(i -> kind.create((Number) i))
+                            .collect(Collectors.toList()),
+                    this.createContext(),
+                    result.setKind(kind)
+            );
+        }
     }
 
     @Override
