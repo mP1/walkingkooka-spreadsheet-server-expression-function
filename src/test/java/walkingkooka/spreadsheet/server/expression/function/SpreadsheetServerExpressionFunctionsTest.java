@@ -2123,18 +2123,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     @Test
     public void testValueWithInvalidString() {
-        String message = null;
-
-        try {
-            final Object object = SpreadsheetErrorKind.VALUE.setMessage("Ignored");
-            final ExpressionNumber ignore = (ExpressionNumber) object;
-        } catch (final ClassCastException expected) {
-            message = expected.getMessage();
-        }
-
         this.evaluateAndValueCheck(
                 "=value(\"abc\")",
-                SpreadsheetErrorKind.VALUE.setMessage(message)
+                SpreadsheetErrorKind.VALUE.setMessage("Failed to convert SpreadsheetError to ExpressionNumber")
         );
     }
 
