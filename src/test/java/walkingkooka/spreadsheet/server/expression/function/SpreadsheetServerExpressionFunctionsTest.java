@@ -1322,6 +1322,30 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testLetOnlyStringLiteral() {
+        this.evaluateAndValueCheck(
+                "=let(\"hello\")",
+                "hello"
+        );
+    }
+
+    @Test
+    public void testLetWithBackReferences() {
+        this.evaluateAndValueCheck(
+                "=let(x, 2, x * 3)",
+                EXPRESSION_NUMBER_KIND.create(2 * 3)
+        );
+    }
+
+    @Test
+    public void testLetWithBackReferences2() {
+        this.evaluateAndValueCheck(
+                "=let(x, 2, y, 3, x * y * x * y)",
+                EXPRESSION_NUMBER_KIND.create(2 * 3 * 2 * 3)
+        );
+    }
+
+    @Test
     public void testLn() {
         this.evaluateAndValueCheck(
                 "=ln(2)",

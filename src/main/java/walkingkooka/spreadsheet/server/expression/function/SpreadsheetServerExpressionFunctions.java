@@ -122,6 +122,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isText(),
                 left(),
                 len(),
+                let(),
                 ln(),
                 log(),
                 log10(),
@@ -762,6 +763,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
             StringExpressionFunctions.stringLength(),
             "len"
     );
+
+    /**
+     * {@see ObjectExpressionFunctionLet}
+     */
+    public static ExpressionFunction<Object, SpreadsheetExpressionEvaluationContext> let() {
+        return ObjectExpressionFunctionLet.INSTANCE;
+    }
 
     /**
      * {@see NumberExpressionFunctions#ln}
