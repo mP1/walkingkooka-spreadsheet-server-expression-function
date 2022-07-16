@@ -101,6 +101,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isText(),
 - left(),
 - len(),
+- let(),
 - ln(),
 - log(),
 - log10(),
