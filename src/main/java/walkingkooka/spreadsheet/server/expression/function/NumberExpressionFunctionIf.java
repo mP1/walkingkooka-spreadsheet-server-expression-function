@@ -93,7 +93,7 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
     }
 
     @Override
-    public List<ExpressionFunctionParameter<?>> parameters() {
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
         return PARAMETERS;
     }
 

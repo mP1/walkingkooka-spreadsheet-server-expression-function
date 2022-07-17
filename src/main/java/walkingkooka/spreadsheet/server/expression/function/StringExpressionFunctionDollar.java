@@ -61,7 +61,7 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
             .optional(ExpressionNumber.class);
 
     @Override
-    public List<ExpressionFunctionParameter<?>> parameters() {
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
         return PARAMETERS;
     }
 
