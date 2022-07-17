@@ -50,8 +50,8 @@ final class ObjectExpressionFunctionFind extends ObjectExpressionFunction {
     }
 
     @Override
-    public List<ExpressionFunctionParameter<?>> parameters() {
-        return FIND_CASE_SENSITIVE.parameters();
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return FIND_CASE_SENSITIVE.parameters(count);
     }
 
     @Override

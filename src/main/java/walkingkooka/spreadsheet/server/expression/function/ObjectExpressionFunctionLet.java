@@ -59,7 +59,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
     }
 
     @Override
-    public List<ExpressionFunctionParameter<?>> parameters() {
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
         return VALUES;
     }
 

@@ -52,8 +52,8 @@ final class UnformattedNumberExpressionFunction<T> implements ExpressionFunction
     }
 
     @Override
-    public List<ExpressionFunctionParameter<?>> parameters() {
-        return this.function.parameters();
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return this.function.parameters(count);
     }
 
     @Override

@@ -56,7 +56,7 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
             .required(String.class);
 
     @Override
-    public List<ExpressionFunctionParameter<?>> parameters() {
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
         return PARAMETERS;
     }
 
