@@ -17,6 +17,7 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
+import walkingkooka.Cast;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
@@ -47,6 +48,7 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
     @Override
     public Set<ExpressionFunctionKind> kinds() {
         return Sets.of(
+                ExpressionFunctionKind.CONVERT_PARAMETERS,
                 ExpressionFunctionKind.EVALUATE_PARAMETERS,
                 ExpressionFunctionKind.RESOLVE_REFERENCES
         );
@@ -73,16 +75,22 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
                         final SpreadsheetExpressionEvaluationContext context) {
         this.checkParameterCount(parameters);
 
-        ExpressionNumber value = context.prepareParameter(
-                NUMBER,
-                NUMBER.getOrFail(parameters, 0)
+        return this.apply0(
+                context.prepareParameters(
+                        Cast.to(this),
+                        parameters
+                ),
+                context
         );
+    }
 
-        final int decimals = context.prepareParameter(
-                DECIMALS,
-                DECIMALS.get(parameters, 1)
+    private String apply0(final List<Object> parameters,
+                          final SpreadsheetExpressionEvaluationContext context) {
+        ExpressionNumber value = NUMBER.getOrFail(parameters, 0); // needs to convert...
+        final int decimals = (DECIMALS.get(parameters, 1)
                         .orElse(TWO)
         ).intValueExact();
+
 
         final String pattern;
         if (decimals >= 0) {
