@@ -18,7 +18,6 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
@@ -27,7 +26,6 @@ import walkingkooka.spreadsheet.reference.SpreadsheetExpressionReference;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunctions;
 import walkingkooka.tree.expression.function.engineering.EngineeringExpressionFunctions;
@@ -378,14 +376,6 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = UnformattedNumberExpressionFunction.with(
             StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
                     .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
-                    .setKinds(
-                            Sets.of(
-                                    ExpressionFunctionKind.CONVERT_PARAMETERS,
-                                    ExpressionFunctionKind.EVALUATE_PARAMETERS,
-                                    ExpressionFunctionKind.FLATTEN,
-                                    ExpressionFunctionKind.RESOLVE_REFERENCES
-                            )
-                    )
     );
 
     /**
@@ -651,12 +641,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return IS_BLANK;
     }
 
-    private final static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> IS_BLANK = SpreadsheetExpressionFunctions.isBlank()
-            .setKinds(
-                    Sets.of(
-                            ExpressionFunctionKind.EVALUATE_PARAMETERS
-                    )
-            );
+    private final static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> IS_BLANK = SpreadsheetExpressionFunctions.isBlank();
 
     /**
      * {@see DateTimeExpressionFunctions#isDate}

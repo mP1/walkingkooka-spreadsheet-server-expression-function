@@ -23,13 +23,11 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
-import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -74,33 +72,11 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
         );
     }
 
-    private final static ExpressionFunctionParameter<Object> CRITERIA = ExpressionFunctionParameterName.with("criteria")
-            .required(Object.class);
-
     private NumberExpressionFunctionIf(final String name,
                                        final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function) {
         super(name);
         this.function = function;
     }
-
-    @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return EnumSet.of(
-                ExpressionFunctionKind.CONVERT_PARAMETERS,
-                ExpressionFunctionKind.EVALUATE_PARAMETERS,
-                ExpressionFunctionKind.RESOLVE_REFERENCES
-        );
-    }
-
-    @Override
-    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return PARAMETERS;
-    }
-
-    private final List<ExpressionFunctionParameter<?>> PARAMETERS = Lists.of(
-            ExpressionFunctionParameter.VALUE,
-            CRITERIA
-    );
 
     @Override
     public ExpressionNumber apply(final List<Object> parameters,
@@ -127,6 +103,13 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
         );
     }
 
+    private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameter.VALUE
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    private final static ExpressionFunctionParameter<Object> CRITERIA = ExpressionFunctionParameterName.with("criteria")
+            .required(Object.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
     /**
      * Filters the parameter values using the filter.
      */
@@ -150,6 +133,16 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
                 .filter(filter)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return PARAMETERS;
+    }
+
+    private final List<ExpressionFunctionParameter<?>> PARAMETERS = Lists.of(
+            VALUE,
+            CRITERIA
+    );
 
     @Override
     public boolean isPure(final ExpressionPurityContext context) {

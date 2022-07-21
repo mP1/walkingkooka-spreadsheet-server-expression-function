@@ -17,15 +17,13 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
-import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The excel text function.
@@ -40,30 +38,6 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
     private StringExpressionFunctionText() {
         super("text");
     }
-
-    @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return Sets.of(
-                ExpressionFunctionKind.EVALUATE_PARAMETERS,
-                ExpressionFunctionKind.RESOLVE_REFERENCES
-        );
-    }
-
-    private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameterName.with("value")
-            .required(Object.class);
-
-    private final static ExpressionFunctionParameter<String> PATTERN = ExpressionFunctionParameterName.with("format-pattern")
-            .required(String.class);
-
-    @Override
-    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return PARAMETERS;
-    }
-
-    private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-            VALUE,
-            PATTERN
-    );
 
     @Override
     public String apply(final List<Object> parameters,
@@ -87,4 +61,22 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
                         context
                 );
     }
+
+    private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameterName.with("value")
+            .required(Object.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    private final static ExpressionFunctionParameter<String> PATTERN = ExpressionFunctionParameterName.with("format-pattern")
+            .required(String.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    @Override
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return PARAMETERS;
+    }
+
+    private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
+            VALUE,
+            PATTERN
+    );
 }

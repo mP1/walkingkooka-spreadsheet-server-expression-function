@@ -22,13 +22,12 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The excel numbervalue fnction which converts text to a {@link ExpressionNumber}. This is achieved by converting
@@ -47,31 +46,6 @@ final class NumberExpressionFunctionNumberValue extends NumberExpressionFunction
     }
 
     @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return this.function.kinds();
-    }
-
-    private final static ExpressionFunctionParameter<String> TEXT = ExpressionFunctionParameterName.with("text")
-            .required(String.class);
-
-    private final static ExpressionFunctionParameter<Character> DECIMAL_SEPARATOR = ExpressionFunctionParameterName.with("decimal-separator")
-            .optional(Character.class);
-
-    private final static ExpressionFunctionParameter<Character> GROUP_SEPARATOR = ExpressionFunctionParameterName.with("group-separator")
-            .optional(Character.class);
-
-    @Override
-    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return PARAMETERS;
-    }
-
-    private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-            TEXT,
-            DECIMAL_SEPARATOR,
-            GROUP_SEPARATOR
-    );
-
-    @Override
     public ExpressionNumber apply(final List<Object> parameters,
                                   final SpreadsheetExpressionEvaluationContext context) {
         this.checkParameterCount(parameters);
@@ -86,6 +60,18 @@ final class NumberExpressionFunctionNumberValue extends NumberExpressionFunction
         );
     }
 
+    private final static ExpressionFunctionParameter<String> TEXT = ExpressionFunctionParameterName.with("text")
+            .required(String.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    private final static ExpressionFunctionParameter<Character> DECIMAL_SEPARATOR = ExpressionFunctionParameterName.with("decimal-separator")
+            .optional(Character.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    private final static ExpressionFunctionParameter<Character> GROUP_SEPARATOR = ExpressionFunctionParameterName.with("group-separator")
+            .optional(Character.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
     private ExpressionNumber apply0(final List<Object> parameters,
                                     final SpreadsheetExpressionEvaluationContext context) {
         final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function = this.function;
@@ -98,10 +84,21 @@ final class NumberExpressionFunctionNumberValue extends NumberExpressionFunction
         );
     }
 
+    private final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function;
+
+    @Override
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return PARAMETERS;
+    }
+
+    private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
+            TEXT,
+            DECIMAL_SEPARATOR,
+            GROUP_SEPARATOR
+    );
+
     @Override
     public boolean isPure(final ExpressionPurityContext context) {
         return true; // need to test parameters.
     }
-
-    private final ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> function;
 }
