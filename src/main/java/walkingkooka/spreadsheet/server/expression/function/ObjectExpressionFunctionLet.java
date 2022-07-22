@@ -23,11 +23,11 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 import walkingkooka.spreadsheet.reference.SpreadsheetLabelName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.ReferenceExpression;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * A let function.
@@ -47,25 +47,9 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
     }
 
     @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return NONE;
-    }
-
-    private final static Set<ExpressionFunctionKind> NONE = Sets.empty();
-
-    @Override
     public boolean isPure(final ExpressionPurityContext context) {
         return true; // the function itself is pure depending on the parameter values themselves.
     }
-
-    @Override
-    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return VALUES;
-    }
-
-    private final static List<ExpressionFunctionParameter<?>> VALUES = Lists.of(
-            ExpressionFunctionParameter.VALUE
-    );
 
     @Override
     public Object apply(final List<Object> values,
@@ -77,9 +61,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
             case 0:
                 throw new IllegalArgumentException("Missing computed value/expression"); // TODO verify actual error
             case 1:
-                value = context.evaluateIfNecessary(
-                        values.get(0)
-                );
+                value = context.evaluateIfNecessary(values.get(0));
                 break;
             default:
                 if (count % 2 == 0) {
@@ -94,6 +76,12 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
 
         return value;
     }
+
+    private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameterName.VALUE
+            .variable(Object.class)
+            .setKinds(
+                    Sets.of(ExpressionFunctionParameterKind.FLATTEN)
+            );
 
     private Object apply0(final List<Object> values,
                           final SpreadsheetExpressionEvaluationContext context) {
@@ -156,4 +144,11 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
     private Object resolveIfReference0(final ReferenceExpression reference) {
         return reference.value();
     }
+
+    @Override
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return VALUES;
+    }
+
+    private final static List<ExpressionFunctionParameter<?>> VALUES = Lists.of(VALUE);
 }

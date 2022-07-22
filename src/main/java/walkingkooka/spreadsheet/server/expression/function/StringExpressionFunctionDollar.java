@@ -18,18 +18,16 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
+import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * The excel dollar function.
@@ -44,31 +42,6 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
     private StringExpressionFunctionDollar() {
         super("dollar");
     }
-
-    @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return Sets.of(
-                ExpressionFunctionKind.CONVERT_PARAMETERS,
-                ExpressionFunctionKind.EVALUATE_PARAMETERS,
-                ExpressionFunctionKind.RESOLVE_REFERENCES
-        );
-    }
-
-    private final static ExpressionFunctionParameter<ExpressionNumber> NUMBER = ExpressionFunctionParameterName.NUMBER
-            .required(ExpressionNumber.class);
-
-    private final static ExpressionFunctionParameter<ExpressionNumber> DECIMALS = ExpressionFunctionParameterName.with("decimals")
-            .optional(ExpressionNumber.class);
-
-    @Override
-    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return PARAMETERS;
-    }
-
-    private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
-            NUMBER,
-            DECIMALS
-    );
 
     @Override
     public String apply(final List<Object> parameters,
@@ -121,5 +94,23 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
                 );
     }
 
+    private final static ExpressionFunctionParameter<ExpressionNumber> NUMBER = ExpressionFunctionParameterName.NUMBER
+            .required(ExpressionNumber.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    private final static ExpressionFunctionParameter<ExpressionNumber> DECIMALS = ExpressionFunctionParameterName.with("decimals")
+            .optional(ExpressionNumber.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
     private final static ExpressionNumber TWO = ExpressionNumberKind.DEFAULT.create(2);
+
+    @Override
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        return PARAMETERS;
+    }
+
+    private final static List<ExpressionFunctionParameter<?>> PARAMETERS = ExpressionFunctionParameter.list(
+            NUMBER,
+            DECIMALS
+    );
 }

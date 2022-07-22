@@ -25,12 +25,10 @@ import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberSign;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Wraps {@link walkingkooka.tree.expression.function.string.StringExpressionFunctions#findCaseSensitive}
@@ -52,11 +50,6 @@ final class ObjectExpressionFunctionFind extends ObjectExpressionFunction {
     @Override
     public List<ExpressionFunctionParameter<?>> parameters(final int count) {
         return FIND_CASE_SENSITIVE.parameters(count);
-    }
-
-    @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return FIND_CASE_SENSITIVE.kinds();
     }
 
     @Override

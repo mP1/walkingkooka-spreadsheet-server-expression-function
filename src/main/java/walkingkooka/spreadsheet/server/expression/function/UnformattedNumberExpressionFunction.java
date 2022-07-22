@@ -18,18 +18,15 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.ExpressionFunctionKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * A {@link ExpressionFunction} that executes the wraps another {@link ExpressionFunction}, passing a context that
@@ -59,11 +56,6 @@ final class UnformattedNumberExpressionFunction<T> implements ExpressionFunction
     @Override
     public Class<T> returnType() {
         return this.function.returnType();
-    }
-
-    @Override
-    public Set<ExpressionFunctionKind> kinds() {
-        return Sets.empty(); // dont want parameters to be prepared in any way.
     }
 
     @Override
