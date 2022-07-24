@@ -269,6 +269,9 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
+                (s) -> {
+                    throw new UnsupportedOperationException();
+                },
                 NOW
         );
     }

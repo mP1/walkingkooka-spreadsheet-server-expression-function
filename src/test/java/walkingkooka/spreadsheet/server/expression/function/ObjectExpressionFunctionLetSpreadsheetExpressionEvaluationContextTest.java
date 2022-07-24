@@ -66,6 +66,11 @@ public final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationCon
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void testResolveIfLabelNullSelectionFails() {
+        throw new UnsupportedOperationException();
+    }
+
     @Test
     public void testFunctionWithNamedValueFails() {
         final IllegalArgumentException thrown = assertThrows(

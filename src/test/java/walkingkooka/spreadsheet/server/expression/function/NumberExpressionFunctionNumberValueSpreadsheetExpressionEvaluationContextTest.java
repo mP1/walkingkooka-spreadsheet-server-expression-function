@@ -60,6 +60,11 @@ public final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvalu
     }
 
     @Override
+    public void testResolveIfLabelNullSelectionFails() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext createContext() {
         return NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.with(
                 DECIMAL_SEPARATOR,

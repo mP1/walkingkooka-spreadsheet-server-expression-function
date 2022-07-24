@@ -187,6 +187,9 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
+                (s) -> {
+                    throw new UnsupportedOperationException();
+                },
                 LocalDateTime::now
         );
     }

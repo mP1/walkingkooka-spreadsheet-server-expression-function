@@ -111,6 +111,9 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
+                (s) -> {
+                    throw new UnsupportedOperationException();
+                },
                 LocalDateTime::now
         );
     }
