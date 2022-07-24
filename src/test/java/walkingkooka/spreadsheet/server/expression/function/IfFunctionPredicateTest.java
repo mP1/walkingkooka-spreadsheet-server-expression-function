@@ -295,6 +295,9 @@ public final class IfFunctionPredicateTest implements PredicateTesting {
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
+                (s) -> {
+                    throw new UnsupportedOperationException();
+                },
                 LocalDateTime::now
         );
     }
