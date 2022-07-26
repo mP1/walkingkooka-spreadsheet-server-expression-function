@@ -21,6 +21,7 @@ import walkingkooka.Either;
 import walkingkooka.convert.Converter;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.spreadsheet.SpreadsheetCell;
+import walkingkooka.spreadsheet.convert.SpreadsheetConverterContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.parser.SpreadsheetParserToken;
@@ -109,7 +110,7 @@ final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationCo
     }
 
     @Override
-    public Converter<SpreadsheetExpressionEvaluationContext> converter() {
+    public Converter<SpreadsheetConverterContext> converter() {
         return this.context.converter();
     }
 
