@@ -79,6 +79,10 @@ public final class StringExpressionFunctionTextTest extends StringExpressionFunc
         return StringExpressionFunctionText.INSTANCE;
     }
 
+    @Override
+    public int minimumParameterCount() {
+        return 2;
+    }
 
     @Override
     public SpreadsheetExpressionEvaluationContext createContext(final ExpressionNumberKind kind) {

@@ -158,6 +158,11 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
     }
 
     @Override
+    public int minimumParameterCount() {
+        return 1;
+    }
+
+    @Override
     SpreadsheetExpressionEvaluationContext createContext(final ExpressionNumberKind kind) {
         return SpreadsheetExpressionEvaluationContexts.basic(
                 Optional.empty(),

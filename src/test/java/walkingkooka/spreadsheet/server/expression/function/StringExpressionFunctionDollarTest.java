@@ -203,6 +203,11 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
     }
 
     @Override
+    public int minimumParameterCount() {
+        return 2;
+    }
+
+    @Override
     public SpreadsheetExpressionEvaluationContext createContext(final ExpressionNumberKind kind) {
         return new FakeSpreadsheetExpressionEvaluationContext() {
 

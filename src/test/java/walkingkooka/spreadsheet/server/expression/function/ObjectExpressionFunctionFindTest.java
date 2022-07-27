@@ -68,6 +68,11 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
     }
 
     @Override
+    public int minimumParameterCount() {
+        return 2;
+    }
+
+    @Override
     public SpreadsheetExpressionEvaluationContext createContext() {
         return SpreadsheetExpressionEvaluationContexts.basic(
                 Optional.empty(),
