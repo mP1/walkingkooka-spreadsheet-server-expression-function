@@ -277,6 +277,11 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     }
 
     @Override
+    public int minimumParameterCount() {
+        return 1;
+    }
+
+    @Override
     public Class<ObjectExpressionFunctionLet> type() {
         return ObjectExpressionFunctionLet.class;
     }
