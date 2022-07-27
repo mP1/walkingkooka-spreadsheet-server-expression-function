@@ -18,11 +18,9 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetLabelName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
-import walkingkooka.tree.expression.ReferenceExpression;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
@@ -54,18 +52,19 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
     @Override
     public Object apply(final List<Object> values,
                         final SpreadsheetExpressionEvaluationContext context) {
+
         final Object value;
 
         final int count = values.size();
         switch (count) {
             case 0:
-                throw new IllegalArgumentException("Missing computed value/expression"); // TODO verify actual error
+                throw new IllegalArgumentException(MISSING_COMPUTED_VALUE_EXPRESSION);
             case 1:
-                value = context.evaluateIfNecessary(values.get(0));
+                value = COMPUTED.getOrFail(values, 0);
                 break;
             default:
                 if (count % 2 == 0) {
-                    throw new IllegalArgumentException("Missing final computed value expression"); // TODO verify actual error
+                    throw new IllegalArgumentException(MISSING_COMPUTED_VALUE_EXPRESSION);
                 }
                 value = this.apply0(
                         values,
@@ -77,78 +76,112 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
         return value;
     }
 
-    private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameterName.VALUE
-            .variable(Object.class)
-            .setKinds(
-                    Sets.of(ExpressionFunctionParameterKind.FLATTEN)
-            );
+    /**
+     * This message is used when the let function is executed with no values.
+     */
+    private final static String MISSING_COMPUTED_VALUE_EXPRESSION = "Missing final computed value/expression";  // TODO verify actual error
 
     private Object apply0(final List<Object> values,
                           final SpreadsheetExpressionEvaluationContext context) {
         final int count = values.size();
-        final ObjectExpressionFunctionLetNameAndValue[] nameAndValues = new ObjectExpressionFunctionLetNameAndValue[count / 2];
+        final int labelAndValuePairCount = count / 2;
+        final ObjectExpressionFunctionLetNameAndValue[] nameAndValues = new ObjectExpressionFunctionLetNameAndValue[labelAndValuePairCount];
 
-        int i = 0;
-        int j = 0;
-        Object computedValue = null; // never actually returns this null.
+        int valueIndex = 0;
 
-        while (i < count) {
-            final Object nameOrComputedValueExpression = values.get(i);
-            i++;
-
-            // nameOrComputedValueExpression must be the computed value
-            if (count == i) {
-                computedValue = ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext.with(
-                        nameAndValues,
-                        context
-                ).evaluateIfNecessary(nameOrComputedValueExpression);
-                break;
-            }
-
-            // must be a label which is the parameter name...
-            // verify label name does not contain a DOT
-            final SpreadsheetLabelName name = context.convertOrFail(
-                    this.resolveIfReference(nameOrComputedValueExpression),
-                    SpreadsheetLabelName.class
-            );
+        for (int labelAndValueIndex = 0; labelAndValueIndex < labelAndValuePairCount; labelAndValueIndex++) {
+            final SpreadsheetLabelName name = LABEL_NAME.getOrFail(values, valueIndex++);
             if (name.value().indexOf('.') >= 0) {
                 throw new IllegalArgumentException("Illegal name \"" + name + "\" contains dot.");
             }
 
             // check previously declared named values for duplicates.
-            for (int k = 0; k < j; k++) {
-                if (nameAndValues[k].name.equals(name)) {
-                    throw new IllegalArgumentException("Duplicate name \"" + name + "\" in value " + i); // first parameter is called 1
+            for (int i = 0; i < labelAndValueIndex; i++) {
+                if (nameAndValues[i].name.equals(name)) {
+                    throw new IllegalArgumentException("Duplicate name \"" + name + "\" in value " + valueIndex); // first parameter is called 1
                 }
             }
 
             // evaluate parameter value when it is referenced.
-            nameAndValues[j] = ObjectExpressionFunctionLetNameAndValue.with(
+            nameAndValues[labelAndValueIndex] = ObjectExpressionFunctionLetNameAndValue.with(
                     name,
-                    values.get(i)
+                    LABEL_VALUE.getOrFail(values, valueIndex++)
             );
+        }
 
-            i++;
+        // now create the context with the given labels and values.
+        final ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext context2 = ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext.with(
+                nameAndValues,
+                context
+        );
+
+        return context2.evaluateIfNecessary(
+                COMPUTED.getOrFail(
+                        context2.prepareParameters(
+                                this,
+                                values
+                        ),
+                        count - 1
+                )
+        );
+    }
+
+    /**
+     * Given the count assembles the parameters with the correct
+     * @param count
+     * @return
+     */
+    @Override
+    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
+        List<ExpressionFunctionParameter<?>> parameters;
+
+        switch (count) {
+            case 0:
+            case 1:
+                parameters = COMPUTED_PARAMETERS;
+                break;
+            default:
+                parameters = this.parameters0(count/2*2+1);
+                break;
+        }
+
+        return parameters;
+    }
+
+    private final ExpressionFunctionParameter<Object> COMPUTED = ExpressionFunctionParameterName.with("computed")
+            .required(Object.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+
+    private final List<ExpressionFunctionParameter<?>> COMPUTED_PARAMETERS = Lists.of(COMPUTED);
+
+    private List<ExpressionFunctionParameter<?>> parameters0(final int count) {
+        if (count % 2 == 0) {
+            throw new IllegalArgumentException(MISSING_COMPUTED_VALUE_EXPRESSION);
+        }
+        final ExpressionFunctionParameter<?>[] parameters =  new ExpressionFunctionParameter<?>[count];
+
+        int i = 0;
+        int j = 0;
+
+        while( i + 1 < count ) {
+            parameters[i++] = LABEL_NAME.setName(ExpressionFunctionParameterName.with("label-" + j));
+            parameters[i++] = LABEL_VALUE.setName(ExpressionFunctionParameterName.with("value-" + j));
+
             j++;
         }
 
-        return computedValue;
+        parameters[count - 1] = COMPUTED;
+
+        return Lists.of(parameters);
     }
 
-    private Object resolveIfReference(final Object value) {
-        return value instanceof ReferenceExpression ?
-                this.resolveIfReference0((ReferenceExpression) value) :
-                value;
-    }
+    // declaring both LABEL_NAME and LABEL_VALUE will mean these parameters will appear as required in the UI.
 
-    private Object resolveIfReference0(final ReferenceExpression reference) {
-        return reference.value();
-    }
+    private final ExpressionFunctionParameter<SpreadsheetLabelName> LABEL_NAME = ExpressionFunctionParameterName.with("label")
+            .required(SpreadsheetLabelName.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE);
 
-    @Override
-    public List<ExpressionFunctionParameter<?>> parameters(final int count) {
-        return VALUES;
-    }
-
-    private final static List<ExpressionFunctionParameter<?>> VALUES = Lists.of(VALUE);
+    private final ExpressionFunctionParameter<Object> LABEL_VALUE = ExpressionFunctionParameterName.with("value")
+            .required(Object.class)
+            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
 }

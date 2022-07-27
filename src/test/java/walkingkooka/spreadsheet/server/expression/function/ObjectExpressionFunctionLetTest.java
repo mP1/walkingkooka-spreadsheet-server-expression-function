@@ -31,6 +31,7 @@ import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
 import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
+import walkingkooka.text.CharSequences;
 import walkingkooka.tree.expression.Expression;
 import walkingkooka.tree.expression.ExpressionNumber;
 
@@ -41,41 +42,42 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunctionTestCase<ObjectExpressionFunctionLet> {
 
     @Test
     public void testZeroParametersFails() {
-        this.applyFails(
+        this.applyFails2(
                 Lists.empty(),
-                "Missing computed value/expression"
+                "Missing final computed value/expression"
         );
     }
 
     @Test
     public void testEvenNumberParameterCountFails() {
-        this.applyFails(
+        this.applyFails2(
                 Lists.of(1, 2),
-                "Missing final computed value expression"
+                "Missing final computed value/expression"
         );
     }
 
     @Test
     public void testInvalidVariableNameFails() {
-        this.applyFails(
+        this.applyFails2(
                 Lists.of(
                         "!Label",
                         2,
                         3
                 ),
-                "Invalid character '!' at 0 in \"!Label\""
+                null //"Invalid character '!' at 0 in \"!Label\""
         );
     }
 
     @Test
     public void testDuplicateLabelFails() {
-        this.applyFails(
+        this.applyFails2(
                 Lists.of(
                         "Duplicate1",
                         1,
@@ -89,7 +91,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
     @Test
     public void testDuplicateLabelFails2() {
-        this.applyFails(
+        this.applyFails2(
                 Lists.of(
                         "Duplicate1",
                         1,
@@ -103,17 +105,28 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
         );
     }
 
-    private void applyFails(final List<Object> parameters,
-                            final String message) {
-        final IllegalArgumentException thrown = assertThrows(
-                IllegalArgumentException.class, () -> {
-                    this.createBiFunction().apply(parameters, this.createContext());
+    private void applyFails2(final List<Object> parameters,
+                             final String message) {
+        final ObjectExpressionFunctionLet function = this.createBiFunction();
+        final SpreadsheetExpressionEvaluationContext context = this.createContext();
+
+        final RuntimeException thrown = assertThrows(
+                RuntimeException.class, () -> {
+                    function.apply(
+                            context.prepareParameters(
+                                    function,
+                                    parameters
+                            ),
+                            context
+                    );
                 });
-        this.checkEquals(
-                message,
-                thrown.getMessage(),
-                "message"
-        );
+        if(null != message) {
+            this.checkEquals(
+                    message,
+                    thrown.getMessage(),
+                    "message"
+            );
+        }
     }
 
     @Test
@@ -138,7 +151,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
     @Test
     public void testNamedValueIgnored() {
-        this.applyAndCheck2(
+        this.applyAndCheck3(
                 Lists.of(
                         "ABC",
                         123,
@@ -153,7 +166,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
         final String name = "x";
         final int value = 23;
 
-        this.applyAndCheck2(
+        this.applyAndCheck3(
                 Lists.of(
                         name,
                         value,
@@ -176,7 +189,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
         final String name2 = "y";
         final ExpressionNumber value2 = EXPRESSION_NUMBER_KIND.create(20);
 
-        this.applyAndCheck2(
+        this.applyAndCheck3(
                 Lists.of(
                         name1,
                         value1,
@@ -206,7 +219,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
         final String name3 = "z";
         final ExpressionNumber value3 = EXPRESSION_NUMBER_KIND.create(300);
 
-        this.applyAndCheck2(
+        this.applyAndCheck3(
                 Lists.of(
                         name1,
                         value1,
@@ -231,6 +244,40 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 EXPRESSION_NUMBER_KIND.create(300 + 20 + 1)
         );
     }
+
+    private void applyAndCheck3(final List<Object> parameters,
+                                final Object expected) {
+        this.applyAndCheck3(
+                parameters,
+                this.createContext(),
+                expected
+        );
+    }
+
+    private void applyAndCheck3(final List<Object> parameters,
+                                final SpreadsheetExpressionEvaluationContext context,
+                                final Object expected) {
+        this.applyAndCheck3(
+                this.createBiFunction(),
+                parameters,
+                context,
+                expected
+        );
+    }
+
+    private void applyAndCheck3(final ObjectExpressionFunctionLet function,
+                                final List<Object> parameters,
+                                final SpreadsheetExpressionEvaluationContext context,
+                                final Object expected) {
+        assertEquals(
+                expected,
+                function.apply(
+                        context.prepareParameters(function, parameters),
+                        context
+                ),
+                () -> "Wrong result for " + function + " for params: " + CharSequences.quoteIfChars(parameters) + "," + context);
+    }
+
 
     // test related factories...........................................................................................
 
@@ -278,7 +325,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
     @Override
     public int minimumParameterCount() {
-        return 1;
+        return 3;
     }
 
     @Override
