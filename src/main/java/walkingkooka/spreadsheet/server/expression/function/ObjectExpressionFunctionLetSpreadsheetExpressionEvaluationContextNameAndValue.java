@@ -27,18 +27,18 @@ import walkingkooka.tree.expression.Expression;
  * A pair that contains a mapping from a scoped name within a LET statement to a value.
  * If the value is pure the value is cached.
  */
-final class ObjectExpressionFunctionLetNameAndValue {
+final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue {
 
-    static ObjectExpressionFunctionLetNameAndValue with(final SpreadsheetLabelName name,
-                                                        final Object value) {
-        return new ObjectExpressionFunctionLetNameAndValue(
+    static ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue with(final SpreadsheetLabelName name,
+                                                                                              final Object value) {
+        return new ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue(
                 name,
                 value
         );
     }
 
-    private ObjectExpressionFunctionLetNameAndValue(final SpreadsheetLabelName name,
-                                                    final Object value) {
+    private ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue(final SpreadsheetLabelName name,
+                                                                                          final Object value) {
         super();
         this.name = name;
         this.value = value;
