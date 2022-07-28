@@ -18,6 +18,7 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import org.junit.jupiter.api.Test;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContextTesting;
 import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
@@ -102,12 +103,10 @@ public final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationCon
     @Override
     public ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext createContext() {
         return ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext.with(
-              new ObjectExpressionFunctionLetNameAndValue[] {
-                      ObjectExpressionFunctionLetNameAndValue.with(
-                              SpreadsheetSelection.labelName(NAME),
-                              1
-                      )
-              },
+                Maps.of(
+                        SpreadsheetSelection.labelName(NAME),
+                        1
+                ),
                 new FakeSpreadsheetExpressionEvaluationContext() {
 
                     @Override

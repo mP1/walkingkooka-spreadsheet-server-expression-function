@@ -18,6 +18,7 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.map.Maps;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetLabelName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
@@ -26,6 +27,7 @@ import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * A let function.
@@ -85,7 +87,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
                           final SpreadsheetExpressionEvaluationContext context) {
         final int count = values.size();
         final int labelAndValuePairCount = count / 2;
-        final ObjectExpressionFunctionLetNameAndValue[] nameAndValues = new ObjectExpressionFunctionLetNameAndValue[labelAndValuePairCount];
+        final Map<SpreadsheetLabelName, Object> nameAndValues = Maps.sorted();
 
         int valueIndex = 0;
 
@@ -95,18 +97,11 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
                 throw new IllegalArgumentException("Illegal name \"" + name + "\" contains dot.");
             }
 
-            // check previously declared named values for duplicates.
-            for (int i = 0; i < labelAndValueIndex; i++) {
-                if (nameAndValues[i].name.equals(name)) {
-                    throw new IllegalArgumentException("Duplicate name \"" + name + "\" in value " + valueIndex); // first parameter is called 1
-                }
+            if (null != nameAndValues.put(name, LABEL_VALUE.getOrFail(values, valueIndex))) {
+                throw new IllegalArgumentException("Duplicate name \"" + name + "\" in value " + valueIndex); // first parameter is called 1
             }
 
-            // evaluate parameter value when it is referenced.
-            nameAndValues[labelAndValueIndex] = ObjectExpressionFunctionLetNameAndValue.with(
-                    name,
-                    LABEL_VALUE.getOrFail(values, valueIndex++)
-            );
+            valueIndex++;
         }
 
         // now create the context with the given labels and values.

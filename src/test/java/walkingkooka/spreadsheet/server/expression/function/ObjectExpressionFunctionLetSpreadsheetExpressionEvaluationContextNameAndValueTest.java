@@ -20,11 +20,11 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.reflect.ClassTesting;
 import walkingkooka.reflect.JavaVisibility;
 
-public final class ObjectExpressionFunctionLetNameAndValueTest implements ClassTesting<ObjectExpressionFunctionLetNameAndValue> {
+public final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValueTest implements ClassTesting<ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue> {
 
     @Override
-    public Class<ObjectExpressionFunctionLetNameAndValue> type() {
-        return ObjectExpressionFunctionLetNameAndValue.class;
+    public Class<ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue> type() {
+        return ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue.class;
     }
 
     @Override

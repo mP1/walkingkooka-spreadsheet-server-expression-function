@@ -43,6 +43,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -54,15 +55,25 @@ import java.util.Optional;
 final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext implements SpreadsheetExpressionEvaluationContext {
 
     static ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext with(
-            final ObjectExpressionFunctionLetNameAndValue[] nameAndValues,
+            final Map<SpreadsheetLabelName, Object> nameAndValues,
             final SpreadsheetExpressionEvaluationContext context) {
+        final ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue[] copy = new ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue[nameAndValues.size()];
+        int i = 0;
+        for(final Map.Entry<SpreadsheetLabelName, Object> nameAndValue : nameAndValues.entrySet()) {
+            copy[i] = ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue.with(
+                    nameAndValue.getKey(),
+                    nameAndValue.getValue()
+            );
+            i++;
+        }
+
         return new ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext(
-                nameAndValues,
+                copy,
                 context
         );
     }
 
-    private ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext(final ObjectExpressionFunctionLetNameAndValue[] nameAndValues,
+    private ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext(final ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue[] nameAndValues,
                                                                               final SpreadsheetExpressionEvaluationContext context) {
         super();
         this.nameAndValues = nameAndValues;
@@ -169,7 +180,7 @@ final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext im
     }
 
     private void failIfNamedValue(final FunctionExpressionName functionName) {
-        for(final ObjectExpressionFunctionLetNameAndValue parameterAndValue : this.nameAndValues) {
+        for(final ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue parameterAndValue : this.nameAndValues) {
             final SpreadsheetLabelName namedParameter = parameterAndValue.name;
             if(namedParameter.caseSensitivity().equals(namedParameter.value(), functionName.value())) {
                 throw new IllegalArgumentException("Function name " + functionName + " is a named value and not an actual function");
@@ -288,7 +299,7 @@ final class ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContext im
         return this.context.positiveSign();
     }
 
-    private final ObjectExpressionFunctionLetNameAndValue[] nameAndValues;
+    private final ObjectExpressionFunctionLetSpreadsheetExpressionEvaluationContextNameAndValue[] nameAndValues;
 
     private final SpreadsheetExpressionEvaluationContext context;
 
