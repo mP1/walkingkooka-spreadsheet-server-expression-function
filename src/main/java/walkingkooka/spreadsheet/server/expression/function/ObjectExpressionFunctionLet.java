@@ -127,9 +127,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
     }
 
     /**
-     * Given the count assembles the parameters with the correct
-     * @param count
-     * @return
+     * Given the count assembles the parameters with the correct parameter names and types.
      */
     @Override
     public List<ExpressionFunctionParameter<?>> parameters(final int count) {
