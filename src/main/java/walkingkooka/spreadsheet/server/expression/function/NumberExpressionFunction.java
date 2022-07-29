@@ -22,6 +22,8 @@ import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 
+import java.util.Optional;
+
 /**
  * Base for any function that handles and returns a number result.
  */
@@ -32,15 +34,17 @@ abstract class NumberExpressionFunction implements ExpressionFunction<Expression
      */
     NumberExpressionFunction(final String name) {
         super();
-        this.name = FunctionExpressionName.with(name);
+        this.name = Optional.of(
+                FunctionExpressionName.with(name)
+        );
     }
 
     @Override
-    public final FunctionExpressionName name() {
-        return name;
+    public final Optional<FunctionExpressionName> name() {
+        return this.name;
     }
 
-    private final FunctionExpressionName name;
+    private final Optional<FunctionExpressionName> name;
 
     @Override
     public final Class<ExpressionNumber> returnType() {
@@ -49,6 +53,8 @@ abstract class NumberExpressionFunction implements ExpressionFunction<Expression
 
     @Override
     public final String toString() {
-        return this.name().toString();
+        return this.name()
+                .get()
+                .toString();
     }
 }

@@ -37,6 +37,7 @@ import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -282,7 +283,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BITAND = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitAnd()
-            .setName(FunctionExpressionName.with("bitAnd"));
+            .setName(functionName("bitAnd"));
 
     /**
      * {@see EngineeringExpressionFunctions#bitOr}
@@ -292,7 +293,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BITOR = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitOr()
-            .setName(FunctionExpressionName.with("bitOr"));
+            .setName(functionName("bitOr"));
 
     /**
      * {@see EngineeringExpressionFunctions#bitXor}
@@ -302,7 +303,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BitXor = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitXor()
-            .setName(FunctionExpressionName.with("bitXor"));
+            .setName(functionName("bitXor"));
 
     /**
      * {@see NumberExpressionFunctions#ceil}
@@ -326,7 +327,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<Character, SpreadsheetExpressionEvaluationContext> CHAR_FUNCTION = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>ascii()
-            .setName(FunctionExpressionName.with("char"));
+            .setName(functionName("char"));
 
     /**
      * {@see BooleanExpressionFunctions#choose}
@@ -350,7 +351,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> CODE = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>unicode()
-            .setName(FunctionExpressionName.with("code"));
+            .setName(functionName("code"));
 
     /**
      * {@see SpreadsheetExpressionFunctions#column}
@@ -412,7 +413,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNTA = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
             .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
-            .setName(FunctionExpressionName.with("countA"));
+            .setName(functionName("countA"));
 
     private static boolean filterNonNull(final Object value,
                                          final SpreadsheetExpressionEvaluationContext context) {
@@ -428,7 +429,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNT_BLANK = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
             .filterParameters(SpreadsheetServerExpressionFunctions::filterNull)
-            .setName(FunctionExpressionName.with("countBlank"));
+            .setName(functionName("countBlank"));
 
     private static boolean filterNull(final Object value,
                                          final SpreadsheetExpressionEvaluationContext context) {
@@ -534,7 +535,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> EXACT = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>equalsCaseSensitive()
-            .setName(FunctionExpressionName.with("exact"));
+            .setName(functionName("exact"));
 
     /**
      * {@see NumberExpressionFunctions#exp}
@@ -686,7 +687,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> IS_LOGICAL = BooleanExpressionFunctions.<SpreadsheetExpressionEvaluationContext>isBoolean()
-            .setName(FunctionExpressionName.with("isLogical"));
+            .setName(functionName("isLogical"));
 
     /**
      * {@see SpreadsheetExpressionFunctions#isNa}
@@ -951,7 +952,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> RAND = NumberExpressionFunctions.<SpreadsheetExpressionEvaluationContext>random()
-            .setName(FunctionExpressionName.with("rand"));
+            .setName(functionName("rand"));
 
     /**
      * {@see NumberExpressionFunctions#randomBetween}
@@ -961,7 +962,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> RANDBETWEEN = NumberExpressionFunctions.<SpreadsheetExpressionEvaluationContext>randomBetween()
-            .setName(FunctionExpressionName.with("randBetween"));
+            .setName(functionName("randBetween"));
     
     /**
      * {@see StringExpressionFunctions#replace}
@@ -978,7 +979,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> REPT = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>repeat()
-            .setName(FunctionExpressionName.with("rept"));
+            .setName(functionName("rept"));
 
     /**
      * {@see StringExpressionFunctions#right}
@@ -1002,7 +1003,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> ROUND = NumberExpressionFunctions.<SpreadsheetExpressionEvaluationContext>roundHalf()
-            .setName(FunctionExpressionName.with("round"));
+            .setName(functionName("round"));
 
     /**
      * {@see NumberExpressionFunctions#roundDown}
@@ -1040,7 +1041,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> SEARCH = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>searchCaseInsensitive()
-            .setName(FunctionExpressionName.with("search"));
+            .setName(functionName("search"));
 
     /**
      * {@see DateTimeExpressionFunctions#second}
@@ -1141,7 +1142,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> TEXTJOIN = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>textJoin()
-            .setName(FunctionExpressionName.with("textJoin"));
+            .setName(functionName("textJoin"));
 
     /**
      * {@see DateTimeExpressionFunctions#time}
@@ -1165,7 +1166,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> TRIM = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>spaceTrim()
-            .setName(FunctionExpressionName.with("trim"));
+            .setName(functionName("trim"));
     
     /**
      * {@see BooleanExpressionFunctions#trueFunction}
@@ -1196,7 +1197,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<Character, SpreadsheetExpressionEvaluationContext> UNICHAR = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>character()
-            .setName(FunctionExpressionName.with("unichar"));
+            .setName(functionName("unichar"));
 
     /**
      * {@see StringExpressionFunctions#unicode}
@@ -1206,7 +1207,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> UNICODE = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>unicode()
-            .setName(FunctionExpressionName.with("unicode"));
+            .setName(functionName("unicode"));
 
     /**
      * {@see StringExpressionFunctions#upper}
@@ -1228,7 +1229,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> VALUE = NumberExpressionFunctions.<SpreadsheetExpressionEvaluationContext>number()
-            .setName(FunctionExpressionName.with("value"));
+            .setName(functionName("value"));
 
     /**
      * {@see DateTimeExpressionFunctions#weekDay}
@@ -1262,8 +1263,14 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                                                                                                        final String name) {
         return UnformattedNumberExpressionFunction.with(
                 function.setName(
-                        FunctionExpressionName.with(name)
+                        functionName(name)
                 )
+        );
+    }
+
+    private static Optional<FunctionExpressionName> functionName(final String name) {
+        return Optional.of(
+                FunctionExpressionName.with(name)
         );
     }
 

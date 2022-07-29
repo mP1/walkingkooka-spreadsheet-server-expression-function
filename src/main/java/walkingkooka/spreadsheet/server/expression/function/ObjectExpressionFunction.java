@@ -22,6 +22,8 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 
+import java.util.Optional;
+
 /**
  * Common abstract base class for all Object functions in this package.
  */
@@ -29,15 +31,17 @@ abstract class ObjectExpressionFunction implements ExpressionFunction<Object, Sp
 
     ObjectExpressionFunction(final String name) {
         super();
-        this.name = FunctionExpressionName.with(name);
+        this.name = Optional.of(
+                FunctionExpressionName.with(name)
+        );
     }
 
     @Override
-    public final FunctionExpressionName name() {
-        return name;
+    public final Optional<FunctionExpressionName> name() {
+        return this.name;
     }
 
-    private final FunctionExpressionName name;
+    private final Optional<FunctionExpressionName> name;
 
     @Override
     public final Class<Object> returnType() {
@@ -46,6 +50,8 @@ abstract class ObjectExpressionFunction implements ExpressionFunction<Object, Sp
 
     @Override
     public final String toString() {
-        return this.name().toString();
+        return this.name()
+                .get()
+                .toString();
     }
 }
