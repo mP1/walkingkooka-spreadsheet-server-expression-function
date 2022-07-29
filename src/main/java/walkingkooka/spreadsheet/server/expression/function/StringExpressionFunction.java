@@ -22,6 +22,8 @@ import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 
+import java.util.Optional;
+
 /**
  * Base class for many {@link ExpressionFunction} that returns {@link String}.
  */
@@ -32,15 +34,17 @@ abstract class StringExpressionFunction implements ExpressionFunction<String, Sp
      */
     StringExpressionFunction(final String name) {
         super();
-        this.name = FunctionExpressionName.with(name);
+        this.name = Optional.of(
+                FunctionExpressionName.with(name)
+        );
     }
 
     @Override
-    public FunctionExpressionName name() {
+    public final Optional<FunctionExpressionName> name() {
         return this.name;
     }
 
-    private final FunctionExpressionName name;
+    private final Optional<FunctionExpressionName> name;
 
     @Override
     public final Class<String> returnType() {

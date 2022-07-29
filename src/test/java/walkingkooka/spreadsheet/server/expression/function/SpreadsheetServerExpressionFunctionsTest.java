@@ -95,7 +95,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final Set<FunctionExpressionName> names = Sets.sorted();
         SpreadsheetServerExpressionFunctions.visit(
                 (e) -> {
-                    final FunctionExpressionName name = e.name();
+                    final FunctionExpressionName name = e.name()
+                            .get();
                     if (!names.add(name)) {
                         throw new IllegalStateException("Duplicate function name: " + name);
                     }
@@ -2324,7 +2325,13 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
         final Map<String, ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
         SpreadsheetServerExpressionFunctions.visit(
-                (f -> nameToFunctions.put(f.name().value(), f))
+                (f -> nameToFunctions.put(
+                        f.name()
+                                .get()
+                                .value(),
+                        f
+                )
+                )
         );
 
         final SpreadsheetMetadataStore metadataStore = SpreadsheetMetadataStores.treeMap();
@@ -2426,30 +2433,32 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
         final List<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> pureFunctions = Lists.array();
 
-        functions.forEach(f -> {
-            final boolean pure;
+        functions.forEach(
+                f -> {
+                    final boolean pure;
 
-            final FunctionExpressionName name = f.name();
+                    final FunctionExpressionName name = f.name()
+                            .get();
 
-            switch(name.value().toLowerCase()) {
-                case "now":
-                case "today":
-                case "rand":
-                case "randbetween":
-                case "offset":
-                case "cell":
-                case "info":
-                    pure = false;
-                    break;
-                default:
-                    pure = true;
-                    break;
-            }
+                    switch (name.value().toLowerCase()) {
+                        case "now":
+                        case "today":
+                        case "rand":
+                        case "randbetween":
+                        case "offset":
+                        case "cell":
+                        case "info":
+                            pure = false;
+                            break;
+                        default:
+                            pure = true;
+                            break;
+                    }
 
-            if(f.isPure(context) != pure) {
-                pureFunctions.add(f);
-            }
-        });
+                    if (f.isPure(context) != pure) {
+                        pureFunctions.add(f);
+                    }
+                });
 
         this.checkEquals(
                 Lists.empty(),

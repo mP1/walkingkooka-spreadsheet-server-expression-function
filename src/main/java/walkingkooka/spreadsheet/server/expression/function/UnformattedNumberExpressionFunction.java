@@ -27,6 +27,7 @@ import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A {@link ExpressionFunction} that executes the wraps another {@link ExpressionFunction}, passing a context that
@@ -44,7 +45,7 @@ final class UnformattedNumberExpressionFunction<T> implements ExpressionFunction
     }
 
     @Override
-    public FunctionExpressionName name() {
+    public Optional<FunctionExpressionName> name() {
         return this.function.name();
     }
 
