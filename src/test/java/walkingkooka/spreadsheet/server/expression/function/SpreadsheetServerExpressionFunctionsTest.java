@@ -17,7 +17,6 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
@@ -1948,10 +1947,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    @Disabled("Waiting for Context#now https://github.com/mP1/walkingkooka-tree-expression-function-datetime/issues/66")
     public void testTextWithDateTime() {
         this.evaluateAndValueCheck(
-                "=text(datetime(1999,12,31,12,58,59), \"yyyy mm dd hh mm ss\")",
+                "=text(now(), \"yyyy mm dd hh mm ss\")",
                 "1999 12 31 12 58 59"
         );
     }
