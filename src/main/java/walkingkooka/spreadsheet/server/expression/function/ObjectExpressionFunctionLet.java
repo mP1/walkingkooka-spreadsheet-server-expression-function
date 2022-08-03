@@ -20,7 +20,6 @@ package walkingkooka.spreadsheet.server.expression.function;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
-import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.spreadsheet.reference.SpreadsheetLabelName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
@@ -107,9 +106,8 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
         }
 
         // now create the context with the given labels and values.
-        final SpreadsheetExpressionEvaluationContext context2 = SpreadsheetExpressionEvaluationContexts.localLabels(
-                (n) -> Optional.ofNullable(nameAndValues.get(n)),
-                context
+        final SpreadsheetExpressionEvaluationContext context2 = context.context(
+                (n) -> Optional.ofNullable(nameAndValues.get(n))
         );
 
         return context2.evaluateIfNecessary(
