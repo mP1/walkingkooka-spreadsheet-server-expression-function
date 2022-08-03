@@ -29,6 +29,7 @@ import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * A let function.
@@ -107,7 +108,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
 
         // now create the context with the given labels and values.
         final SpreadsheetExpressionEvaluationContext context2 = SpreadsheetExpressionEvaluationContexts.localLabels(
-                nameAndValues,
+                (n) -> Optional.ofNullable(nameAndValues.get(n)),
                 context
         );
 
