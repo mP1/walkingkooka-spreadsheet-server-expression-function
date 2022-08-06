@@ -40,11 +40,6 @@ public final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvalu
     }
 
     @Override
-    public void testEvaluateFunctionUnknownFunctionNameFails() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void testFunctionUnknownFunctionNameFails() {
         throw new UnsupportedOperationException();
     }
