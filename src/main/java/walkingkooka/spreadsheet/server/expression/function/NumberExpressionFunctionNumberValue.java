@@ -28,6 +28,7 @@ import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The excel numbervalue fnction which converts text to a {@link ExpressionNumber}. This is achieved by converting
@@ -53,10 +54,20 @@ final class NumberExpressionFunctionNumberValue extends NumberExpressionFunction
         return this.apply0(
                 parameters.subList(0, 1),
                 NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.with(
-                        DECIMAL_SEPARATOR.get(parameters, 1).orElse(context.decimalSeparator()),
-                        GROUP_SEPARATOR.get(parameters, 2).orElse(context.groupingSeparator()),
-                        context
-                )
+                        DECIMAL_SEPARATOR.get(parameters, 1)
+                                .orElseGet(
+                                        () -> Optional.of(
+                                                context.decimalSeparator()
+                                        )
+                                ).get(),
+                        GROUP_SEPARATOR.get(parameters, 2)
+                                .orElseGet(
+                                        () -> Optional.of(
+                                                context.groupingSeparator()
+                                        )
+                                ).get(),
+                context
+            )
         );
     }
 
