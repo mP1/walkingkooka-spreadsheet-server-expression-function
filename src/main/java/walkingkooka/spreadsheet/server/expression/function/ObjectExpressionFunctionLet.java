@@ -107,7 +107,15 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
 
         // now create the context with the given labels and values.
         final SpreadsheetExpressionEvaluationContext context2 = context.context(
-                (n) -> Optional.ofNullable(nameAndValues.get(n))
+                (n) -> {
+                    final Object value = nameAndValues.get(n);
+
+                    return null != value || nameAndValues.containsKey(n) ?
+                            Optional.of(
+                                    Optional.ofNullable(value)
+                            ) :
+                            Optional.empty();
+                }
         );
 
         return context2.evaluateIfNecessary(
