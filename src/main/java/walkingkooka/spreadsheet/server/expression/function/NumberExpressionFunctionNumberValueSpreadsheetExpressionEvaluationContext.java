@@ -145,7 +145,7 @@ final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationCo
     }
 
     @Override
-    public Optional<Object> reference(final ExpressionReference reference) {
+    public Optional<Optional<Object>> reference(final ExpressionReference reference) {
         return this.context.reference(reference);
     }
 
