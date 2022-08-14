@@ -22,12 +22,12 @@ import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.text.CharSequences;
 import walkingkooka.tree.expression.ExpressionNumber;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterName;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The excel dollar function.
@@ -61,7 +61,12 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
                           final SpreadsheetExpressionEvaluationContext context) {
         ExpressionNumber value = NUMBER.getOrFail(parameters, 0); // needs to convert...
         final int decimals = (DECIMALS.get(parameters, 1)
-                        .orElse(TWO)
+                .orElseGet(
+                        () -> Optional.of(
+                                context.expressionNumberKind().create(2)
+                        )
+                )
+                .orElse(null)
         ).intValueExact();
 
 
@@ -101,8 +106,6 @@ final class StringExpressionFunctionDollar extends StringExpressionFunction {
     private final static ExpressionFunctionParameter<ExpressionNumber> DECIMALS = ExpressionFunctionParameterName.with("decimals")
             .optional(ExpressionNumber.class)
             .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
-
-    private final static ExpressionNumber TWO = ExpressionNumberKind.DEFAULT.create(2);
 
     @Override
     public List<ExpressionFunctionParameter<?>> parameters(final int count) {
