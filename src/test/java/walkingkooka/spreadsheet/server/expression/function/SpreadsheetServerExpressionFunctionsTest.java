@@ -1312,6 +1312,24 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         );
     }
 
+    // https://www.microsoft.com/en-us/research/blog/lambda-the-ultimatae-excel-worksheet-function/
+
+    @Test
+    public void testLambdaWithParametersLet() {
+        this.evaluateAndValueCheck(
+                "=lambda(x,y,    Let(xs, x*x, ys, y*y, xs+ys))(3, 4)",
+                EXPRESSION_NUMBER_KIND.create(25)
+        );
+    }
+
+    @Test
+    public void testLambdaWithParametersLet2() {
+        this.evaluateAndValueCheck(
+                "=lambda(x,y,    Let(xs, x*x, ys, y*y, sqrt(xs+ys)))(3, 4)",
+                EXPRESSION_NUMBER_KIND.create(5)
+        );
+    }
+
     @Test
     public void testLeft() {
         this.evaluateAndValueCheck(
