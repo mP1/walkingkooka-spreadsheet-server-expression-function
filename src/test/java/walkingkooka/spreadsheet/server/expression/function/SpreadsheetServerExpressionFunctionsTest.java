@@ -1286,7 +1286,32 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 true
         );
     }
-    
+
+    @Test
+    public void testLambdaWithParameters() {
+        this.evaluateAndValueCheck(
+                "=lambda(x,y,x*y)(10,20)",
+                EXPRESSION_NUMBER_KIND.create(10 * 20)
+        );
+    }
+
+    @Test
+    public void testLAMBDAWithParameters() {
+        this.evaluateAndValueCheck(
+                "=LAMBDA(x,y,z,x*y*z)(20,30, 40)",
+                EXPRESSION_NUMBER_KIND.create(20 * 30 * 40)
+        );
+    }
+
+    @Test
+    public void testLambdaWithParametersAndCellReference() {
+        this.evaluateAndValueCheck(
+                "=lambda(x,y,x*y*b2)(10,20)",
+                Maps.of("b2", "30"),
+                EXPRESSION_NUMBER_KIND.create(10 * 20 * 30)
+        );
+    }
+
     @Test
     public void testLeft() {
         this.evaluateAndValueCheck(

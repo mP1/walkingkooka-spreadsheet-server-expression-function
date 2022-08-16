@@ -119,6 +119,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 isOdd(),
                 isoWeekNum(),
                 isText(),
+                lambda(),
                 left(),
                 len(),
                 let(),
@@ -729,6 +730,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> isText() {
         return StringExpressionFunctions.isText();
+    }
+
+    /**
+     * {@see LambdaExpressionFunction}
+     */
+    public static ExpressionFunction<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>, SpreadsheetExpressionEvaluationContext> lambda() {
+        return LambdaExpressionFunction.INSTANCE;
     }
 
     /**
