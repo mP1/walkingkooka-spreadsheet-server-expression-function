@@ -61,13 +61,13 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
         final int count = values.size();
         switch (count) {
             case 0:
-                throw new IllegalArgumentException(MISSING_COMPUTED_VALUE_EXPRESSION);
+                throw new IllegalArgumentException(MISSING_EXPRESSION);
             case 1:
-                value = COMPUTED.getOrFail(values, 0);
+                value = EXPRESSION.getOrFail(values, 0);
                 break;
             default:
                 if (count % 2 == 0) {
-                    throw new IllegalArgumentException(MISSING_COMPUTED_VALUE_EXPRESSION);
+                    throw new IllegalArgumentException(MISSING_EXPRESSION);
                 }
                 value = this.apply0(
                         values,
@@ -82,7 +82,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
     /**
      * This message is used when the let function is executed with no values.
      */
-    private final static String MISSING_COMPUTED_VALUE_EXPRESSION = "Missing final computed value/expression";  // TODO verify actual error
+    private final static String MISSING_EXPRESSION = "Missing last parameter with expression";
 
     private Object apply0(final List<Object> values,
                           final SpreadsheetExpressionEvaluationContext context) {
@@ -119,7 +119,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
         );
 
         return context2.evaluateIfNecessary(
-                COMPUTED.getOrFail(
+                EXPRESSION.getOrFail(
                         context2.prepareParameters(
                                 this,
                                 values
@@ -149,15 +149,15 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
         return parameters;
     }
 
-    private final ExpressionFunctionParameter<Object> COMPUTED = ExpressionFunctionParameterName.with("computed")
+    private final ExpressionFunctionParameter<Object> EXPRESSION = ExpressionFunctionParameterName.with("expression")
             .required(Object.class)
             .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
 
-    private final List<ExpressionFunctionParameter<?>> COMPUTED_PARAMETERS = Lists.of(COMPUTED);
+    private final List<ExpressionFunctionParameter<?>> COMPUTED_PARAMETERS = Lists.of(EXPRESSION);
 
     private List<ExpressionFunctionParameter<?>> parameters0(final int count) {
         if (count % 2 == 0) {
-            throw new IllegalArgumentException(MISSING_COMPUTED_VALUE_EXPRESSION);
+            throw new IllegalArgumentException(MISSING_EXPRESSION);
         }
         final ExpressionFunctionParameter<?>[] parameters =  new ExpressionFunctionParameter<?>[count];
 
@@ -171,7 +171,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
             j++;
         }
 
-        parameters[count - 1] = COMPUTED;
+        parameters[count - 1] = EXPRESSION;
 
         return Lists.of(parameters);
     }

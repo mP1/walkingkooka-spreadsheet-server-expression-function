@@ -47,7 +47,7 @@ public final class LambdaExpressionFunctionTest extends ExpressionFunctionTestCa
                 () -> LambdaExpressionFunction.INSTANCE.parameters(0)
         );
         this.checkEquals(
-                "Missing expression parameter",
+                "Missing last parameter with expression",
                 thrown.getMessage(),
                 "message"
         );

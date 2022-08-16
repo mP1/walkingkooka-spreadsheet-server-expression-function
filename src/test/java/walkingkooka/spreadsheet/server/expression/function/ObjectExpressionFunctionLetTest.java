@@ -51,7 +51,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     public void testZeroParametersFails() {
         this.applyFails2(
                 Lists.empty(),
-                "Missing final computed value/expression"
+                "Missing last parameter with expression"
         );
     }
 
@@ -59,7 +59,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     public void testEvenNumberParameterCountFails() {
         this.applyFails2(
                 Lists.of(1, 2),
-                "Missing final computed value/expression"
+                "Missing last parameter with expression"
         );
     }
 

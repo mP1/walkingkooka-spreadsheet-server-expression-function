@@ -65,7 +65,7 @@ final class LambdaExpressionFunction implements ExpressionFunction<ExpressionFun
         return true; // the function itself is pure depending on the parameter values themselves.
     }
 
-    private final static String MISSING_EXPRESSION = "Missing expression parameter";  // TODO verify actual error
+    private final static String MISSING_EXPRESSION = "Missing last parameter with expression";
 
     @Override
     public ExpressionFunction<?, SpreadsheetExpressionEvaluationContext> apply(final List<Object> values,
