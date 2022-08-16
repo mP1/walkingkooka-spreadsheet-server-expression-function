@@ -99,6 +99,7 @@ different semantics that exist within a spreadsheet formula or function evaluati
 - isOdd()
 - isoWeekNum()
 - isText(),
+- lambda(),
 - left(),
 - len(),
 - let(),
