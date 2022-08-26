@@ -64,7 +64,7 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
 
     private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameterName.with("value")
             .required(Object.class)
-            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+            .setKinds(ExpressionFunctionParameterKind.EVALUATE_RESOLVE_REFERENCES);
 
     private final static ExpressionFunctionParameter<String> PATTERN = ExpressionFunctionParameterName.with("format-pattern")
             .required(String.class)
