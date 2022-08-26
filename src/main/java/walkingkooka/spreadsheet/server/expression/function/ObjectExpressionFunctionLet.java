@@ -151,7 +151,7 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
 
     private final ExpressionFunctionParameter<Object> EXPRESSION = ExpressionFunctionParameterName.with("expression")
             .required(Object.class)
-            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+            .setKinds(ExpressionFunctionParameterKind.EVALUATE_RESOLVE_REFERENCES);
 
     private final List<ExpressionFunctionParameter<?>> COMPUTED_PARAMETERS = Lists.of(EXPRESSION);
 
@@ -184,5 +184,5 @@ final class ObjectExpressionFunctionLet extends ObjectExpressionFunction {
 
     private final ExpressionFunctionParameter<Object> LABEL_VALUE = ExpressionFunctionParameterName.with("value")
             .required(Object.class)
-            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+            .setKinds(ExpressionFunctionParameterKind.EVALUATE_RESOLVE_REFERENCES);
 }

@@ -104,11 +104,11 @@ final class NumberExpressionFunctionIf extends NumberExpressionFunction {
     }
 
     private final static ExpressionFunctionParameter<Object> VALUE = ExpressionFunctionParameter.VALUE
-            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+            .setKinds(ExpressionFunctionParameterKind.EVALUATE_RESOLVE_REFERENCES);
 
     private final static ExpressionFunctionParameter<Object> CRITERIA = ExpressionFunctionParameterName.with("criteria")
             .required(Object.class)
-            .setKinds(ExpressionFunctionParameterKind.CONVERT_EVALUATE_RESOLVE_REFERENCES);
+            .setKinds(ExpressionFunctionParameterKind.EVALUATE_RESOLVE_REFERENCES);
 
     /**
      * Filters the parameter values using the filter.
