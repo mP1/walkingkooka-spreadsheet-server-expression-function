@@ -54,7 +54,7 @@ final class StringExpressionFunctionText extends StringExpressionFunction {
                 PATTERN.getOrFail(parameters, 1)
         );
 
-        return SpreadsheetConverters.formatPattern(pattern)
+        return SpreadsheetConverters.stringToFormatPattern(pattern)
                 .convertOrFail(
                         value,
                         String.class,
