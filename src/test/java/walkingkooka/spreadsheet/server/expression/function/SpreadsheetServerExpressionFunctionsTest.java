@@ -29,6 +29,7 @@ import walkingkooka.net.email.EmailAddress;
 import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.PublicStaticHelperTesting;
 import walkingkooka.spreadsheet.SpreadsheetCell;
+import walkingkooka.spreadsheet.SpreadsheetError;
 import walkingkooka.spreadsheet.SpreadsheetErrorKind;
 import walkingkooka.spreadsheet.SpreadsheetFormula;
 import walkingkooka.spreadsheet.SpreadsheetId;
@@ -114,6 +115,54 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 names.size());
     }
 
+    // error handling tests............................................................................................
+
+    @Test
+    public void testFormulaError() {
+        this.evaluateAndValueCheck(
+                "=1+",
+                SpreadsheetErrorKind.ERROR.setMessage(
+                        "End of text at (4,1) \"=1+\" expected BINARY_SUB_EXPRESSION"
+                )
+        );
+    }
+
+    @Test
+    public void testFormulaEqMissingCell() {
+        this.evaluateAndValueCheck(
+                "=Z99",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testFormulaEqUnknownLabel() {
+        this.evaluateAndValueCheck(
+                "=Label123",
+                SpreadsheetError.notFound(
+                        SpreadsheetSelection.labelName("Label123")
+                )
+        );
+    }
+
+    @Test
+    public void testFormulaEqUnknownFunction() {
+        this.evaluateAndValueCheck(
+                "=UnknownFunction123()",
+                SpreadsheetErrorKind.VALUE.setMessage(
+                        "Unknown function UnknownFunction123"
+                )
+        );
+    }
+
+    @Test
+    public void testFormulaIncludesMissingCell() {
+        this.evaluateAndValueCheck(
+                "=1+Z99",
+                EXPRESSION_NUMBER_KIND.one()
+        );
+    }
+
     // evaluateAndValueCheck tests......................................................................................
 
     @Test
@@ -151,7 +200,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 Maps.of(
                         "A2", "=2"
                 ),
-                SpreadsheetErrorKind.REF.setMessage("Reference not found: A3")
+                EXPRESSION_NUMBER_KIND.create(3)
         );
     }
 
