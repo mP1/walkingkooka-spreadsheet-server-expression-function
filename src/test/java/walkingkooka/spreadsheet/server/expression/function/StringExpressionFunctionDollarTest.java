@@ -20,6 +20,9 @@ package walkingkooka.spreadsheet.server.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.convert.Converter;
+import walkingkooka.convert.Converters;
+import walkingkooka.spreadsheet.convert.SpreadsheetConverterContext;
 import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumber;
@@ -223,22 +226,51 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
             }
 
             @Override
+            public boolean canConvert(final Object value,
+                                      final Class<?> type) {
+                return value instanceof ExpressionNumber &&
+                        (ExpressionNumber.class == type || BigDecimal.class == type);
+            }
+
+            @Override
             public <TT> Either<TT, String> convert(final Object value,
                                                    final Class<TT> target) {
-                if(value instanceof ExpressionNumber && ExpressionNumber.class == target) {
-                    return this.successfulConversion(
-                            ExpressionNumber.class.cast(value),
-                            target
-                    );
-                }
-                if(value instanceof ExpressionNumber && BigDecimal.class == target) {
-                    return this.successfulConversion(
-                            ExpressionNumber.class.cast(value).bigDecimal(),
-                            target
-                    );
-                }
+                return this.converter()
+                        .convert(
+                                value,
+                                target,
+                                this
+                        );
+            }
 
-                return this.failConversion(value, target);
+            @Override
+            public Converter<SpreadsheetConverterContext> converter() {
+                return Converters.collection(
+                        Lists.of(
+                                new Converter<>() {
+                                    @Override
+                                    public boolean canConvert(final Object value,
+                                                              final Class<?> type,
+                                                              final SpreadsheetConverterContext context) {
+                                        return value instanceof ExpressionNumber && ExpressionNumber.class == type;
+                                    }
+
+                                    @Override
+                                    public <T> Either<T, String> convert(final Object value,
+                                                                         final Class<T> type,
+                                                                         final SpreadsheetConverterContext context) {
+                                        return this.successfulConversion(
+                                                ExpressionNumber.class.cast(value),
+                                                type
+                                        );
+                                    }
+                                },
+                                Converters.simple(),
+                                ExpressionNumber.fromConverter(
+                                        Converters.numberNumber()
+                                )
+                        )
+                );
             }
 
             @Override
