@@ -60,6 +60,7 @@ import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
@@ -149,8 +150,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testFormulaEqUnknownFunction() {
         this.evaluateAndValueCheck(
                 "=UnknownFunction123()",
-                SpreadsheetErrorKind.VALUE.setMessage(
-                        "Unknown function UnknownFunction123"
+                SpreadsheetErrorKind.NAME.setMessageAndValue(
+                        "Unknown function \"UnknownFunction123\"",
+                        FunctionExpressionName.with("UnknownFunction123")
                 )
         );
     }
@@ -2447,7 +2449,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                     Objects.requireNonNull(n, "name");
                     final ExpressionFunction<?, ?> function = nameToFunctions.get(n.value());
                     if (null == function) {
-                        throw new IllegalArgumentException("Unknown function " + n);
+                        throw new UnknownExpressionFunctionException(n);
                     }
                     return Cast.to(function);
                 },
