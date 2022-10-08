@@ -20,14 +20,15 @@ package walkingkooka.spreadsheet.server.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.Either;
 import walkingkooka.collect.list.Lists;
+import walkingkooka.convert.Converter;
 import walkingkooka.convert.Converters;
+import walkingkooka.spreadsheet.convert.SpreadsheetConverterContext;
 import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 
-import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Locale;
 
@@ -102,25 +103,27 @@ public final class StringExpressionFunctionTextTest extends StringExpressionFunc
             @Override
             public <TT> Either<TT, String> convert(final Object value,
                                                    final Class<TT> target) {
-                if(value instanceof ExpressionNumber && BigDecimal.class == target) {
-                    return this.successfulConversion(
-                            ExpressionNumber.class.cast(value).bigDecimal(),
-                            target
-                    );
-                }
-                if(Object.class == target) {
-                    return this.successfulConversion(
-                            value,
-                            target
-                    );
-                }
+                return this.converter()
+                        .convert(
+                                value,
+                                target,
+                                this
+                        );
+            }
+
+            @Override
+            public Converter<SpreadsheetConverterContext> converter() {
                 return Converters.collection(
                         Lists.of(
                                 Converters.simple(),
+                                Converters.object(),
                                 Converters.localDateLocalDateTime(),
-                                Converters.localTimeLocalDateTime()
+                                Converters.localTimeLocalDateTime(),
+                                ExpressionNumber.fromConverter(
+                                        Converters.numberNumber()
+                                )
                         )
-                ).convert(value, target, this);
+                );
             }
 
             @Override
