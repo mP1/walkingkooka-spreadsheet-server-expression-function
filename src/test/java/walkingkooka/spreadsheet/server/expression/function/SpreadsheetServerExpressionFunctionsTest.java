@@ -57,6 +57,7 @@ import walkingkooka.spreadsheet.store.SpreadsheetColumnStores;
 import walkingkooka.spreadsheet.store.SpreadsheetRowStores;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepositories;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
+import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -82,7 +83,8 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public final class SpreadsheetServerExpressionFunctionsTest implements PublicStaticHelperTesting<SpreadsheetServerExpressionFunctions> {
+public final class SpreadsheetServerExpressionFunctionsTest implements PublicStaticHelperTesting<SpreadsheetServerExpressionFunctions>,
+        TreePrintableTesting {
 
     private final static Locale LOCALE = Locale.forLanguageTag("EN-AU");
     private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("https://server.example.com");
