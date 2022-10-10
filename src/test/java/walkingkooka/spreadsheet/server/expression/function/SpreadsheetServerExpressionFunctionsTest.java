@@ -142,7 +142,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testFormulaEqUnknownLabel() {
         this.evaluateAndValueCheck(
                 "=Label123",
-                SpreadsheetError.notFound(
+                SpreadsheetError.selectionNotFound(
                         SpreadsheetSelection.labelName("Label123")
                 )
         );
