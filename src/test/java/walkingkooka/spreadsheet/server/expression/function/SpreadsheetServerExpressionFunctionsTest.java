@@ -1384,6 +1384,17 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testLeftMissingCellReference() {
+        this.evaluateAndValueCheck(
+                "=left(Z99)",
+                SpreadsheetErrorKind.NAME_STRING.setMessageAndValue(
+                        "Cell not found: Z99",
+                        SpreadsheetSelection.parseCell("Z99")
+                )
+        );
+    }
+
+    @Test
     public void testLeft() {
         this.evaluateAndValueCheck(
                 "=left(\"abc\")",
