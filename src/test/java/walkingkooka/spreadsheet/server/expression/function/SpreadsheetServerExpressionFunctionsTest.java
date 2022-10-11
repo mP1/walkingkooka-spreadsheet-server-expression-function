@@ -152,8 +152,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testFormulaEqUnknownFunction() {
         this.evaluateAndValueCheck(
                 "=UnknownFunction123()",
-                SpreadsheetErrorKind.NAME.setMessageAndValue(
-                        "Unknown function \"UnknownFunction123\"",
+                SpreadsheetError.functionNotFound(
                         FunctionExpressionName.with("UnknownFunction123")
                 )
         );
