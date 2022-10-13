@@ -17,6 +17,7 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
+import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.SpreadsheetError;
@@ -527,7 +528,9 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      * {@see walkingkooka.spreadsheet.expression.SpreadsheetExpressionFunctions#error}
      */
     public static ExpressionFunction<SpreadsheetError, SpreadsheetExpressionEvaluationContext> error() {
-        return walkingkooka.spreadsheet.expression.SpreadsheetExpressionFunctions.error();
+        return Cast.to(
+                walkingkooka.spreadsheet.expression.SpreadsheetExpressionFunctions.error()
+        );
     }
 
     /**
