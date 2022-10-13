@@ -115,7 +115,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         .map(Method::getName)
                         .collect(Collectors.toCollection(Sets::sorted))
                         .size(),
-                names.size());
+                names.size()
+        );
     }
 
     // error handling tests............................................................................................
@@ -1126,6 +1127,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testIsErrWithError() {
         this.evaluateAndValueCheck(
                 "=isErr(1/0)",
+                true
+        );
+    }
+
+    @Test
+    public void testIsErrWithErrorRef() {
+        this.evaluateAndValueCheck(
+                "=isErr(#REF!)",
                 true
         );
     }
