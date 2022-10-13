@@ -19,6 +19,7 @@ package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.collect.list.Lists;
 import walkingkooka.reflect.PublicStaticHelper;
+import walkingkooka.spreadsheet.SpreadsheetError;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
@@ -90,6 +91,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
                 delta(),
                 dollar(),
                 e(),
+                error(),
                 even(),
                 exact(),
                 exp(),
@@ -519,6 +521,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> e() {
         return NumberExpressionFunctions.e();
+    }
+
+    /**
+     * {@see walkingkooka.spreadsheet.expression.SpreadsheetExpressionFunctions#error}
+     */
+    public static ExpressionFunction<SpreadsheetError, SpreadsheetExpressionEvaluationContext> error() {
+        return walkingkooka.spreadsheet.expression.SpreadsheetExpressionFunctions.error();
     }
 
     /**
