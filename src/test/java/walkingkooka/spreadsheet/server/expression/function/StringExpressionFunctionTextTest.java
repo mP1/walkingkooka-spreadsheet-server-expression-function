@@ -147,7 +147,7 @@ public final class StringExpressionFunctionTextTest extends StringExpressionFunc
             }
 
             @Override
-            public char groupingSeparator() {
+            public char groupSeparator() {
                 return ',';
             }
 

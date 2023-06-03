@@ -234,7 +234,7 @@ final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationCo
     }
 
     @Override
-    public char groupingSeparator() {
+    public char groupSeparator() {
         return this.groupSeparator;
     }
 

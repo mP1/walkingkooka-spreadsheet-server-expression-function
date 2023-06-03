@@ -63,7 +63,7 @@ final class NumberExpressionFunctionNumberValue extends NumberExpressionFunction
                         GROUP_SEPARATOR.get(parameters, 2)
                                 .orElseGet(
                                         () -> Optional.of(
-                                                context.groupingSeparator()
+                                                context.groupSeparator()
                                         )
                                 ).get(),
                 context
