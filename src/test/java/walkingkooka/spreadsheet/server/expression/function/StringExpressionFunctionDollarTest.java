@@ -294,7 +294,7 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
             }
 
             @Override
-            public char groupingSeparator() {
+            public char groupSeparator() {
                 return ',';
             }
 
