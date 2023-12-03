@@ -145,7 +145,7 @@ final class IfFunctionPredicate implements StaticHelper {
         return (v) -> (Boolean) context.evaluate(
                 condition.apply(
                         Expression.value(v),
-                        context.parseExpression(
+                        context.parseFormula(
                                         TextCursors.charSequence(value)
                                 ).toExpression(context)
                                 .orElse(null)

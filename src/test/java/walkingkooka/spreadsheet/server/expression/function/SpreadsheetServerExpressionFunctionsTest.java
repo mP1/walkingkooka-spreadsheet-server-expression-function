@@ -40,6 +40,7 @@ import walkingkooka.spreadsheet.engine.SpreadsheetEngineContexts;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterContext;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
@@ -135,7 +136,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testFormulaEqMissingCell() {
         this.evaluateAndValueCheck(
                 "=Z99",
-                EXPRESSION_NUMBER_KIND.zero()
+                SpreadsheetError.selectionNotFound(
+                        SpreadsheetSelection.parseCell("Z99")
+                )
         );
     }
 
@@ -163,7 +166,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testFormulaIncludesMissingCell() {
         this.evaluateAndValueCheck(
                 "=1+Z99",
-                EXPRESSION_NUMBER_KIND.one()
+                SpreadsheetError.selectionNotFound(
+                        SpreadsheetSelection.parseCell("Z99")
+                )
         );
     }
 
@@ -204,7 +209,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 Maps.of(
                         "A2", "=2"
                 ),
-                EXPRESSION_NUMBER_KIND.create(3)
+                SpreadsheetError.selectionNotFound(
+                        SpreadsheetSelection.parseCell("A3")
+                )
         );
     }
 
@@ -306,7 +313,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testAverageIfSomeValuesFiltered() {
         this.evaluateAndValueCheck(
-                "=averageIf(A2:A4, \">99+1\")",
+                "=averageIf(A2:A4, \">100\")",
                 Maps.of(
                         "A2", "=1", //
                         "A3", "=200", //
@@ -734,7 +741,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testCountIfSomeValuesFiltered() {
         this.evaluateAndValueCheck(
-                "=countIf(A2:A5, \">99+1\")",
+                "=countIf(A2:A5, \">100\")",
                 Maps.of(
                         "A2", "=1", //
                         "A3", "=2", //
@@ -1395,9 +1402,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testLeftMissingCellReference() {
         this.evaluateAndValueCheck(
                 "=left(Z99)",
-                SpreadsheetErrorKind.NAME_STRING.setMessageAndValue(
-                        "Cell not found: Z99",
-                        SpreadsheetSelection.parseCell("Z99")
+                SpreadsheetErrorKind.VALUE.setMessage(
+                        "Failed to convert SpreadsheetError to String"
                 )
         );
     }
@@ -2003,7 +2009,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testSumIfSomeValuesFiltered() {
         this.evaluateAndValueCheck(
-                "=sumIf(A2:A4, \">99+1\")",
+                "=sumIf(A2:A4, \">100\")",
                 Maps.of(
                         "A2", "=1", //
                         "A3", "=200", //
@@ -2411,6 +2417,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
                 .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
+                .set(SpreadsheetMetadataPropertyName.GENERAL_NUMBER_FORMAT_DIGIT_COUNT, SpreadsheetFormatterContext.DEFAULT_GENERAL_FORMAT_NUMBER_DIGIT_COUNT)
                 .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
                 .set(SpreadsheetMetadataPropertyName.NUMBER_FORMAT_PATTERN, SpreadsheetPattern.parseNumberFormatPattern("#.###"))
