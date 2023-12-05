@@ -380,7 +380,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = UnformattedNumberExpressionFunction.with(
             StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
-                    .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
+                    .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNullAndNotMissingCell)
     );
 
     /**
@@ -416,12 +416,13 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNTA = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
-            .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNull)
+            .filterParameters(SpreadsheetServerExpressionFunctions::filterNonNullAndNotMissingCell)
             .setName(functionName("countA"));
 
-    private static boolean filterNonNull(final Object value,
-                                         final SpreadsheetExpressionEvaluationContext context) {
-        return null != value;
+    private static boolean filterNonNullAndNotMissingCell(final Object value,
+                                                          final SpreadsheetExpressionEvaluationContext context) {
+        return null != value &&
+                false == (value instanceof SpreadsheetError && ((SpreadsheetError)value).isMissingCell());
     }
 
     /**
@@ -432,12 +433,15 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> COUNT_BLANK = StatExpressionFunctions.<SpreadsheetExpressionEvaluationContext>count()
-            .filterParameters(SpreadsheetServerExpressionFunctions::filterNull)
+            .filterParameters(SpreadsheetServerExpressionFunctions::filterNullAndNotMissingCell)
             .setName(functionName("countBlank"));
 
-    private static boolean filterNull(final Object value,
-                                         final SpreadsheetExpressionEvaluationContext context) {
-        return null == value;
+    private static boolean filterNullAndNotMissingCell(final Object value,
+                                                       final SpreadsheetExpressionEvaluationContext context) {
+        return null == value ||
+                (value instanceof SpreadsheetError &&
+                        ((SpreadsheetError) value).isMissingCell()
+                );
     }
 
     /**

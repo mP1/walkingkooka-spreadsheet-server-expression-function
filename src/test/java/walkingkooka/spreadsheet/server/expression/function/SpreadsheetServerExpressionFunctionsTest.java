@@ -136,9 +136,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testFormulaEqMissingCell() {
         this.evaluateAndValueCheck(
                 "=Z99",
-                SpreadsheetError.selectionNotFound(
-                        SpreadsheetSelection.parseCell("Z99")
-                )
+                EXPRESSION_NUMBER_KIND.zero()
         );
     }
 
@@ -165,10 +163,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testFormulaIncludesMissingCell() {
         this.evaluateAndValueCheck(
-                "=1+Z99",
-                SpreadsheetError.selectionNotFound(
-                        SpreadsheetSelection.parseCell("Z99")
-                )
+                "=123+Z99",
+                EXPRESSION_NUMBER_KIND.create(123)
         );
     }
 
@@ -203,14 +199,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
-    public void testMathExpressionEvaluationFailureReferenceNotFound() {
+    public void testMathExpressionEvaluation() {
         this.evaluateAndValueCheck(
                 "=1+A2+A3",
                 Maps.of(
                         "A2", "=2"
                 ),
-                SpreadsheetError.selectionNotFound(
-                        SpreadsheetSelection.parseCell("A3")
+                EXPRESSION_NUMBER_KIND.create(
+                        1 + 2 + 0
                 )
         );
     }
@@ -661,8 +657,8 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testCountAMissingCell() {
         this.evaluateAndValueCheck(
-                "=countA(Z99)", // becomes a #REF which counts as a non empty cell
-                EXPRESSION_NUMBER_KIND.one()
+                "=countA(Z99)", // becomes a #NAME which is ignored
+                EXPRESSION_NUMBER_KIND.zero()
         );
     }
 
@@ -702,7 +698,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testCountBlankMissingCell() {
         this.evaluateAndValueCheck(
                 "=countBlank(Z99)", // becomes a #REF which counts as a non empty cell
-                EXPRESSION_NUMBER_KIND.zero()
+                EXPRESSION_NUMBER_KIND.one()
         );
     }
 
