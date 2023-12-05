@@ -1987,6 +1987,49 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     }
 
     @Test
+    public void testSumMissingCell() {
+        this.evaluateAndValueCheck(
+                "=sum(B2)",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testSumMissingCell2() {
+        this.evaluateAndValueCheck(
+                "=sum(123+B2)",
+                EXPRESSION_NUMBER_KIND.create(123)
+        );
+    }
+
+    @Test
+    public void testSumMissingCellRange() {
+        this.evaluateAndValueCheck(
+                "=sum(B2:B3)",
+                EXPRESSION_NUMBER_KIND.zero()
+        );
+    }
+
+    @Test
+    public void testSumMissingCellRange2() {
+        this.evaluateAndValueCheck(
+                "=sum(B2:B3,123)",
+                EXPRESSION_NUMBER_KIND.create(123)
+        );
+    }
+
+    @Test
+    public void testSumMissingCellRange3() {
+        this.evaluateAndValueCheck(
+                "=sum(123,B2:B3)",
+                Maps.of(
+                        "B2", "1000"
+                ),
+                EXPRESSION_NUMBER_KIND.create(123 + 1000)
+        );
+    }
+
+    @Test
     public void testSumIfOne() {
         this.evaluateAndValueCheck(
                 "=sumIf(123, 123)",
