@@ -36,6 +36,11 @@ public final class LambdaExpressionFunctionTest extends ExpressionFunctionTestCa
         implements ToStringTesting<LambdaExpressionFunction> {
 
     @Override
+    public void testSetParametersSame() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public void testTypeNaming() {
         throw new UnsupportedOperationException();
     }
