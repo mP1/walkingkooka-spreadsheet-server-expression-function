@@ -737,7 +737,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     @Test
     public void testCountIfSomeValuesFiltered() {
         this.evaluateAndValueCheck(
-                "=countIf(A2:A5, \">100\")",
+                "=countIf(A2:A5, \">99+1\")",
                 Maps.of(
                         "A2", "=1", //
                         "A3", "=2", //
