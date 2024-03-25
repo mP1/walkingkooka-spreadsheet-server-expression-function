@@ -2552,7 +2552,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         if (null != formatted) {
             this.checkEquals(
                     formatted,
-                    saved.formatted(),
+                    saved.formattedValue(),
                     cellReference + "=" + cellFormula + "\n" +
                             preload.entrySet().stream()
                                     .map(e -> e.getKey() + "=" + e.getValue())
