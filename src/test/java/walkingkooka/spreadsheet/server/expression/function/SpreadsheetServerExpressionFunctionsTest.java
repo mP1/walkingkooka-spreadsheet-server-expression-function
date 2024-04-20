@@ -34,7 +34,7 @@ import walkingkooka.spreadsheet.SpreadsheetErrorKind;
 import walkingkooka.spreadsheet.SpreadsheetFormula;
 import walkingkooka.spreadsheet.SpreadsheetId;
 import walkingkooka.spreadsheet.SpreadsheetName;
-import walkingkooka.spreadsheet.compare.SpreadsheetComparators;
+import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviders;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngine;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContext;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContexts;
@@ -2513,7 +2513,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
-                SpreadsheetComparators.nameToSpreadsheetComparator(),
+                SpreadsheetComparatorProviders.builtIn(),
                 (n) -> {
                     Objects.requireNonNull(n, "name");
                     final ExpressionFunction<?, ?> function = nameToFunctions.get(n.value());
