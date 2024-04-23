@@ -17,6 +17,7 @@
 
 package walkingkooka.spreadsheet.server.expression.function;
 
+import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContextTesting;
 
@@ -152,5 +153,17 @@ public final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvalu
     @Override
     public Class<NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext> type() {
         return NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.class;
+    }
+
+    // ExpressionFunctionProviderTesting................................................................................
+
+    @Override
+    public void testExpressionFunctionInfosNotEmpty() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public JavaVisibility typeVisibility() {
+        return JavaVisibility.PACKAGE_PRIVATE;
     }
 }

@@ -60,10 +60,12 @@ import walkingkooka.spreadsheet.store.SpreadsheetRowStores;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepositories;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
 import walkingkooka.text.printer.TreePrintableTesting;
+import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
+import walkingkooka.tree.expression.function.provider.FakeExpressionFunctionProvider;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
@@ -2514,13 +2516,16 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
                 SpreadsheetComparatorProviders.builtIn(),
-                (n) -> {
-                    Objects.requireNonNull(n, "name");
-                    final ExpressionFunction<?, ?> function = nameToFunctions.get(n.value());
-                    if (null == function) {
-                        throw new UnknownExpressionFunctionException(n);
+                new FakeExpressionFunctionProvider() {
+                    @Override
+                    public ExpressionFunction<?, ExpressionEvaluationContext> function(final FunctionExpressionName name) {
+                        Objects.requireNonNull(name, "name");
+                        final ExpressionFunction<?, ?> function = nameToFunctions.get(name.value());
+                        if (null == function) {
+                            throw new UnknownExpressionFunctionException(name);
+                        }
+                        return Cast.to(function);
                     }
-                    return Cast.to(function);
                 },
                 engine,
                 (b) -> {
