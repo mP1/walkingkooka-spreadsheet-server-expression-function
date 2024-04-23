@@ -31,6 +31,7 @@ import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
 
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -96,9 +97,7 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                         .set(SpreadsheetMetadataPropertyName.NUMBER_FORMAT_PATTERN, SpreadsheetPattern.parseNumberFormatPattern("#.###"))
                         .set(SpreadsheetMetadataPropertyName.TEXT_FORMAT_PATTERN, SpreadsheetPattern.parseTextFormatPattern("@@"))
                         .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20),
-                (n) -> {
-                    throw new UnsupportedOperationException();
-                },
+                ExpressionFunctionProviders.fake(),
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
