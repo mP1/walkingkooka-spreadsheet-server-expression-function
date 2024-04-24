@@ -18,7 +18,6 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import org.junit.jupiter.api.Test;
-import walkingkooka.Cast;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
@@ -59,13 +58,13 @@ import walkingkooka.spreadsheet.store.SpreadsheetLabelStores;
 import walkingkooka.spreadsheet.store.SpreadsheetRowStores;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepositories;
 import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
-import walkingkooka.tree.expression.function.UnknownExpressionFunctionException;
-import walkingkooka.tree.expression.function.provider.FakeExpressionFunctionProvider;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.TextNode;
 import walkingkooka.tree.text.TextStyle;
@@ -81,9 +80,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -98,28 +95,51 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     private final static Supplier<LocalDateTime> NOW = () -> LocalDateTime.of(1999, 12, 31, 12, 58, 59);
 
     @Test
-    public void testVisit() {
-        final Set<FunctionExpressionName> names = Sets.sorted();
-        SpreadsheetServerExpressionFunctions.visit(
-                (e) -> {
-                    final FunctionExpressionName name = e.name()
-                            .get();
-                    if (!names.add(name)) {
-                        throw new IllegalStateException("Duplicate function name: " + name);
-                    }
-                }
-        );
-
+    public void testExpressionFunctionProvider() {
         this.checkEquals(
-                Arrays.stream(
-                                SpreadsheetServerExpressionFunctions.class.getDeclaredMethods()
-                        )
-                        .filter(m -> JavaVisibility.of(m) == JavaVisibility.PUBLIC)
+                Arrays.stream(SpreadsheetServerExpressionFunctions.class.getDeclaredMethods())
                         .filter(m -> m.getReturnType() == ExpressionFunction.class)
+                        .filter(m -> m.getParameterTypes().length == 0)
                         .map(Method::getName)
+                        .map(n -> {
+                                    // JDK BUG cant have a lambda with switch as the body ???
+                                    switch (n) {
+                                        case "bitAnd":
+                                            return "bitand";
+                                        case "bitOr":
+                                            return "bitor";
+                                        case "bitXor":
+                                            return "bitxor";
+                                        case "charFunction":
+                                            return "char";
+                                        case "falseFunction":
+                                            return "false";
+                                        case "formulaText":
+                                            return "formulatext";
+                                        case "ifFunction":
+                                            return "if";
+                                        case "intFunction":
+                                            return "int";
+                                        case "isoWeekNum":
+                                            return "isoweeknum";
+                                        case "switchFunction":
+                                            return "switch";
+                                        case "trueFunction":
+                                            return "true";
+                                        case "weekDay":
+                                            return "weekday";
+                                        case "weekNum":
+                                            return "weeknum";
+                                        default:
+                                            return n;
+                                    }
+                                }
+                        ).collect(Collectors.toCollection(Sets::sorted)),
+                (Object)SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
+                        .expressionFunctionInfos()
+                        .stream()
+                        .map(i -> i.name().value())
                         .collect(Collectors.toCollection(Sets::sorted))
-                        .size(),
-                names.size()
         );
     }
 
@@ -2485,17 +2505,6 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                   final Optional<TextNode> formatted) {
         final SpreadsheetEngine engine = SpreadsheetEngines.basic();
 
-        final Map<String, ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> nameToFunctions = Maps.sorted(String.CASE_INSENSITIVE_ORDER);
-        SpreadsheetServerExpressionFunctions.visit(
-                (f -> nameToFunctions.put(
-                        f.name()
-                                .get()
-                                .value(),
-                        f
-                )
-                )
-        );
-
         final SpreadsheetMetadataStore metadataStore = SpreadsheetMetadataStores.treeMap();
         metadataStore.save(metadata);
 
@@ -2516,17 +2525,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
                 SpreadsheetComparatorProviders.builtIn(),
-                new FakeExpressionFunctionProvider() {
-                    @Override
-                    public ExpressionFunction<?, ExpressionEvaluationContext> function(final FunctionExpressionName name) {
-                        Objects.requireNonNull(name, "name");
-                        final ExpressionFunction<?, ?> function = nameToFunctions.get(name.value());
-                        if (null == function) {
-                            throw new UnknownExpressionFunctionException(name);
-                        }
-                        return Cast.to(function);
-                    }
-                },
+                SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
                 engine,
                 (b) -> {
                     throw new UnsupportedOperationException();
@@ -2594,17 +2593,15 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testIsPure() {
         final SpreadsheetExpressionEvaluationContext context = SpreadsheetExpressionEvaluationContexts.fake();
 
-        final List<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> functions = Lists.array();
-        SpreadsheetServerExpressionFunctions.visit(functions::add);
+        final List<ExpressionFunction<?, ExpressionEvaluationContext>> pureFunctions = Lists.array();
+        final ExpressionFunctionProvider provider = SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE);
 
-        final List<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> pureFunctions = Lists.array();
-
-        functions.forEach(
-                f -> {
+        provider.expressionFunctionInfos()
+                .forEach(
+                    i -> {
                     final boolean pure;
 
-                    final FunctionExpressionName name = f.name()
-                            .get();
+                    final FunctionExpressionName name = i.name();
 
                     switch (name.value().toLowerCase()) {
                         case "now":
@@ -2621,8 +2618,9 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                             break;
                     }
 
-                    if (f.isPure(context) != pure) {
-                        pureFunctions.add(f);
+                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.function(name);
+                    if (function.isPure(context) != pure) {
+                        pureFunctions.add(function);
                     }
                 });
 
