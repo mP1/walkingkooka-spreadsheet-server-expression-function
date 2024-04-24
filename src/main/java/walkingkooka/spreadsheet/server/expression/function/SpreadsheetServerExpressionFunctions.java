@@ -18,13 +18,15 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.Cast;
-import walkingkooka.collect.list.Lists;
+import walkingkooka.collect.set.Sets;
+import walkingkooka.net.Url;
 import walkingkooka.reflect.PublicStaticHelper;
 import walkingkooka.spreadsheet.SpreadsheetError;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.spreadsheet.reference.SpreadsheetExpressionReference;
+import walkingkooka.text.CaseSensitivity;
 import walkingkooka.tree.expression.ExpressionNumber;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
@@ -33,6 +35,8 @@ import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunction
 import walkingkooka.tree.expression.function.engineering.EngineeringExpressionFunctions;
 import walkingkooka.tree.expression.function.number.NumberExpressionFunctions;
 import walkingkooka.tree.expression.function.number.trigonometry.NumberTrigonomteryExpressionFunctions;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
 import walkingkooka.tree.expression.function.stat.StatExpressionFunctions;
 import walkingkooka.tree.expression.function.string.StringExpressionFunctions;
 
@@ -40,7 +44,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 /**
  * Collection of static factory methods for numerous {@link ExpressionFunction}.
@@ -48,151 +51,157 @@ import java.util.function.Consumer;
 public final class SpreadsheetServerExpressionFunctions implements PublicStaticHelper {
 
     /**
-     * Visit all {@link ExpressionFunction functions}.
+     * An {@link ExpressionFunctionProvider} with all the functions in this project.
      */
-    public static void visit(final Consumer<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>> functions) {
-        Lists.of(
-                abs(),
-                acos(),
-                address(),
-                and(),
-                asin(),
-                atan(),
-                average(),
-                averageIf(),
-                base(),
-                bin2dec(),
-                bin2hex(),
-                bin2oct(),
-                bitAnd(),
-                bitOr(),
-                bitXor(),
-                ceil(),
-                cell(),
-                charFunction(),
-                choose(),
-                clean(),
-                code(),
-                column(),
-                columns(),
-                concat(),
-                cos(),
-                count(),
-                countA(),
-                countBlank(),
-                countIf(),
-                date(),
-                day(),
-                days(),
-                decimal(),
-                dec2bin(),
-                dec2hex(),
-                dec2oct(),
-                degrees(),
-                delta(),
-                dollar(),
-                e(),
-                error(),
-                even(),
-                exact(),
-                exp(),
-                falseFunction(),
-                find(),
-                fixed(),
-                floor(),
-                formulaText(),
-                hex2bin(),
-                hex2dec(),
-                hex2oct(),
-                hour(),
-                ifFunction(),
-                ifs(),
-                indirect(),
-                intFunction(),
-                isBlank(),
-                isDate(),
-                isErr(),
-                isError(),
-                isEven(),
-                isFormula(),
-                isLogical(),
-                isNa(),
-                isNonText(),
-                isNumber(),
-                isOdd(),
-                isoWeekNum(),
-                isText(),
-                lambda(),
-                left(),
-                len(),
-                let(),
-                ln(),
-                log(),
-                log10(),
-                lower(),
-                max(),
-                maxIf(),
-                mid(),
-                min(),
-                minIf(),
-                minute(),
-                mod(),
-                month(),
-                not(),
-                now(),
-                numberValue(),
-                oct2bin(),
-                oct2dec(),
-                oct2hex(),
-                odd(),
-                offset(),
-                or(),
-                pi(),
-                product(),
-                proper(),
-                quotient(),
-                radians(),
-                rand(),
-                randBetween(),
-                replace(),
-                rept(),
-                right(),
-                roman(),
-                round(),
-                roundDown(),
-                roundUp(),
-                row(),
-                rows(),
-                search(),
-                second(),
-                sign(),
-                sin(),
-                sinh(),
-                sqrt(),
-                substitute(),
-                sum(),
-                sumIf(),
-                switchFunction(),
-                t(),
-                tan(),
-                tanh(),
-                text(),
-                textJoin(),
-                time(),
-                today(),
-                trim(),
-                trueFunction(),
-                trunc(),
-                type(),
-                unichar(),
-                unicode(),
-                upper(),
-                value(),
-                weekDay(),
-                weekNum(),
-                year(),
-                xor()
-        ).forEach(functions);
+    public static ExpressionFunctionProvider expressionFunctionProvider(final CaseSensitivity nameCaseSensitivity) {
+        return ExpressionFunctionProviders.basic(
+                Url.parseAbsolute("https://github.com/mP1/walkingkooka-spreadsheet-server-expression-function/"),
+                nameCaseSensitivity,
+                Cast.to(
+                        Sets.of(
+                                abs(),
+                                acos(),
+                                address(),
+                                and(),
+                                asin(),
+                                atan(),
+                                average(),
+                                averageIf(),
+                                base(),
+                                bin2dec(),
+                                bin2hex(),
+                                bin2oct(),
+                                bitAnd(),
+                                bitOr(),
+                                bitXor(),
+                                ceil(),
+                                cell(),
+                                charFunction(),
+                                choose(),
+                                clean(),
+                                code(),
+                                column(),
+                                columns(),
+                                concat(),
+                                cos(),
+                                count(),
+                                countA(),
+                                countBlank(),
+                                countIf(),
+                                date(),
+                                day(),
+                                days(),
+                                decimal(),
+                                dec2bin(),
+                                dec2hex(),
+                                dec2oct(),
+                                degrees(),
+                                delta(),
+                                dollar(),
+                                e(),
+                                error(),
+                                even(),
+                                exact(),
+                                exp(),
+                                falseFunction(),
+                                find(),
+                                fixed(),
+                                floor(),
+                                formulaText(),
+                                hex2bin(),
+                                hex2dec(),
+                                hex2oct(),
+                                hour(),
+                                ifFunction(),
+                                ifs(),
+                                indirect(),
+                                intFunction(),
+                                isBlank(),
+                                isDate(),
+                                isErr(),
+                                isError(),
+                                isEven(),
+                                isFormula(),
+                                isLogical(),
+                                isNa(),
+                                isNonText(),
+                                isNumber(),
+                                isOdd(),
+                                isoWeekNum(),
+                                isText(),
+                                lambda(),
+                                left(),
+                                len(),
+                                let(),
+                                ln(),
+                                log(),
+                                log10(),
+                                lower(),
+                                max(),
+                                maxIf(),
+                                mid(),
+                                min(),
+                                minIf(),
+                                minute(),
+                                mod(),
+                                month(),
+                                not(),
+                                now(),
+                                numberValue(),
+                                oct2bin(),
+                                oct2dec(),
+                                oct2hex(),
+                                odd(),
+                                offset(),
+                                or(),
+                                pi(),
+                                product(),
+                                proper(),
+                                quotient(),
+                                radians(),
+                                rand(),
+                                randBetween(),
+                                replace(),
+                                rept(),
+                                right(),
+                                roman(),
+                                round(),
+                                roundDown(),
+                                roundUp(),
+                                row(),
+                                rows(),
+                                search(),
+                                second(),
+                                sign(),
+                                sin(),
+                                sinh(),
+                                sqrt(),
+                                substitute(),
+                                sum(),
+                                sumIf(),
+                                switchFunction(),
+                                t(),
+                                tan(),
+                                tanh(),
+                                text(),
+                                textJoin(),
+                                time(),
+                                today(),
+                                trim(),
+                                trueFunction(),
+                                trunc(),
+                                type(),
+                                unichar(),
+                                unicode(),
+                                upper(),
+                                value(),
+                                weekDay(),
+                                weekNum(),
+                                year(),
+                                xor()
+                        )
+                )
+        );
     }
 
     /**
@@ -286,8 +295,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return BITAND;
     }
 
-    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BITAND = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitAnd()
-            .setName(functionName("bitAnd"));
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BITAND = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitAnd();
 
     /**
      * {@see EngineeringExpressionFunctions#bitOr}
@@ -296,8 +304,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return BITOR;
     }
 
-    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BITOR = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitOr()
-            .setName(functionName("bitOr"));
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BITOR = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitOr();
 
     /**
      * {@see EngineeringExpressionFunctions#bitXor}
@@ -306,8 +313,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return BitXor;
     }
 
-    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BitXor = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitXor()
-            .setName(functionName("bitXor"));
+    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> BitXor = EngineeringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>bitXor();
 
     /**
      * {@see NumberExpressionFunctions#ceil}
@@ -370,7 +376,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> columns() {
         return SpreadsheetExpressionFunctions.columns();
     }
-    
+
     /**
      * {@see StringExpressionFunctions#concat}
      */
@@ -422,7 +428,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     private static boolean filterNonNullAndNotMissingCell(final Object value,
                                                           final SpreadsheetExpressionEvaluationContext context) {
         return null != value &&
-                false == (value instanceof SpreadsheetError && ((SpreadsheetError)value).isMissingCell());
+                false == (value instanceof SpreadsheetError && ((SpreadsheetError) value).isMissingCell());
     }
 
     /**
@@ -733,7 +739,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> isOdd() {
         return NumberExpressionFunctions.isOdd();
     }
-    
+
     /**
      * {@see DateTimeExpressionFunctions.isoWeekNum}
      */
@@ -911,7 +917,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> oct2hex() {
         return EngineeringExpressionFunctions.oct2hex();
     }
-    
+
     /**
      * {@see NumberExpressionFunctions#odd}
      */
@@ -967,7 +973,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> radians() {
         return NumberTrigonomteryExpressionFunctions.radians();
     }
-    
+
     /**
      * {@see NumberExpressionFunctions#random}
      */
@@ -987,7 +993,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> RANDBETWEEN = NumberExpressionFunctions.<SpreadsheetExpressionEvaluationContext>randomBetween()
             .setName(functionName("randBetween"));
-    
+
     /**
      * {@see StringExpressionFunctions#replace}
      */
@@ -1101,7 +1107,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> sqrt() {
         return NumberExpressionFunctions.sqrt();
     }
-    
+
     /**
      * {@see StringExpressionFunctions#substitute}
      */
@@ -1122,7 +1128,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> sumIf() {
         return NumberExpressionFunctionIf.sumIf();
     }
-    
+
     /**
      * {@see BooleanExpressionFunctions#switchFunction}
      */
@@ -1165,8 +1171,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         return TEXTJOIN;
     }
 
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> TEXTJOIN = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>textJoin()
-            .setName(functionName("textJoin"));
+    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> TEXTJOIN = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>textJoin();
 
     /**
      * {@see DateTimeExpressionFunctions#time}
@@ -1191,7 +1196,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
 
     private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> TRIM = StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>spaceTrim()
             .setName(functionName("trim"));
-    
+
     /**
      * {@see BooleanExpressionFunctions#trueFunction}
      */
@@ -1268,7 +1273,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> weekNum() {
         return DateTimeExpressionFunctions.weekNum();
     }
-    
+
     /**
      * {@see DateTimeExpressionFunctions#year}
      */
