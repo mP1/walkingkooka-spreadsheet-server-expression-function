@@ -26,6 +26,7 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.parser.SpreadsheetParserToken;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
+import walkingkooka.spreadsheet.reference.SpreadsheetLabelName;
 import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.cursor.TextCursor;
@@ -87,8 +88,8 @@ final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationCo
     }
 
     @Override
-    public SpreadsheetSelection resolveIfLabel(SpreadsheetSelection selection) {
-        return this.context.resolveIfLabel(selection);
+    public SpreadsheetSelection resolveLabel(final SpreadsheetLabelName labelName) {
+        return this.context.resolveLabel(labelName);
     }
 
     @Override
