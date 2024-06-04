@@ -41,6 +41,7 @@ import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterContext;
+import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
@@ -2525,6 +2526,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
                 SpreadsheetComparatorProviders.builtIn(),
+                SpreadsheetFormatterProviders.spreadsheetFormatPattern(),
                 SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
                 engine,
                 (b) -> {
@@ -2618,7 +2620,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                             break;
                     }
 
-                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.function(name);
+                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.expressionFunctionOrFail(name);
                     if (function.isPure(context) != pure) {
                         pureFunctions.add(function);
                     }
