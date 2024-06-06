@@ -64,7 +64,7 @@ final class UnformattedNumberExpressionFunction<T> implements ExpressionFunction
                    final SpreadsheetExpressionEvaluationContext context) {
         return this.apply0(
                 parameters,
-                SpreadsheetExpressionEvaluationContexts.functionParameterConverter(
+                SpreadsheetExpressionEvaluationContexts.converter(
                         SpreadsheetConverters.unformattedNumber().cast(SpreadsheetExpressionEvaluationContext.class),
                         context
                 )
