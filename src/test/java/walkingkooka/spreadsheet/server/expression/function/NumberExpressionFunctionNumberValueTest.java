@@ -27,6 +27,7 @@ import walkingkooka.spreadsheet.SpreadsheetName;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
+import walkingkooka.spreadsheet.format.SpreadsheetParserProviders;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
@@ -114,6 +115,7 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                         .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20),
                 SpreadsheetFormatterProviders.spreadsheetFormatPattern(),
                 ExpressionFunctionProviders.fake(),
+                SpreadsheetParserProviders.spreadsheetParsePattern(),
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
