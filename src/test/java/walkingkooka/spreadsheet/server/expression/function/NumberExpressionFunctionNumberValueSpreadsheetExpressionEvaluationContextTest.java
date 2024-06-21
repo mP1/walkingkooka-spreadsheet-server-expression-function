@@ -145,13 +145,6 @@ public final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvalu
         return NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationContext.class;
     }
 
-    // ExpressionFunctionProviderTesting................................................................................
-
-    @Override
-    public void testExpressionFunctionInfosNotEmpty() {
-        throw new UnsupportedOperationException();
-    }
-
     @Override
     public JavaVisibility typeVisibility() {
         return JavaVisibility.PACKAGE_PRIVATE;

@@ -42,6 +42,7 @@ import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContex
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterContext;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
+import walkingkooka.spreadsheet.format.SpreadsheetParserProviders;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
@@ -2528,6 +2529,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 SpreadsheetComparatorProviders.builtIn(),
                 SpreadsheetFormatterProviders.spreadsheetFormatPattern(),
                 SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
+                SpreadsheetParserProviders.spreadsheetParsePattern(),
                 engine,
                 (b) -> {
                     throw new UnsupportedOperationException();
