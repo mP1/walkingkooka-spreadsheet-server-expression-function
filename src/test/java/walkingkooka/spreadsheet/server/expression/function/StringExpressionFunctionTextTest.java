@@ -120,7 +120,7 @@ public final class StringExpressionFunctionTextTest extends StringExpressionFunc
                                 Converters.localDateLocalDateTime(),
                                 Converters.localTimeLocalDateTime(),
                                 ExpressionNumber.toConverter(
-                                        Converters.numberNumber()
+                                        Converters.numberToNumber()
                                 )
                         )
                 );
