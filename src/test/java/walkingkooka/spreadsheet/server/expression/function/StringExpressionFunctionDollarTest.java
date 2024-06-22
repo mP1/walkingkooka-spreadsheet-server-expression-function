@@ -26,6 +26,7 @@ import walkingkooka.spreadsheet.convert.SpreadsheetConverterContext;
 import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionNumber;
+import walkingkooka.tree.expression.ExpressionNumberConverters;
 import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 
@@ -266,7 +267,7 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
                                     }
                                 },
                                 Converters.simple(),
-                                ExpressionNumber.numberOrExpressionNumberTo(
+                                ExpressionNumberConverters.numberOrExpressionNumberTo(
                                         Converters.numberToNumber()
                                 )
                         )
