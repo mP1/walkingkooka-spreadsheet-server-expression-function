@@ -117,7 +117,7 @@ public final class StringExpressionFunctionTextTest extends StringExpressionFunc
                         Lists.of(
                                 Converters.simple(),
                                 Converters.object(),
-                                Converters.localDateLocalDateTime(),
+                                Converters.localDateToLocalDateTime(),
                                 Converters.localTimeLocalDateTime(),
                                 ExpressionNumber.toConverter(
                                         Converters.numberToNumber()
