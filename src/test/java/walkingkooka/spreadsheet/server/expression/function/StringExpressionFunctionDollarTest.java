@@ -266,7 +266,7 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
                                     }
                                 },
                                 Converters.simple(),
-                                ExpressionNumber.fromConverter(
+                                ExpressionNumber.numberOrExpressionNumberTo(
                                         Converters.numberToNumber()
                                 )
                         )
