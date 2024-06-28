@@ -2526,7 +2526,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
-                SpreadsheetComparatorProviders.builtIn(),
+                SpreadsheetComparatorProviders.spreadsheetComparators(),
                 SpreadsheetFormatterProviders.spreadsheetFormatPattern(),
                 SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
                 SpreadsheetParserProviders.spreadsheetParsePattern(),
