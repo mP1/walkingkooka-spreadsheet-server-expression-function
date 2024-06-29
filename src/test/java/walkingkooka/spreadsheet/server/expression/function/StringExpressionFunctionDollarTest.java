@@ -267,11 +267,13 @@ public final class StringExpressionFunctionDollarTest extends StringExpressionFu
                                     }
                                 },
                                 Converters.simple(),
-                                ExpressionNumberConverters.numberOrExpressionNumberTo(
-                                        Converters.numberToNumber()
-                                )
+                                ExpressionNumberConverters.numberOrExpressionNumberToNumber()
+                                        .to(
+                                                Number.class,
+                                                Converters.numberToNumber()
+                                        ).cast(SpreadsheetConverterContext.class)
                         )
-                );
+                ).cast(SpreadsheetConverterContext.class);
             }
 
             @Override
