@@ -180,6 +180,11 @@ final class NumberExpressionFunctionNumberValueSpreadsheetExpressionEvaluationCo
     }
 
     @Override
+    public long dateOffset() {
+        return this.context.dateOffset();
+    }
+
+    @Override
     public List<String> ampms() {
         return this.context.ampms();
     }
