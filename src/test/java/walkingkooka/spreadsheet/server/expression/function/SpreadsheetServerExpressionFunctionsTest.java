@@ -2643,7 +2643,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                             break;
                     }
 
-                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.expressionFunctionOrFail(name);
+                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.expressionFunction(name);
                     if (function.isPure(context) != pure) {
                         pureFunctions.add(function);
                     }
