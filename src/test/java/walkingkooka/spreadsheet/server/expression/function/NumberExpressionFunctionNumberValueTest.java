@@ -25,17 +25,13 @@ import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.spreadsheet.SpreadsheetId;
 import walkingkooka.spreadsheet.SpreadsheetName;
-import walkingkooka.spreadsheet.convert.SpreadsheetConvertersConverterProviders;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
-import walkingkooka.spreadsheet.parser.SpreadsheetParserProviders;
 import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
 import walkingkooka.tree.expression.ExpressionNumberKind;
-import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
 
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -118,19 +114,16 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
                 metadata,
-                SpreadsheetConvertersConverterProviders.spreadsheetConverters(
-                        metadata,
-                        SpreadsheetFormatterProviders.spreadsheetFormatPattern(),
-                        SpreadsheetParserProviders.spreadsheetParsePattern()
-                ),
-                ExpressionFunctionProviders.fake(),
+                CONVERTER_PROVIDER,
+                EXPRESSION_FUNCTION_PROVIDER,
+                PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
                 (s) -> {
                     throw new UnsupportedOperationException();
                 },
-                LocalDateTime::now
+                NOW
         );
     }
 

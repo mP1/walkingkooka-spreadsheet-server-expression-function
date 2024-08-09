@@ -100,6 +100,7 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                         .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20),
                 ConverterProviders.fake(),
                 ExpressionFunctionProviders.fake(),
+                PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },

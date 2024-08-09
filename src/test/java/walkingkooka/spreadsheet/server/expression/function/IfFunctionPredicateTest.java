@@ -28,14 +28,12 @@ import walkingkooka.spreadsheet.SpreadsheetName;
 import walkingkooka.spreadsheet.convert.SpreadsheetConvertersConverterProviders;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
-import walkingkooka.spreadsheet.parser.SpreadsheetParserProviders;
+import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
 import walkingkooka.spreadsheet.store.SpreadsheetCellStores;
 import walkingkooka.tree.expression.ExpressionNumberKind;
-import walkingkooka.tree.expression.function.provider.ExpressionFunctionProviders;
 
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -43,7 +41,8 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class IfFunctionPredicateTest implements PredicateTesting {
+public final class IfFunctionPredicateTest implements PredicateTesting,
+        SpreadsheetMetadataTesting {
 
     @Test
     public void testEqualsNumber() {
@@ -299,17 +298,18 @@ public final class IfFunctionPredicateTest implements PredicateTesting {
                 metadata,
                 SpreadsheetConvertersConverterProviders.spreadsheetConverters(
                         metadata,
-                        SpreadsheetFormatterProviders.spreadsheetFormatPattern(),
-                        SpreadsheetParserProviders.spreadsheetParsePattern()
+                        SPREADSHEET_FORMATTER_PROVIDER,
+                        SPREADSHEET_PARSER_PROVIDER
                 ),
-                ExpressionFunctionProviders.fake(),
+                EXPRESSION_FUNCTION_PROVIDER,
+                PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
                 (s) -> {
                     throw new UnsupportedOperationException();
                 },
-                LocalDateTime::now
+                NOW
         );
     }
 }

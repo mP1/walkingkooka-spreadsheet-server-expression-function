@@ -44,15 +44,12 @@ import walkingkooka.spreadsheet.engine.SpreadsheetEngines;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
 import walkingkooka.spreadsheet.format.SpreadsheetFormatterContext;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterProvider;
-import walkingkooka.spreadsheet.format.SpreadsheetFormatterProviders;
 import walkingkooka.spreadsheet.format.pattern.SpreadsheetPattern;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadata;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
+import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
 import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStore;
 import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStores;
-import walkingkooka.spreadsheet.parser.SpreadsheetParserProvider;
-import walkingkooka.spreadsheet.parser.SpreadsheetParserProviders;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
 import walkingkooka.spreadsheet.security.store.SpreadsheetGroupStores;
@@ -68,7 +65,6 @@ import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
-import walkingkooka.tree.expression.ExpressionNumberKind;
 import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
@@ -88,18 +84,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public final class SpreadsheetServerExpressionFunctionsTest implements PublicStaticHelperTesting<SpreadsheetServerExpressionFunctions>,
+        SpreadsheetMetadataTesting,
         TreePrintableTesting {
 
     private final static Locale LOCALE = Locale.forLanguageTag("EN-AU");
     private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("https://server.example.com");
-
-    private final static ExpressionNumberKind EXPRESSION_NUMBER_KIND = ExpressionNumberKind.BIG_DECIMAL;
-
-    private final static Supplier<LocalDateTime> NOW = () -> LocalDateTime.of(1999, 12, 31, 12, 58, 59);
 
     @Test
     public void testExpressionFunctionProvider() {
@@ -2140,7 +2132,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
     public void testTextWithDateTime() {
         this.evaluateAndValueCheck(
                 "=text(now(), \"yyyy mm dd hh mm ss\")",
-                "1999 12 31 12 58 59"
+                "1999 12 31 12 58 00"
         );
     }
 
@@ -2532,25 +2524,23 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 SpreadsheetUserStores.treeMap()
         );
 
-        final SpreadsheetFormatterProvider spreadsheetFormatterProvider = SpreadsheetFormatterProviders.spreadsheetFormatPattern();
-        final SpreadsheetParserProvider spreadsheetParserProviders = SpreadsheetParserProviders.spreadsheetParsePattern();
-
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
                 ConverterProviders.collection(
                     Sets.of(
                             SpreadsheetConvertersConverterProviders.spreadsheetConverters(
                                     metadata,
-                                    spreadsheetFormatterProvider,
-                                    spreadsheetParserProviders
+                                    SPREADSHEET_FORMATTER_PROVIDER,
+                                    SPREADSHEET_PARSER_PROVIDER
                             ),
                             ConverterProviders.converters()
                     )
                 ),
                 SpreadsheetComparatorProviders.spreadsheetComparators(),
-                spreadsheetFormatterProvider,
+                SPREADSHEET_FORMATTER_PROVIDER,
                 SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
-                spreadsheetParserProviders,
+                SPREADSHEET_PARSER_PROVIDER,
+                PROVIDER_CONTEXT,
                 engine,
                 (b) -> {
                     throw new UnsupportedOperationException();
@@ -2643,7 +2633,10 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                             break;
                     }
 
-                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.expressionFunction(name);
+                    final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.expressionFunction(
+                            name,
+                            PROVIDER_CONTEXT
+                    );
                     if (function.isPure(context) != pure) {
                         pureFunctions.add(function);
                     }
