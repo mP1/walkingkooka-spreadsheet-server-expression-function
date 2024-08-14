@@ -22,8 +22,8 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.reference.SpreadsheetLabelName;
 import walkingkooka.tree.expression.Expression;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
-import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameterKind;
@@ -47,12 +47,12 @@ final class LambdaExpressionFunction implements ExpressionFunction<ExpressionFun
     }
 
     @Override
-    public Optional<FunctionExpressionName> name() {
+    public Optional<ExpressionFunctionName> name() {
         return NAME;
     }
 
-    private final static Optional<FunctionExpressionName> NAME = Optional.of(
-            FunctionExpressionName.with("lambda")
+    private final static Optional<ExpressionFunctionName> NAME = Optional.of(
+            ExpressionFunctionName.with("lambda")
     );
 
     @Override

@@ -23,9 +23,9 @@ import walkingkooka.reflect.JavaVisibility;
 import walkingkooka.reflect.TypeNameTesting;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
 import walkingkooka.tree.expression.ExpressionPurityTesting;
-import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionTesting;
 
@@ -45,7 +45,7 @@ public abstract class ExpressionFunctionTestCase<F extends ExpressionFunction<T,
                 this.createBiFunction(),
                 new ExpressionPurityContext() {
                     @Override
-                    public boolean isPure(final FunctionExpressionName name) {
+                    public boolean isPure(final ExpressionFunctionName name) {
                         throw new UnsupportedOperationException();
                     }
                 },

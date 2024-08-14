@@ -21,8 +21,8 @@ import walkingkooka.Cast;
 import walkingkooka.spreadsheet.convert.SpreadsheetConverters;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContexts;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
-import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.ExpressionFunctionParameter;
 
@@ -45,7 +45,7 @@ final class UnformattedNumberExpressionFunction<T> implements ExpressionFunction
     }
 
     @Override
-    public Optional<FunctionExpressionName> name() {
+    public Optional<ExpressionFunctionName> name() {
         return this.function.name();
     }
 

@@ -27,8 +27,8 @@ import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctio
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.spreadsheet.reference.SpreadsheetExpressionReference;
 import walkingkooka.text.CaseSensitivity;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionNumber;
-import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.booleann.BooleanExpressionFunctions;
 import walkingkooka.tree.expression.function.datetime.DateTimeExpressionFunctions;
@@ -1297,9 +1297,9 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
         );
     }
 
-    private static Optional<FunctionExpressionName> functionName(final String name) {
+    private static Optional<ExpressionFunctionName> functionName(final String name) {
         return Optional.of(
-                FunctionExpressionName.with(name)
+                ExpressionFunctionName.with(name)
         );
     }
 
