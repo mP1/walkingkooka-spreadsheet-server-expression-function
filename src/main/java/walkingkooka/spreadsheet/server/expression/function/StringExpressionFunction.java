@@ -18,8 +18,8 @@
 package walkingkooka.spreadsheet.server.expression.function;
 
 import walkingkooka.spreadsheet.expression.SpreadsheetExpressionEvaluationContext;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.ExpressionPurityContext;
-import walkingkooka.tree.expression.FunctionExpressionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 
 import java.util.Optional;
@@ -35,16 +35,16 @@ abstract class StringExpressionFunction implements ExpressionFunction<String, Sp
     StringExpressionFunction(final String name) {
         super();
         this.name = Optional.of(
-                FunctionExpressionName.with(name)
+                ExpressionFunctionName.with(name)
         );
     }
 
     @Override
-    public final Optional<FunctionExpressionName> name() {
+    public final Optional<ExpressionFunctionName> name() {
         return this.name;
     }
 
-    private final Optional<FunctionExpressionName> name;
+    private final Optional<ExpressionFunctionName> name;
 
     @Override
     public final Class<String> returnType() {
