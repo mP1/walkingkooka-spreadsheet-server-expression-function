@@ -83,9 +83,9 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     public void testDuplicateLabelFails() {
         this.applyFails2(
                 Lists.of(
-                        "Duplicate1",
+                        SpreadsheetSelection.labelName("Duplicate1"),
                         1,
-                        "DUPLICATE1",
+                        SpreadsheetSelection.labelName("DUPLICATE1"),
                         2,
                         999
                 ),
@@ -97,11 +97,11 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     public void testDuplicateLabelFails2() {
         this.applyFails2(
                 Lists.of(
-                        "Duplicate1",
+                        SpreadsheetSelection.labelName("Duplicate1"),
                         1,
-                        "X",
+                        SpreadsheetSelection.labelName("X"),
                         2,
-                        "DUPLICATE1",
+                        SpreadsheetSelection.labelName("DUPLICATE1"),
                         3,
                         999
                 ),
@@ -157,7 +157,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     public void testNamedValueIgnored() {
         this.applyAndCheck3(
                 Lists.of(
-                        "ABC",
+                        SpreadsheetSelection.labelName("ABC"), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         123,
                         "DEF"
                 ),
@@ -172,7 +172,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
         this.applyAndCheck3(
                 Lists.of(
-                        name,
+                        SpreadsheetSelection.labelName(name), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         value,
                         Expression.add(
                                 Expression.reference(
@@ -195,9 +195,9 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
         this.applyAndCheck3(
                 Lists.of(
-                        name1,
+                        SpreadsheetSelection.labelName(name1), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         value1,
-                        name2,
+                        SpreadsheetSelection.labelName(name2), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         value2,
                         Expression.add(
                                 Expression.reference(
@@ -225,11 +225,11 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
         this.applyAndCheck3(
                 Lists.of(
-                        name1,
+                        SpreadsheetSelection.labelName(name1), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         value1,
-                        name2,
+                        SpreadsheetSelection.labelName(name2), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         value2,
-                        name3,
+                        SpreadsheetSelection.labelName(name3), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
                         value3,
                         Expression.add(
                                 Expression.reference(
@@ -334,10 +334,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                (s) -> {
-                    throw new UnsupportedOperationException();
-                },
-                NOW
+                SPREADSHEET_CONVERTER_CONTEXT
         );
     }
 

@@ -65,7 +65,7 @@ import walkingkooka.spreadsheet.store.repo.SpreadsheetStoreRepository;
 import walkingkooka.text.CaseSensitivity;
 import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
-import walkingkooka.tree.expression.FunctionExpressionName;
+import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
 import walkingkooka.tree.text.Length;
@@ -177,7 +177,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         this.evaluateAndValueCheck(
                 "=UnknownFunction123()",
                 SpreadsheetError.functionNotFound(
-                        FunctionExpressionName.with("UnknownFunction123")
+                        ExpressionFunctionName.with("UnknownFunction123")
                 )
         );
     }
@@ -2618,7 +2618,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                     i -> {
                     final boolean pure;
 
-                    final FunctionExpressionName name = i.name();
+                    final ExpressionFunctionName name = i.name();
 
                     switch (name.value().toLowerCase()) {
                         case "now":
