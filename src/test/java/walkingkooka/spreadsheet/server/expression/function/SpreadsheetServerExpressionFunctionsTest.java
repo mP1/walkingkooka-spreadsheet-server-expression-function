@@ -35,7 +35,6 @@ import walkingkooka.spreadsheet.SpreadsheetErrorKind;
 import walkingkooka.spreadsheet.SpreadsheetFormula;
 import walkingkooka.spreadsheet.SpreadsheetId;
 import walkingkooka.spreadsheet.SpreadsheetName;
-import walkingkooka.spreadsheet.compare.SpreadsheetComparatorProviders;
 import walkingkooka.spreadsheet.convert.SpreadsheetConvertersConverterProviders;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngine;
 import walkingkooka.spreadsheet.engine.SpreadsheetEngineContext;
@@ -50,6 +49,7 @@ import walkingkooka.spreadsheet.meta.SpreadsheetMetadataPropertyName;
 import walkingkooka.spreadsheet.meta.SpreadsheetMetadataTesting;
 import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStore;
 import walkingkooka.spreadsheet.meta.store.SpreadsheetMetadataStores;
+import walkingkooka.spreadsheet.provider.SpreadsheetProviders;
 import walkingkooka.spreadsheet.reference.SpreadsheetCellReference;
 import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
 import walkingkooka.spreadsheet.security.store.SpreadsheetGroupStores;
@@ -2526,20 +2526,22 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
-                ConverterProviders.collection(
-                    Sets.of(
-                            SpreadsheetConvertersConverterProviders.spreadsheetConverters(
-                                    metadata,
-                                    SPREADSHEET_FORMATTER_PROVIDER,
-                                    SPREADSHEET_PARSER_PROVIDER
-                            ),
-                            ConverterProviders.converters()
-                    )
+                SpreadsheetProviders.basic(
+                        ConverterProviders.collection(
+                                Sets.of(
+                                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
+                                                metadata,
+                                                SPREADSHEET_FORMATTER_PROVIDER,
+                                                SPREADSHEET_PARSER_PROVIDER
+                                        ),
+                                        ConverterProviders.converters()
+                                )
+                        ),
+                        SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
+                        SPREADSHEET_COMPARATOR_PROVIDER,
+                        SPREADSHEET_FORMATTER_PROVIDER,
+                        SPREADSHEET_PARSER_PROVIDER
                 ),
-                SpreadsheetComparatorProviders.spreadsheetComparators(),
-                SPREADSHEET_FORMATTER_PROVIDER,
-                SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
-                SPREADSHEET_PARSER_PROVIDER,
                 PROVIDER_CONTEXT,
                 engine,
                 (b) -> {
