@@ -27,7 +27,7 @@ public class TestGwtTest extends GWTTestCase {
     public void testColumnE1() {
         final ExpressionNumberKind kind = ExpressionNumberKind.DOUBLE;
 
-        assertEquals(
+        checkEquals(
                 kind.create(5),
                 SpreadsheetExpressionFunctions.column()
                         .apply(
@@ -40,6 +40,14 @@ public class TestGwtTest extends GWTTestCase {
                                     }
                                 }
                         )
+        );
+    }
+
+    private void checkEquals(final Object expected,
+                             final Object actual) {
+        assertEquals(
+                expected,
+                actual
         );
     }
 }

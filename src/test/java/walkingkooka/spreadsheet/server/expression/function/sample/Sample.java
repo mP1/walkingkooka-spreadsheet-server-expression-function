@@ -17,7 +17,39 @@
 
 package walkingkooka.spreadsheet.server.expression.function.sample;
 
+import walkingkooka.collect.list.Lists;
+import walkingkooka.spreadsheet.expression.FakeSpreadsheetExpressionEvaluationContext;
+import walkingkooka.spreadsheet.expression.function.SpreadsheetExpressionFunctions;
+import walkingkooka.spreadsheet.reference.SpreadsheetSelection;
+import walkingkooka.tree.expression.ExpressionNumberKind;
+
 public final class Sample {
     public static void main(final String[] args) {
+        final Sample sample = new Sample();
+        sample.testColumnE1();
+    }
+
+    public void testColumnE1() {
+        final ExpressionNumberKind kind = ExpressionNumberKind.DOUBLE;
+
+        checkEquals(
+                kind.create(5),
+                SpreadsheetExpressionFunctions.column()
+                        .apply(
+                                Lists.of(SpreadsheetSelection.parseCell("E1")),
+                                new FakeSpreadsheetExpressionEvaluationContext() {
+
+                                    @Override
+                                    public ExpressionNumberKind expressionNumberKind() {
+                                        return kind;
+                                    }
+                                }
+                        )
+        );
+    }
+
+    private void checkEquals(final Object expected,
+                             final Object actual) {
+
     }
 }

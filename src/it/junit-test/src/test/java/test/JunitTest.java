@@ -33,7 +33,7 @@ public class JunitTest {
     public void testColumnE1() {
         final ExpressionNumberKind kind = ExpressionNumberKind.DOUBLE;
 
-        Assert.assertEquals(
+        checkEquals(
                 kind.create(5),
                 SpreadsheetExpressionFunctions.column()
                         .apply(
@@ -46,6 +46,14 @@ public class JunitTest {
                                     }
                                 }
                         )
+        );
+    }
+
+    private void checkEquals(final Object expected,
+                             final Object actual) {
+        Assert.assertEquals(
+                expected,
+                actual
         );
     }
 }
