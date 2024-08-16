@@ -114,7 +114,6 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
                 metadata,
-                CONVERTER_PROVIDER,
                 EXPRESSION_FUNCTION_PROVIDER,
                 PROVIDER_CONTEXT,
                 (r) -> {
