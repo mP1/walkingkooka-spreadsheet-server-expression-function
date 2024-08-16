@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.provider.ConverterProvider;
 import walkingkooka.convert.provider.ConverterProviders;
 import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.Url;
@@ -315,30 +314,27 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 .set(SpreadsheetMetadataPropertyName.TEXT_FORMATTER, SpreadsheetPattern.parseTextFormatPattern("@@").spreadsheetFormatterSelector())
                 .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
 
-        final ConverterProvider converterProvider = ConverterProviders.collection(
-                Sets.of(
-                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
-                                metadata,
-                                SPREADSHEET_FORMATTER_PROVIDER,
-                                SPREADSHEET_PARSER_PROVIDER
-                        ),
-                        ConverterProviders.converters()
-                )
-        );
-
         return SpreadsheetExpressionEvaluationContexts.basic(
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
                 metadata,
-                converterProvider,
                 EXPRESSION_FUNCTION_PROVIDER,
                 PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
                 metadata.converterContext(
-                        converterProvider,
+                        ConverterProviders.collection(
+                                Sets.of(
+                                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
+                                                metadata,
+                                                SPREADSHEET_FORMATTER_PROVIDER,
+                                                SPREADSHEET_PARSER_PROVIDER
+                                        ),
+                                        ConverterProviders.converters()
+                                )
+                        ),
                         NOW,
                         SPREADSHEET_LABEL_NAME_RESOLVER,
                         PROVIDER_CONTEXT

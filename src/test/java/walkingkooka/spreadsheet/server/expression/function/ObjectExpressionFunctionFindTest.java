@@ -20,7 +20,6 @@ package walkingkooka.spreadsheet.server.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.provider.ConverterProviders;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
 import walkingkooka.spreadsheet.SpreadsheetErrorKind;
@@ -98,7 +97,6 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                         .set(SpreadsheetMetadataPropertyName.NUMBER_FORMATTER, SpreadsheetPattern.parseNumberFormatPattern("#.###").spreadsheetFormatterSelector())
                         .set(SpreadsheetMetadataPropertyName.TEXT_FORMATTER, SpreadsheetPattern.parseTextFormatPattern("@@").spreadsheetFormatterSelector())
                         .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20),
-                ConverterProviders.fake(),
                 ExpressionFunctionProviders.fake(),
                 PROVIDER_CONTEXT,
                 (r) -> {
