@@ -306,10 +306,7 @@ public final class IfFunctionPredicateTest implements PredicateTesting,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                (s) -> {
-                    throw new UnsupportedOperationException();
-                },
-                NOW
+                SPREADSHEET_CONVERTER_CONTEXT
         );
     }
 }

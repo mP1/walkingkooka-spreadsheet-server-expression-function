@@ -201,10 +201,7 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                (s) -> {
-                    throw new UnsupportedOperationException();
-                },
-                NOW
+                SPREADSHEET_CONVERTER_CONTEXT
         );
     }
 
