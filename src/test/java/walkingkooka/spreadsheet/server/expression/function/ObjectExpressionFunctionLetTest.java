@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
+import walkingkooka.convert.provider.ConverterProvider;
 import walkingkooka.convert.provider.ConverterProviders;
 import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.Url;
@@ -157,7 +158,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
     public void testNamedValueIgnored() {
         this.applyAndCheck3(
                 Lists.of(
-                        SpreadsheetSelection.labelName("ABC"), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        "ABC",
                         123,
                         "DEF"
                 ),
@@ -172,7 +173,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
         this.applyAndCheck3(
                 Lists.of(
-                        SpreadsheetSelection.labelName(name), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        name,
                         value,
                         Expression.add(
                                 Expression.reference(
@@ -195,9 +196,9 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
         this.applyAndCheck3(
                 Lists.of(
-                        SpreadsheetSelection.labelName(name1), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        name1,
                         value1,
-                        SpreadsheetSelection.labelName(name2), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        name2,
                         value2,
                         Expression.add(
                                 Expression.reference(
@@ -225,11 +226,11 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
 
         this.applyAndCheck3(
                 Lists.of(
-                        SpreadsheetSelection.labelName(name1), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        name1,
                         value1,
-                        SpreadsheetSelection.labelName(name2), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        name2,
                         value2,
-                        SpreadsheetSelection.labelName(name3), // https://github.com/mP1/walkingkooka-spreadsheet/issues/4914 String -> label
+                        name3,
                         value3,
                         Expression.add(
                                 Expression.reference(
@@ -314,27 +315,34 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 .set(SpreadsheetMetadataPropertyName.TEXT_FORMATTER, SpreadsheetPattern.parseTextFormatPattern("@@").spreadsheetFormatterSelector())
                 .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20);
 
+        final ConverterProvider converterProvider = ConverterProviders.collection(
+                Sets.of(
+                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
+                                metadata,
+                                SPREADSHEET_FORMATTER_PROVIDER,
+                                SPREADSHEET_PARSER_PROVIDER
+                        ),
+                        ConverterProviders.converters()
+                )
+        );
+
         return SpreadsheetExpressionEvaluationContexts.basic(
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
                 metadata,
-                ConverterProviders.collection(
-                        Sets.of(
-                                SpreadsheetConvertersConverterProviders.spreadsheetConverters(
-                                        metadata,
-                                        SPREADSHEET_FORMATTER_PROVIDER,
-                                        SPREADSHEET_PARSER_PROVIDER
-                                ),
-                                ConverterProviders.converters()
-                        )
-                ),
+                converterProvider,
                 EXPRESSION_FUNCTION_PROVIDER,
                 PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                SPREADSHEET_CONVERTER_CONTEXT
+                metadata.converterContext(
+                        converterProvider,
+                        NOW,
+                        SPREADSHEET_LABEL_NAME_RESOLVER,
+                        PROVIDER_CONTEXT
+                )
         );
     }
 
