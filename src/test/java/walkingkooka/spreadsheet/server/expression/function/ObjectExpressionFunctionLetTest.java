@@ -325,6 +325,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                     throw new UnsupportedOperationException();
                 },
                 metadata.converterContext(
+                        SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER,
                         ConverterProviders.collection(
                                 Sets.of(
                                         SpreadsheetConvertersConverterProviders.spreadsheetConverters(
