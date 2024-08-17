@@ -19,9 +19,7 @@ package walkingkooka.spreadsheet.server.expression.function;
 
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
-import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.provider.ConverterProviders;
 import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.Url;
 import walkingkooka.net.email.EmailAddress;
@@ -306,7 +304,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
                 .set(
                         SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER,
-                        ConverterSelector.parse("collection (string-to-selection, selection-to-selection, general, object-to-string)")
+                        ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, general)")
                 ).set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
                 .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
@@ -326,15 +324,10 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 },
                 metadata.converterContext(
                         SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER,
-                        ConverterProviders.collection(
-                                Sets.of(
-                                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
-                                                metadata,
-                                                SPREADSHEET_FORMATTER_PROVIDER,
-                                                SPREADSHEET_PARSER_PROVIDER
-                                        ),
-                                        ConverterProviders.converters()
-                                )
+                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
+                                metadata,
+                                SPREADSHEET_FORMATTER_PROVIDER,
+                                SPREADSHEET_PARSER_PROVIDER
                         ),
                         NOW,
                         SPREADSHEET_LABEL_NAME_RESOLVER,
