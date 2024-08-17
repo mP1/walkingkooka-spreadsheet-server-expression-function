@@ -22,7 +22,6 @@ import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
 import walkingkooka.collect.set.Sets;
 import walkingkooka.convert.Converters;
-import walkingkooka.convert.provider.ConverterProviders;
 import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.AbsoluteUrl;
 import walkingkooka.net.Url;
@@ -2479,11 +2478,11 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
                 .set(
                         SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER,
-                        ConverterSelector.parse("collection (string-to-selection, selection-to-selection, general, object-to-string)")
+                        ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, error-to-number, error-throwing, general)")
                 ).set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
                 .set(
                         SpreadsheetMetadataPropertyName.FORMAT_CONVERTER,
-                        ConverterSelector.parse("collection (string-to-selection, selection-to-selection, general, object-to-string)")
+                        ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, error-to-number, error-to-string, general)")
                 ).set(SpreadsheetMetadataPropertyName.GENERAL_NUMBER_FORMAT_DIGIT_COUNT, SpreadsheetFormatterContext.DEFAULT_GENERAL_FORMAT_NUMBER_DIGIT_COUNT)
                 .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
@@ -2530,15 +2529,10 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
                 metadata,
                 SpreadsheetProviders.basic(
-                        ConverterProviders.collection(
-                                Sets.of(
-                                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
-                                                metadata,
-                                                SPREADSHEET_FORMATTER_PROVIDER,
-                                                SPREADSHEET_PARSER_PROVIDER
-                                        ),
-                                        ConverterProviders.converters()
-                                )
+                        SpreadsheetConvertersConverterProviders.spreadsheetConverters(
+                                metadata,
+                                SPREADSHEET_FORMATTER_PROVIDER,
+                                SPREADSHEET_PARSER_PROVIDER
                         ),
                         SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
                         SPREADSHEET_COMPARATOR_PROVIDER,
