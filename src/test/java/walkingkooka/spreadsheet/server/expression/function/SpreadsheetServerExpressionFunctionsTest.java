@@ -2634,6 +2634,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
                     final ExpressionFunction<?, ExpressionEvaluationContext> function = provider.expressionFunction(
                             name,
+                            Lists.empty(),
                             PROVIDER_CONTEXT
                     );
                     if (function.isPure(context) != pure) {
