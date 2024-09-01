@@ -2536,6 +2536,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         ),
                         SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
                         SPREADSHEET_COMPARATOR_PROVIDER,
+                        SPREADSHEET_EXPORTER_PROVIDER,
                         SPREADSHEET_FORMATTER_PROVIDER,
                         SPREADSHEET_IMPORTER_PROVIDER,
                         SPREADSHEET_PARSER_PROVIDER
