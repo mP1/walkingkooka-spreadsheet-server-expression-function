@@ -20,7 +20,7 @@ package walkingkooka.spreadsheet.server.expression.function;
 import org.junit.jupiter.api.Test;
 import walkingkooka.collect.list.Lists;
 import walkingkooka.collect.map.Maps;
-import walkingkooka.collect.set.Sets;
+import walkingkooka.collect.set.SortedSets;
 import walkingkooka.convert.Converters;
 import walkingkooka.convert.provider.ConverterSelector;
 import walkingkooka.net.AbsoluteUrl;
@@ -132,12 +132,12 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                             return n;
                                     }
                                 }
-                        ).collect(Collectors.toCollection(Sets::sorted)),
+                        ).collect(Collectors.toCollection(SortedSets::tree)),
                 (Object)SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
                         .expressionFunctionInfos()
                         .stream()
                         .map(i -> i.name().value())
-                        .collect(Collectors.toCollection(Sets::sorted))
+                        .collect(Collectors.toCollection(SortedSets::tree))
         );
     }
 
