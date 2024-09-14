@@ -133,7 +133,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                     }
                                 }
                         ).collect(Collectors.toCollection(SortedSets::tree)),
-                (Object)SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
+                (Object) SpreadsheetServerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.SENSITIVE)
                         .expressionFunctionInfos()
                         .stream()
                         .map(i -> i.name().value())
@@ -2534,7 +2534,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                 SPREADSHEET_FORMATTER_PROVIDER,
                                 SPREADSHEET_PARSER_PROVIDER
                         ),
-                        SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
+                        SpreadsheetServerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
                         SPREADSHEET_COMPARATOR_PROVIDER,
                         SPREADSHEET_EXPORTER_PROVIDER,
                         SPREADSHEET_FORMATTER_PROVIDER,
@@ -2610,7 +2610,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final SpreadsheetExpressionEvaluationContext context = SpreadsheetExpressionEvaluationContexts.fake();
 
         final List<ExpressionFunction<?, ExpressionEvaluationContext>> pureFunctions = Lists.array();
-        final ExpressionFunctionProvider provider = SpreadsheetServerExpressionFunctions.expressionFunctionProvider(CaseSensitivity.INSENSITIVE);
+        final ExpressionFunctionProvider provider = SpreadsheetServerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE);
 
         provider.expressionFunctionInfos()
                 .forEach(
