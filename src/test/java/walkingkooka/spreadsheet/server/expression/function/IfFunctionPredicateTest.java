@@ -300,7 +300,7 @@ public final class IfFunctionPredicateTest implements PredicateTesting,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                SPREADSHEET_CONVERTER_CONTEXT
+                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT
         );
     }
 }

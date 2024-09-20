@@ -119,7 +119,7 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                SPREADSHEET_CONVERTER_CONTEXT
+                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT
         );
     }
 
