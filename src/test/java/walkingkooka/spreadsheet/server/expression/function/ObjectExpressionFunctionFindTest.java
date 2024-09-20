@@ -102,7 +102,7 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                SPREADSHEET_CONVERTER_CONTEXT
+                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT
         );
     }
 

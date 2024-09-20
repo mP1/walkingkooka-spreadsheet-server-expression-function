@@ -195,7 +195,7 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                SPREADSHEET_CONVERTER_CONTEXT
+                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT
         );
     }
 
