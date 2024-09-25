@@ -316,12 +316,10 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
-                metadata,
-                EXPRESSION_FUNCTION_PROVIDER,
-                PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
+                metadata,
                 metadata.expressionSpreadsheetConverterContext(
                         NOW,
                         SPREADSHEET_LABEL_NAME_RESOLVER,
@@ -331,7 +329,9 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                                 SPREADSHEET_PARSER_PROVIDER
                         ),
                         PROVIDER_CONTEXT
-                )
+                ),
+                EXPRESSION_FUNCTION_PROVIDER,
+                PROVIDER_CONTEXT
         );
     }
 

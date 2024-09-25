@@ -113,13 +113,13 @@ public final class NumberExpressionFunctionNumberValueTest extends NumberExpress
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
-                metadata,
-                EXPRESSION_FUNCTION_PROVIDER,
-                PROVIDER_CONTEXT,
                 (r) -> {
                     throw new UnsupportedOperationException();
                 },
-                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT
+                metadata,
+                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT,
+                EXPRESSION_FUNCTION_PROVIDER,
+                PROVIDER_CONTEXT
         );
     }
 

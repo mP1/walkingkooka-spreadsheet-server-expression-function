@@ -79,6 +79,9 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                 Optional.empty(),
                 SpreadsheetCellStores.fake(),
                 Url.parseAbsolute("https://example.com/server"),
+                (r) -> {
+                    throw new UnsupportedOperationException();
+                },
                 SpreadsheetMetadata.EMPTY
                         .set(SpreadsheetMetadataPropertyName.SPREADSHEET_ID, SpreadsheetId.parse("1234"))
                         .set(SpreadsheetMetadataPropertyName.SPREADSHEET_NAME, SpreadsheetName.with("Untitled5678"))
@@ -97,12 +100,9 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                         .set(SpreadsheetMetadataPropertyName.NUMBER_FORMATTER, SpreadsheetPattern.parseNumberFormatPattern("#.###").spreadsheetFormatterSelector())
                         .set(SpreadsheetMetadataPropertyName.TEXT_FORMATTER, SpreadsheetPattern.parseTextFormatPattern("@@").spreadsheetFormatterSelector())
                         .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20),
+                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT,
                 ExpressionFunctionProviders.fake(),
-                PROVIDER_CONTEXT,
-                (r) -> {
-                    throw new UnsupportedOperationException();
-                },
-                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT
+                PROVIDER_CONTEXT
         );
     }
 
