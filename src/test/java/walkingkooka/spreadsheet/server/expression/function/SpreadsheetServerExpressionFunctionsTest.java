@@ -2527,7 +2527,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         );
 
         final SpreadsheetEngineContext context = SpreadsheetEngineContexts.basic(
+                SERVER_URL,
+                NOW,
                 metadata,
+                engine,
+                (b) -> {
+                    throw new UnsupportedOperationException();
+                },
+                repo,
                 SpreadsheetProviders.basic(
                         SpreadsheetConvertersConverterProviders.spreadsheetConverters(
                                 metadata,
@@ -2541,14 +2548,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         SPREADSHEET_IMPORTER_PROVIDER,
                         SPREADSHEET_PARSER_PROVIDER
                 ),
-                PROVIDER_CONTEXT,
-                engine,
-                (b) -> {
-                    throw new UnsupportedOperationException();
-                },
-                repo,
-                SERVER_URL,
-                NOW
+                PROVIDER_CONTEXT
         );
 
         // save all the preload cells, these will contain references in the test cell.
