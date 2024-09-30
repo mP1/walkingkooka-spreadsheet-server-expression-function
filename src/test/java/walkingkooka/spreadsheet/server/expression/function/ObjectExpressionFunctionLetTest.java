@@ -302,11 +302,11 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                 .set(SpreadsheetMetadataPropertyName.CELL_CHARACTER_WIDTH, 1)
                 .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
+                .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
                 .set(
-                        SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER,
+                        SpreadsheetMetadataPropertyName.FORMULA_CONVERTER,
                         ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, general)")
-                ).set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
-                .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
+                ).set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
                 .set(SpreadsheetMetadataPropertyName.NUMBER_FORMATTER, SpreadsheetPattern.parseNumberFormatPattern("#.###").spreadsheetFormatterSelector())
                 .set(SpreadsheetMetadataPropertyName.TEXT_FORMATTER, SpreadsheetPattern.parseTextFormatPattern("@@").spreadsheetFormatterSelector())
@@ -320,7 +320,7 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                     throw new UnsupportedOperationException();
                 },
                 metadata,
-                metadata.expressionSpreadsheetConverterContext(
+                metadata.formulaSpreadsheetConverterContext(
                         NOW,
                         SPREADSHEET_LABEL_NAME_RESOLVER,
                         SpreadsheetConvertersConverterProviders.spreadsheetConverters(
