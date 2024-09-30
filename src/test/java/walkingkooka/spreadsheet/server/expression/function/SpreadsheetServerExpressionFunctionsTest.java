@@ -2476,11 +2476,11 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                 .set(SpreadsheetMetadataPropertyName.CELL_CHARACTER_WIDTH, 1)
                 .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
+                .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
                 .set(
-                        SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER,
+                        SpreadsheetMetadataPropertyName.FORMULA_CONVERTER,
                         ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, error-to-number, error-throwing, general)")
-                ).set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, EXPRESSION_NUMBER_KIND)
-                .set(
+                ).set(
                         SpreadsheetMetadataPropertyName.FORMAT_CONVERTER,
                         ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, error-to-number, error-to-string, general)")
                 ).set(SpreadsheetMetadataPropertyName.GENERAL_NUMBER_FORMAT_DIGIT_COUNT, SpreadsheetFormatterContext.DEFAULT_GENERAL_FORMAT_NUMBER_DIGIT_COUNT)

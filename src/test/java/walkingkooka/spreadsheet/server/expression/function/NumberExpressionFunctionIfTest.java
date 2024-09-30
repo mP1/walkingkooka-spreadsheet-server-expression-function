@@ -177,8 +177,8 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
                 .set(SpreadsheetMetadataPropertyName.CELL_CHARACTER_WIDTH, 1)
                 .set(SpreadsheetMetadataPropertyName.DATETIME_OFFSET, Converters.EXCEL_1904_DATE_SYSTEM_OFFSET)
                 .set(SpreadsheetMetadataPropertyName.DEFAULT_YEAR, 20)
-                .set(SpreadsheetMetadataPropertyName.EXPRESSION_CONVERTER, ConverterSelector.parse("general"))
                 .set(SpreadsheetMetadataPropertyName.EXPRESSION_NUMBER_KIND, kind)
+                .set(SpreadsheetMetadataPropertyName.FORMULA_CONVERTER, ConverterSelector.parse("general"))
                 .set(SpreadsheetMetadataPropertyName.PRECISION, MathContext.DECIMAL32.getPrecision())
                 .set(SpreadsheetMetadataPropertyName.ROUNDING_MODE, RoundingMode.HALF_UP)
                 .set(SpreadsheetMetadataPropertyName.NUMBER_FORMATTER, SpreadsheetPattern.parseNumberFormatPattern("#.###").spreadsheetFormatterSelector())
@@ -193,7 +193,7 @@ public final class NumberExpressionFunctionIfTest extends NumberExpressionFuncti
                     throw new UnsupportedOperationException();
                 },
                 metadata,
-                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT,
+                SPREADSHEET_FORMULA_CONVERTER_CONTEXT,
                 EXPRESSION_FUNCTION_PROVIDER,
                 PROVIDER_CONTEXT
         );

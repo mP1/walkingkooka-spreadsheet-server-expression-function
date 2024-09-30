@@ -100,7 +100,7 @@ public final class ObjectExpressionFunctionFindTest extends ObjectExpressionFunc
                         .set(SpreadsheetMetadataPropertyName.NUMBER_FORMATTER, SpreadsheetPattern.parseNumberFormatPattern("#.###").spreadsheetFormatterSelector())
                         .set(SpreadsheetMetadataPropertyName.TEXT_FORMATTER, SpreadsheetPattern.parseTextFormatPattern("@@").spreadsheetFormatterSelector())
                         .set(SpreadsheetMetadataPropertyName.TWO_DIGIT_YEAR, 20),
-                SPREADSHEET_EXPRESSION_CONVERTER_CONTEXT,
+                SPREADSHEET_FORMULA_CONVERTER_CONTEXT,
                 ExpressionFunctionProviders.fake(),
                 PROVIDER_CONTEXT
         );
