@@ -66,6 +66,7 @@ import walkingkooka.text.printer.TreePrintableTesting;
 import walkingkooka.tree.expression.ExpressionEvaluationContext;
 import walkingkooka.tree.expression.ExpressionFunctionName;
 import walkingkooka.tree.expression.function.ExpressionFunction;
+import walkingkooka.tree.expression.function.provider.ExpressionFunctionAliasSet;
 import walkingkooka.tree.expression.function.provider.ExpressionFunctionProvider;
 import walkingkooka.tree.text.Length;
 import walkingkooka.tree.text.TextNode;
@@ -91,6 +92,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
 
     private final static Locale LOCALE = Locale.forLanguageTag("EN-AU");
     private final static AbsoluteUrl SERVER_URL = Url.parseAbsolute("https://server.example.com");
+    private final static ExpressionFunctionProvider SERVER_EXPRESSION_FUNCTION_PROVIDER = SpreadsheetServerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE);
 
     @Test
     public void testExpressionFunctionProvider() {
@@ -2481,6 +2483,14 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                         SpreadsheetMetadataPropertyName.FORMULA_CONVERTER,
                         ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, error-to-number, error-throwing, general)")
                 ).set(
+                        SpreadsheetMetadataPropertyName.FORMULA_FUNCTIONS,
+                        ExpressionFunctionAliasSet.parse(
+                                SERVER_EXPRESSION_FUNCTION_PROVIDER.expressionFunctionInfos()
+                                        .stream()
+                                        .map(i -> i.name().value())
+                                        .collect(Collectors.joining(ExpressionFunctionAliasSet.SEPARATOR.string()))
+                        )
+                ).set(
                         SpreadsheetMetadataPropertyName.FORMAT_CONVERTER,
                         ConverterSelector.parse("collection (string-to-selection, selection-to-selection, selection-to-string, error-to-number, error-to-string, general)")
                 ).set(SpreadsheetMetadataPropertyName.GENERAL_NUMBER_FORMAT_DIGIT_COUNT, SpreadsheetFormatterContext.DEFAULT_GENERAL_FORMAT_NUMBER_DIGIT_COUNT)
@@ -2541,7 +2551,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                                 SPREADSHEET_FORMATTER_PROVIDER,
                                 SPREADSHEET_PARSER_PROVIDER
                         ),
-                        SpreadsheetServerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE),
+                        SERVER_EXPRESSION_FUNCTION_PROVIDER,
                         SPREADSHEET_COMPARATOR_PROVIDER,
                         SPREADSHEET_EXPORTER_PROVIDER,
                         SPREADSHEET_FORMATTER_PROVIDER,
@@ -2610,7 +2620,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
         final SpreadsheetExpressionEvaluationContext context = SpreadsheetExpressionEvaluationContexts.fake();
 
         final List<ExpressionFunction<?, ExpressionEvaluationContext>> pureFunctions = Lists.array();
-        final ExpressionFunctionProvider provider = SpreadsheetServerExpressionFunctionProviders.expressionFunctionProvider(CaseSensitivity.INSENSITIVE);
+        final ExpressionFunctionProvider provider = SERVER_EXPRESSION_FUNCTION_PROVIDER;
 
         provider.expressionFunctionInfos()
                 .forEach(
