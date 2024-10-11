@@ -320,7 +320,8 @@ public final class ObjectExpressionFunctionLetTest extends ObjectExpressionFunct
                     throw new UnsupportedOperationException();
                 },
                 metadata,
-                metadata.formulaSpreadsheetConverterContext(
+                metadata.spreadsheetConverterContext(
+                        SpreadsheetMetadataPropertyName.FORMULA_CONVERTER,
                         NOW,
                         SPREADSHEET_LABEL_NAME_RESOLVER,
                         SpreadsheetConvertersConverterProviders.spreadsheetConverters(
