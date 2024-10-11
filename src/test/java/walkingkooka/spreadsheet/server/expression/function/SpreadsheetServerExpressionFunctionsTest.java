@@ -2545,6 +2545,7 @@ public final class SpreadsheetServerExpressionFunctionsTest implements PublicSta
                     throw new UnsupportedOperationException();
                 },
                 repo,
+                SpreadsheetMetadataPropertyName.FORMULA_FUNCTIONS,
                 SpreadsheetProviders.basic(
                         SpreadsheetConvertersConverterProviders.spreadsheetConverters(
                                 metadata,
