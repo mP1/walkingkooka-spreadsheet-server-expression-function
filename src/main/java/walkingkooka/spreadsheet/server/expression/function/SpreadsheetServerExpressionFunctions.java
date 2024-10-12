@@ -357,10 +357,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see StringExpressionFunctionDollar}
+     * {@see SpreadsheetExpressionFunctions#dollar}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> dollar() {
-        return StringExpressionFunctionDollar.INSTANCE;
+        return SpreadsheetExpressionFunctions.dollar();
     }
 
     /**
@@ -984,10 +984,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see StringExpressionFunctionText}
+     * {@see SpreadsheetExpressionFunctions.text}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> text() {
-        return StringExpressionFunctionText.INSTANCE;
+        return SpreadsheetExpressionFunctions.text();
     }
 
     /**
