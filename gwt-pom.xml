@@ -85,61 +85,6 @@
     </repositories>
 
     <dependencies>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-boolean-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-datetime-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-engineering-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-net-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-number-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-number-trigonometry-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-provider-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-stat-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>walkingkooka</groupId>
-            <artifactId>walkingkooka-tree-expression-function-string-gwt</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>walkingkooka</groupId>
             <artifactId>walkingkooka-spreadsheet-expression-function-gwt</artifactId>

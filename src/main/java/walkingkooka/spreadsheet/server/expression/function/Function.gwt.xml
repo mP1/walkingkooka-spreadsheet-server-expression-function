@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
     <inherits name="walkingkooka.net.Net"/>
-    <inherits name="walkingkooka.tree.expression.function.provider.TreeExpressionFunctionProvider"/>
+    <inherits name="walkingkooka.spreadsheet.expression.function.Function"/>
     <inherits name="walkingkooka.tree.json.Json"/>
     <source path=""/>
 </module>
