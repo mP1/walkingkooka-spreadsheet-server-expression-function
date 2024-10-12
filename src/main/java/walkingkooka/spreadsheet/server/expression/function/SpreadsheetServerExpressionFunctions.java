@@ -95,10 +95,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see NumberExpressionFunctionIf#averageIf}
+     * {@see SpreadsheetExpressionFunctions#averageIf}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> averageIf() {
-        return NumberExpressionFunctionIf.averageIf();
+        return SpreadsheetExpressionFunctions.averageIf();
     }
 
     /**
@@ -292,10 +292,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see NumberExpressionFunctionIf#countIf}
+     * {@see SpreadsheetExpressionFunctions#countIf}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> countIf() {
-        return NumberExpressionFunctionIf.countIf();
+        return SpreadsheetExpressionFunctions.countIf();
     }
 
     /**
@@ -669,10 +669,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see NumberExpressionFunctionIf.maxIf}
+     * {@see SpreadsheetExpressionFunctions.maxIf}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> maxIf() {
-        return NumberExpressionFunctionIf.maxIf();
+        return SpreadsheetExpressionFunctions.maxIf();
     }
 
     /**
@@ -690,10 +690,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see NumberExpressionFunctionIf.minIf}
+     * {@see SpreadsheetExpressionFunctions.minIf}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> minIf() {
-        return NumberExpressionFunctionIf.minIf();
+        return SpreadsheetExpressionFunctions.minIf();
     }
 
     /**
@@ -964,10 +964,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see NumberExpressionFunctionIf#sumIf}
+     * {@see SpreadsheetExpressionFunctions#sumIf}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> sumIf() {
-        return NumberExpressionFunctionIf.sumIf();
+        return SpreadsheetExpressionFunctions.sumIf();
     }
 
     /**
