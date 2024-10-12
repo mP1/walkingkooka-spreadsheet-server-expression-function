@@ -599,7 +599,7 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      * {@see LambdaExpressionFunction}
      */
     public static ExpressionFunction<ExpressionFunction<?, SpreadsheetExpressionEvaluationContext>, SpreadsheetExpressionEvaluationContext> lambda() {
-        return LambdaExpressionFunction.INSTANCE;
+        return SpreadsheetExpressionFunctions.lambda();
     }
 
     /**
