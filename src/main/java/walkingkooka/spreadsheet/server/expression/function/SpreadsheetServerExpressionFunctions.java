@@ -219,16 +219,11 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see StringExpressionFunctions#concat}
+     * {@see SpreadsheetExpressionFunctions#concat}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> concat() {
-        return CONCAT;
+        return SpreadsheetExpressionFunctions.concat();
     }
-
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> CONCAT = UnformattedNumberExpressionFunction.with(
-            StringExpressionFunctions.<SpreadsheetExpressionEvaluationContext>concat()
-                    .filterParameterValues(SpreadsheetServerExpressionFunctions::filterNonNullAndNotMissingCell)
-    );
 
     /**
      * {@see NumberTrigonomteryExpressionFunctions#cos}
@@ -610,16 +605,11 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see StringExpressionFunctions#stringLength}
+     * {@see SpreadsheetExpressionFunctions#len}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> len() {
-        return LEN;
+        return SpreadsheetExpressionFunctions.len();
     }
-
-    private final static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> LEN = unformattedNumber(
-            StringExpressionFunctions.stringLength(),
-            "len"
-    );
 
     /**
      * {@see ObjectExpressionFunctionLet}
@@ -650,16 +640,11 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see StringExpressionFunctions#lower}
+     * {@see SpreadsheetExpressionFunctions#lower}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> lower() {
-        return LOWER;
+        return SpreadsheetExpressionFunctions.lower();
     }
-
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> LOWER = unformattedNumber(
-            StringExpressionFunctions.lowerCase(),
-            "lower"
-    );
 
     /**
      * {@see StatExpressionFunctions#max}
@@ -1080,16 +1065,11 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
             .setName(functionName("unicode"));
 
     /**
-     * {@see StringExpressionFunctions#upper}
+     * {@see SpreadsheetExpressionFunctions#upper}
      */
     public static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> upper() {
-        return UPPER;
+        return SpreadsheetExpressionFunctions.upper();
     }
-
-    private final static ExpressionFunction<String, SpreadsheetExpressionEvaluationContext> UPPER = unformattedNumber(
-            StringExpressionFunctions.upperCase(),
-            "upper"
-    );
 
     /**
      * {@see NumberExpressionFunctions#number}
@@ -1127,15 +1107,6 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
      */
     public static ExpressionFunction<Boolean, SpreadsheetExpressionEvaluationContext> xor() {
         return BooleanExpressionFunctions.xor();
-    }
-
-    private static <T> ExpressionFunction<T, SpreadsheetExpressionEvaluationContext> unformattedNumber(final ExpressionFunction<T, SpreadsheetExpressionEvaluationContext> function,
-                                                                                                       final String name) {
-        return UnformattedNumberExpressionFunction.with(
-                function.setName(
-                        functionName(name)
-                )
-        );
     }
 
     private static Optional<ExpressionFunctionName> functionName(final String name) {
