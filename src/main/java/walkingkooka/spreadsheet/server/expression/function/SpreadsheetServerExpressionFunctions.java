@@ -732,10 +732,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see NumberExpressionFunctionNumberValue#INSTANCE}
+     * {@see SpreadsheetExpressionFunctions#numberValue}
      */
     public static ExpressionFunction<ExpressionNumber, SpreadsheetExpressionEvaluationContext> numberValue() {
-        return NumberExpressionFunctionNumberValue.INSTANCE;
+        return SpreadsheetExpressionFunctions.numberValue();
     }
 
     /**
