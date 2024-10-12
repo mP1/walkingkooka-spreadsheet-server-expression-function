@@ -411,10 +411,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see ObjectExpressionFunctionFind}
+     * {@see StringExpressionFunctions#find}
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionEvaluationContext> find() {
-        return ObjectExpressionFunctionFind.INSTANCE;
+        return SpreadsheetExpressionFunctions.find();
     }
 
     /**
@@ -612,10 +612,10 @@ public final class SpreadsheetServerExpressionFunctions implements PublicStaticH
     }
 
     /**
-     * {@see ObjectExpressionFunctionLet}
+     * {@see StringExpressionFunctions#let}
      */
     public static ExpressionFunction<Object, SpreadsheetExpressionEvaluationContext> let() {
-        return ObjectExpressionFunctionLet.INSTANCE;
+        return SpreadsheetExpressionFunctions.let();
     }
 
     /**
