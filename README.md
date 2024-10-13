@@ -5,7 +5,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/mP1/walkingkooka-spreadsheet-server-expression-function.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/mP1/walkingkooka-spreadsheet-server-expression-function/alerts/)
 [![J2CL compatible](https://img.shields.io/badge/J2CL-compatible-brightgreen.svg)](https://github.com/mP1/j2cl-central)
 
-
+This repo has been **RETIRED**, everything has been migrated into [HERE](https://github.com/mP1/walkingkooka-spreadsheet-expression-function).
 
 An assembly of functions that faithfully match their Excel equivalents, and are ready for use by walkingkooka-spreadsheet-server.
 
